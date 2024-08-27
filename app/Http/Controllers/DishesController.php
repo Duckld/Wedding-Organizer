@@ -2,34 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dishes;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class DishesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
-    public function login(Request $request)
+    public function index()
     {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->intended('admin/dashboard');
-        }
-
-        return back()->withErrors(['email' => 'Email atau password salah.']);
-    }
-
-    public function Dadmin()
-    {
-        return view('admin.dashboard');
-    }
-
-    public function Duser()
-    {
-        return view('user.dashboard');
+        return view('admin.katering');
     }
 
     /**
@@ -51,7 +34,7 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Dishes $dishes)
     {
         //
     }
@@ -59,7 +42,7 @@ class HomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Dishes $dishes)
     {
         //
     }
@@ -67,7 +50,7 @@ class HomeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Dishes $dishes)
     {
         //
     }
@@ -75,7 +58,7 @@ class HomeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Dishes $dishes)
     {
         //
     }

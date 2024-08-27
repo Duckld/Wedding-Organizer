@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\DishesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MaincourseController;
+use App\Models\Maincourse;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,12 +34,18 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    route::get('admin/dashboard', [HomeController::class, 'Dadmin']);
+
+// Route untuk Admin
+Route::middleware(['auth', 'can:admin'])->group(function () {
+    Route::get('/admin', [HomeController::class, 'Dadmin']);
 });
 
-Route::middleware(['auth', 'role:user'])->group(function () {
-    route::get('user/dashboard', [HomeController::class, 'Duser']);
+// Routes untuk user biasa
+Route::middleware(['auth', 'can:user'])->group(function () {
+    Route::get('/user', [HomeController::class, 'Duser']);
 });
 
+Route::get('/admin/maincourse', [MaincourseController::class, 'index']);
+route::post('admin/maincourse/store',[MaincourseController::class,'store'])->name('admin.store');
 
+Route::get('/admin/dishes', [DishesController::class, 'index']);

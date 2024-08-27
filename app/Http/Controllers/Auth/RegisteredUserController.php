@@ -18,6 +18,16 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
+
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->usertype == 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+    
+        return redirect()->route('user.dashboard');
+    }
+    
     public function create(): View
     {
         return view('auth.register');

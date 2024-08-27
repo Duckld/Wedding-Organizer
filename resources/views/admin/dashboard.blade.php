@@ -52,7 +52,7 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="Vendor">Katering</a>
+                                    <a href="admin/maincourse">Katering</a>
                                 </li>
                                 <li class="submenu-item ">
                                     <a href="Item">Item</a>
