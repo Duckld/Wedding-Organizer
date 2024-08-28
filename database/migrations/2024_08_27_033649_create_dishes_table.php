@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('dishes', function (Blueprint $table) {
             $table->string('id_dishes')->primary();
-            $table->string('nama_paket_dish');
-            $table->bigInteger('harga_dish');
+            $table->string('nama_paket_dishes');
+            $table->text('deskripsi_makanan');
+            $table->bigInteger('harga_paket');
             $table->string('foto_menu');
             $table->timestamps();
         });

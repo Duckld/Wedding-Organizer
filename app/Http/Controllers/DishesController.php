@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dishes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DishesController extends Controller
 {
@@ -12,7 +13,8 @@ class DishesController extends Controller
      */
     public function index()
     {
-        return view('admin.katering');
+        $dishes = Dishes::all();
+        return view('admin.katering', compact('dishes'));
     }
 
     /**
@@ -28,7 +30,18 @@ class DishesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fotoPath = null;
+        if ($request->hasFile('foto_menu')) {
+            $fotoPath = $request->file('foto_menu')->store('foto_menuD', 'public');
+        };
+ 
+        Dishes::create([
+            'nama_paket_dishes' => $request->input('nama_paket_dishes'),
+            'deskripsi_makanan' => $request->input('deskripsi_makanan'),
+            'harga_paket' => $request->input('harga_paket'),
+            'foto_menu' => $fotoPath,
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -42,17 +55,34 @@ class DishesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Dishes $dishes)
+    public function edit(Dishes $id_dishes)
     {
-        //
+        $dishes = Dishes::find($id_dishes);
+        return view('admin/dishes', compact('dishes'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Dishes $dishes)
+    public function update(Request $request, Dishes $id_dishes)
     {
-        //
+        $dishes = Dishes::findOrFail($id_dishes);
+
+        if ($request->hasFile('foto_menu')) {
+            if ($dishes->foto_menu) {
+                Storage::delete('public/' . $dishes->foto_menu);
+            }
+            $dishes->foto_menu = $request->file('foto_menu')->store('foto_menuD', 'public');
+        }
+
+        $dishes->update([
+            'nama_paket_maincourse' => $request->input('nama_paket_maincourse'),
+            'deskripsi_makanan' => $request->input('deskripsi_makanan'),
+            'harga_paket' => $request->input('harga_paket'),
+            'foto_menu' => $dishes->foto_menu,
+        ]);
+
+        return redirect()->route('admin.indexD')->with('success', 'Data berhasil diupdate');
     }
 
     /**

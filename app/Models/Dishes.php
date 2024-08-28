@@ -14,8 +14,9 @@ class Dishes extends Model
     protected $keyType = 'string';
     
     protected $fillable = [
-        'nama_paket_dish',
-        'harga_dish',
+        'nama_paket_dishes',
+        'deskripsi_makanan',
+        'harga_paket',
         'foto_menu',
     ];
 
@@ -24,9 +25,9 @@ class Dishes extends Model
         parent::boot();
 
         static::creating(function ($product) {
-            $lastCustomer = User::orderBy('id_customer', 'desc')->first();
-            $lastId = $lastCustomer ? intval(substr($lastCustomer->id_customer, 2)) : 0;
-            $product->id_customer = 'MC' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
+            $lastCustomer = Dishes::orderBy('id_dishes', 'desc')->first();
+            $lastId = $lastCustomer ? intval(substr($lastCustomer->id_dishes, 2)) : 0;
+            $product->id_dishes = 'DS' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
         });
     }
 }
