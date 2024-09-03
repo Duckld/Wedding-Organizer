@@ -39,7 +39,7 @@
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item active">
-                            <a href="admin" class='sidebar-link'>
+                            <a href="/admin" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -48,14 +48,20 @@
                         <li class="sidebar-item has-sub">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-stack"></i>
-                                <span> Features</span>
+                                <span>Features</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="admin/maincourse">Katering</a>
+                                    <a href="/admin/maincourse">Katering</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="Item">Item</a>
+                                    <a href="/admin/gedung">Gedung</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/dekorasi">Dekorasi</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/dokumentasi">Dokumentasi</a>
                                 </li>
                             </ul>
                         </li>

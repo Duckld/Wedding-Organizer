@@ -68,14 +68,20 @@
                         <li class="sidebar-item has-sub active">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-stack"></i>
-                                <span> Vendor</span>
+                                <span>Features</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item active">
                                     <a href="/admin/maincourse">Katering</a>
                                 </li>
                                 <li class="submenu-item">
-                                    <a href="Item">Item</a>
+                                    <a href="/admin/gedung">Gedung</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/dekorasi">Dekorasi</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/dokumentasi">Dokumentasi</a>
                                 </li>
                             </ul>
                         </li>
@@ -164,7 +170,10 @@
                 </nav>
             </header>
             <div id="main-content">
-
+                <header>
+                    <h1>Katering</h1>
+                    <br>
+                </header>
                 <div class="card">
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -266,18 +275,11 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                
-                                                                                <button type="button"
-                                                                                    class="btn btn-light-secondary"
-                                                                                    data-bs-dismiss="modal">
-                                                                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                                                                    <span class="d-none d-sm-block">Close</span>
-                                                                                </button>
                                                                                 <button type="button"
                                                                                     class="btn btn-primary ml-1"
                                                                                     data-bs-dismiss="modal">
                                                                                     <i class="bx bx-check d-block d-sm-none"></i>
-                                                                                    <span class="d-none d-sm-block">Accept</span>
+                                                                                    <span class="d-none d-sm-block">Close</span>
                                                                                 </button>
                                                                             </div>
                                                                         </div>
@@ -316,23 +318,23 @@
                                                                                             <div class="card-body">
                                                                                                 <div class="row">
                                                                                                     <div class="col-md-12">
-                                                                                                        <div class="form-group">
+                                                                                                        <div class="form-group" style="text-align: left">
                                                                                                             <label for="nama_paket_maincourse">Nama Paket</label>
                                                                                                             <input name="nama_paket_maincourse" type="text" class="form-control" id="nama_paket_maincourse" value="{{ $mc->nama_paket_maincourse }}">
                                                                                                         </div>
                                                                                                     
-                                                                                                        <div class="form-group">
+                                                                                                        <div class="form-group" style="text-align: left">
                                                                                                             <label for="deskripsi_makanan">Deskripsi Makanan</label>
                                                                                                             <textarea name="deskripsi_makanan" id="deskripsi_makanan" class="form-control">{{ $mc->deskripsi_makanan }}</textarea>
                                                                                                         </div>
                                                                                                         
-                                                                                                        <div class="form-group">
+                                                                                                        <div class="form-group" style="text-align: left">
                                                                                                             <label for="harga_paket">Harga Paket</label>
                                                                                                             <input name="harga_paket" type="text" class="form-control" id="harga_paket" value="{{ $mc->harga_paket }}">
                                                                                                         </div>
                                                                             
                                                                                                         <div class="form-group">
-                                                                                                            <label for="foto_menu">Foto Menu</label>
+                                                                                                            <label for="foto_menu" style="text-align: left">Foto Menu</label>
                                                                                                             <input type="file" class="form-control" id="foto_menu" name="foto_menu">
                                                                                                             @if($mc->foto_menu)
                                                                                                                 <img src="{{ asset('storage/' . $mc->foto_menu) }}" alt="Foto Menu" class="img-fluid mt-2" width="200">
@@ -459,18 +461,11 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                
-                                                                                <button type="button"
-                                                                                    class="btn btn-light-secondary"
-                                                                                    data-bs-dismiss="modal">
-                                                                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                                                                    <span class="d-none d-sm-block">Close</span>
-                                                                                </button>
                                                                                 <button type="button"
                                                                                     class="btn btn-primary ml-1"
                                                                                     data-bs-dismiss="modal">
                                                                                     <i class="bx bx-check d-block d-sm-none"></i>
-                                                                                    <span class="d-none d-sm-block">Accept</span>
+                                                                                    <span class="d-none d-sm-block">Close</span>
                                                                                 </button>
                                                                             </div>
                                                                         </div>
@@ -496,7 +491,7 @@
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title"
                                                                                     id="exampleModalCenterTitle{{ $ds->id_dishes }}">
-                                                                                    Edit Data Main Course</h5>
+                                                                                    Edit Data Dishes</h5>
                                                                             </div>
                                                                             <div class="modal-body">
                                                                                 <form
@@ -509,17 +504,17 @@
                                                                                             <div class="card-body">
                                                                                                 <div class="row">
                                                                                                     <div class="col-md-12">
-                                                                                                        <div class="form-group">
+                                                                                                        <div class="form-group" style="text-align: left">
                                                                                                             <label for="nama_paket_dishes">Nama Paket</label>
                                                                                                             <input name="nama_paket_dishes" type="text" class="form-control" id="nama_paket_dishes" value="{{ $ds->nama_paket_dishes }}">
                                                                                                         </div>
                                                                                                     
-                                                                                                        <div class="form-group">
+                                                                                                        <div class="form-group" style="text-align: left">
                                                                                                             <label for="deskripsi_makanan">Deskripsi Makanan</label>
                                                                                                             <textarea name="deskripsi_makanan" id="deskripsi_makanan" class="form-control">{{ $ds->deskripsi_makanan }}</textarea>
                                                                                                         </div>
                                                                                                         
-                                                                                                        <div class="form-group">
+                                                                                                        <div class="form-group" style="text-align: left">
                                                                                                             <label for="harga_paket">Harga Paket</label>
                                                                                                             <input name="harga_paket" type="text" class="form-control" id="harga_paket" value="{{ $ds->harga_paket }}">
                                                                                                         </div>
