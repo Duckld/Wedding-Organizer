@@ -63,6 +63,18 @@
                                 <li class="submenu-item">
                                     <a href="/admin/dokumentasi">Dokumentasi</a>
                                 </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/hiburan">Hiburan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/bridalstyle">Bridalstyle</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/souvenir">Souvenir</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/undangan">Undangan</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -137,8 +149,14 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#"><i
-                                                class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout
+                                            </button>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

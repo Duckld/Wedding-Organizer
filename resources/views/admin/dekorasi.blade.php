@@ -83,6 +83,18 @@
                                 <li class="submenu-item">
                                     <a href="/admin/dokumentasi">Dokumentasi</a>
                                 </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/hiburan">Hiburan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/bridalstyle">Bridalstyle</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/souvenir">Souvenir</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/undangan">Undangan</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -254,7 +266,7 @@
                                                                         </div>
                                                                         <div class="col-md-4" style="text-align: left">
                                                                             <p><b style="color: #435ebe">ID Paket : </b>{{ $dek->id_dekorasi }}</p>
-                                                                            <p><b style="color: #435ebe">Nama Paket Main Course : </b>{{ $dek->nama_dekorasi }}</p>
+                                                                            <p><b style="color: #435ebe">Nama Dekorasi : </b>{{ $dek->nama_dekorasi }}</p>
                                                                             <p><b style="color: #435ebe">Harga : </b>{{ $dek->harga_dekorasi }}</p>
                                                                             <p><b style="color: #435ebe">Deskripsi : </b>{{ $dek->deskripsi_dekorasi }}</p>
                                                                         </div>

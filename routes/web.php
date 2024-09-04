@@ -1,13 +1,18 @@
 <?php
 
+use App\Http\Controllers\BridalstyleController;
 use App\Http\Controllers\DekorasiController;
 use App\Http\Controllers\DishesController;
 use App\Http\Controllers\DokumentasiController;
 use App\Http\Controllers\GedungController;
+use App\Http\Controllers\HiburanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MaincourseController;
+use App\Http\Controllers\SouvenirController;
+use App\Http\Controllers\UndanganController;
 use App\Models\Maincourse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +48,11 @@ Route::middleware(['auth', 'can:admin'])->group(function () {
     Route::get('/admin', [HomeController::class, 'Dadmin']);
 });
 
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/dashboard'); // Redirect ke halaman dashboard
+})->name('logout');
+
 // Routes untuk user biasa
 Route::middleware(['auth', 'can:user'])->group(function () {
     Route::get('/user', [HomeController::class, 'Duser']);
@@ -77,3 +87,27 @@ Route::get('/admin/dokumentasi', [DokumentasiController::class, 'index'])->name(
 Route::post('/admin/dokumentasi/store',[DokumentasiController::class,'store'])->name('dokumentasi.store');
 Route::get('/admin/dokumentasi/{id_dokumentasi}/edit', [DokumentasiController::class ,'edit'])->name('dokumentasi.edit');
 Route::put('/admin/dokumentasi/{id}', [DokumentasiController::class ,'update'])->name('dokumentasi.update');
+
+// hiburan
+Route::get('/admin/hiburan', [HiburanController::class, 'index'])->name('hiburan.index');
+Route::post('/admin/hiburan/store',[HiburanController::class,'store'])->name('hiburan.store');
+Route::get('/admin/hiburan/{id_hiburan}/edit', [HiburanController::class ,'edit'])->name('hiburan.edit');
+Route::put('/admin/hiburan/{id}', [HiburanController::class ,'update'])->name('hiburan.update');
+
+// bridalstyle
+Route::get('/admin/bridalstyle', [BridalstyleController::class, 'index'])->name('bridalstyle.index');
+Route::post('/admin/bridalstyle/store',[BridalstyleController::class,'store'])->name('bridalstyle.store');
+Route::get('/admin/bridalstyle/{id_bridalstyle}/edit', [BridalstyleController::class ,'edit'])->name('bridalstyle.edit');
+Route::put('/admin/bridalstyle/{id}', [BridalstyleController::class ,'update'])->name('bridalstyle.update');
+
+// souvenir
+Route::get('/admin/souvenir', [SouvenirController::class, 'index'])->name('souvenir.index');
+Route::post('/admin/souvenir/store',[SouvenirController::class,'store'])->name('souvenir.store');
+Route::get('/admin/souvenir/{id_souvenir}/edit', [SouvenirController::class ,'edit'])->name('souvenir.edit');
+Route::put('/admin/souvenir/{id}', [SouvenirController::class ,'update'])->name('souvenir.update');
+
+// undangan
+Route::get('/admin/undangan', [UndanganController::class, 'index'])->name('undangan.index');
+Route::post('/admin/undangan/store',[UndanganController::class,'store'])->name('undangan.store');
+Route::get('/admin/undangan/{id_undangan}/edit', [UndanganController::class ,'edit'])->name('undangan.edit');
+Route::put('/admin/undangan/{id}', [UndanganController::class ,'update'])->name('undangan.update');

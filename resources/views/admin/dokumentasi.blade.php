@@ -83,6 +83,18 @@
                                 <li class="submenu-item active">
                                     <a href="/admin/dokumentasi">Dokumentasi</a>
                                 </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/hiburan">Hiburan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/bridalstyle">Bridalstyle</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/souvenir">Souvenir</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/undangan">Undangan</a>
+                                </li>
                             </ul>
                         </li>
 
