@@ -59,6 +59,39 @@
       width: 500px; /* Atur lebar gambar sesuai kebutuhan */
       height: auto; /* Pertahankan rasio aspek gambar */
     }
+
+    .navbar-profile {
+        position: relative;
+        display: inline-block;
+    }
+
+    .profile-picture {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: white;
+        min-width: 150px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-menu a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: #ddd;
+    }
   </style>
 
 </head>
@@ -104,7 +137,14 @@
         </ul>
       </nav><!-- .navbar -->
 
-      <a class="btn-book-a-table" href="#book-a-table">Booking Sekarang</a>
+      <div class="navbar-profile">
+        <img src="assets/Yummy/assets/img/testimonials/testimonials-1.jpg" alt="Profile Picture" class="profile-picture" onclick="toggleDropdown()">
+        <div id="dropdownMenu" class="dropdown-menu">
+          <a href="#">Profile</a>
+          <a href="#">Settings</a>
+          <a href="#">Logout</a>
+        </div>
+      </div>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
@@ -139,34 +179,37 @@
 
         <div class="section-header">
           <h2>About Us</h2>
-          <p>Learn More <span>About Us</span></p>
+          <p>Pelajari Lebih Lanjut <span>Tentang Kami</span></p>
         </div>
 
         <div class="row gy-4">
-          <div class="col-lg-7 position-relative about-img" style="background-image: url(assets/Yummy/assets/img/about.jpg) ;" data-aos="fade-up" data-aos-delay="150">
+          <div class="col-lg-7 position-relative about-img" style="background-image: url(assets/Yummy/assets/img/wedding/about.jpg) ; background-size: cover;" data-aos="fade-up" data-aos-delay="150">
             <div class="call-us position-absolute">
-              <h4>Book a Table</h4>
+              <h4>Booking Now !</h4>
               <p>+1 5589 55488 55</p>
             </div>
           </div>
           <div class="col-lg-5 d-flex align-items-end" data-aos="fade-up" data-aos-delay="300">
             <div class="content ps-0 ps-lg-5">
               <p class="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua.
+                Selamat datang di WeddingSebelas, tempat di mana impian pernikahan Anda menjadi kenyataan. Kami adalah tim profesional yang berdedikasi untuk menciptakan momen pernikahan yang sempurna dan tak terlupakan. 
+                Dengan sentuhan kreativitas, perhatian terhadap detail, dan layanan yang dipersonalisasi, kami siap membantu Anda merancang dan merayakan hari istimewa Anda sesuai keinginan.
               </p>
               <ul>
-                <li><i class="bi bi-check2-all"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                <li><i class="bi bi-check2-all"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                <li><i class="bi bi-check2-all"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+                <li><i class="bi bi-check2-all"></i> Certified Wedding Planner</li>
+                <li><i class="bi bi-check2-all"></i> 15 tahun pengalaman dalam wedding planning</li>
+                <li><i class="bi bi-check2-all"></i> Spesialis Wedding Tradisional & Modern</li>
+                <li><i class="bi bi-check2-all"></i> Kemampuan Beradaptasi yang sangat baik</li>
+                <li><i class="bi bi-check2-all"></i> Jaringan & reputasi bisnis yang baik</li>
+                <li><i class="bi bi-check2-all"></i> Tim eksklusif yang sudah terlatih</li>
               </ul>
               <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
+                Dari perencanaan awal hingga hari-H, kami akan bersama Anda di setiap langkah, memastikan setiap detail terencana dengan sempurna. 
+                Percayakan pernikahan Anda kepada kami, dan biarkan kami menciptakan kisah cinta yang abadi.
               </p>
 
               <div class="position-relative mt-4">
-                <img src="assets/Yummy/assets/img/about-2.jpg" class="img-fluid" alt="">
+                <img src="assets/Yummy/assets/img/wedding/wedding-katering.jpg" class="img-fluid" alt="">
                 <a href="https://www.youtube.com/watch?v=HU3KDz_7PC8" class="glightbox play-btn"></a>
               </div>
             </div>
@@ -1109,6 +1152,31 @@
 
   <!-- Template Main JS File -->
   <script src="assets/Yummy/assets/js/main.js"></script>
+
+  <script>
+    function toggleDropdown() {
+        var dropdown = document.getElementById("dropdownMenu");
+        if (dropdown.style.display === "none" || dropdown.style.display === "") {
+            dropdown.style.display = "block";
+        } else {
+            dropdown.style.display = "none";
+        }
+    }
+
+    // Menutup dropdown jika klik di luar
+    window.onclick = function(event) {
+        if (!event.target.matches('.profile-picture')) {
+            var dropdowns = document.getElementsByClassName("dropdown-menu");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.style.display === "block") {
+                    openDropdown.style.display = "none";
+                }
+            }
+        }
+    }
+
+  </script>
 
 </body>
 
