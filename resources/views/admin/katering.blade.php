@@ -282,7 +282,12 @@
                                                                                         <p><b style="color: #435ebe">ID Paket : </b>{{ $mc->id_maincourse }}</p>
                                                                                         <p><b style="color: #435ebe">Nama Paket Main Course : </b>{{ $mc->nama_paket_maincourse }}</p>
                                                                                         <p><b style="color: #435ebe">Harga : </b>{{ $mc->harga_paket }}</p>
-                                                                                        <p><b style="color: #435ebe">Deskripsi : </b>{{ $mc->deskripsi_makanan }}</p>
+                                                                                        <p>
+                                                                                            <b style="color: #435ebe">Deskripsi :</b><br>
+                                                                                            {!! str_replace(["\r\n", "\n", "\r"], '', nl2br(e($mc->deskripsi_makanan))) !!}
+                                                                                        </p>
+                                                                                        
+                                                                                        
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
