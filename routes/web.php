@@ -61,12 +61,14 @@ Route::middleware(['auth', 'can:user'])->group(function () {
 // maincourse
 Route::get('/admin/maincourse', [MaincourseController::class, 'index'])->name('admin.index');
 Route::post('/admin/maincourse/store',[MaincourseController::class,'store'])->name('admin.store');
+Route::get('/admin/maincourse/{id}', [MaincourseController::class, 'show'])->name('maincourse.show');
 Route::get('/admin/maincourse/{id_maincourse}/edit', [MaincourseController::class ,'edit'])->name('admin.edit');
 Route::put('/admin/maincourse/{id_maincourse}', [MaincourseController::class ,'update'])->name('admin.update');
 
 // dishes
 Route::get('/admin/dishes', [MaincourseController::class, 'index'])->name('admin.indexD');
 Route::post('/admin/dishes/store',[MaincourseController::class,'storeD'])->name('admin.storeD');
+Route::get('/admin/dishes/{id}', [MaincourseController::class, 'showD'])->name('maincourse.showD');
 Route::get('/admin/dishes/{id_dishes}/edit', [MaincourseController::class ,'editD'])->name('admin.editD');
 Route::put('/admin/dishes/{id_dishes}', [MaincourseController::class ,'updateD'])->name('admin.updateD');
 

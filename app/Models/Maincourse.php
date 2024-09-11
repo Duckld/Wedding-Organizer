@@ -16,8 +16,7 @@ class Maincourse extends Model
     protected $fillable = [
         'nama_paket_maincourse',
         'deskripsi_makanan',
-        'harga_paket',
-        'foto_menu',
+        'harga_paket'
     ];
 
     protected static function boot()
@@ -29,5 +28,10 @@ class Maincourse extends Model
             $lastId = $lastCustomer ? intval(substr($lastCustomer->id_maincourse, 2)) : 0;
             $product->id_maincourse = 'MC' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
         });
+    }
+
+    public function images()
+    {
+        return $this->hasMany(MaincourseImage::class, 'maincourse_id', 'id_maincourse');
     }
 }

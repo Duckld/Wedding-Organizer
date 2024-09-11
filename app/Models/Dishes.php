@@ -30,4 +30,9 @@ class Dishes extends Model
             $product->id_dishes = 'DS' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
         });
     }
+
+    public function images()
+    {
+        return $this->hasMany(DishesImage::class, 'dishes_id', 'id_dishes');
+    }
 }

@@ -223,7 +223,7 @@
 
                                                     <div class="form-group">
                                                         <label for="foto_menu">Foto Menu</label>
-                                                        <input type="file" class="form-control" id="foto_menu" name="foto_menu">
+                                                        <input type="file" class="form-control" id="foto_menu" name="foto_menu[]" multiple>
                                                     </div>
 
                                                     <button type="submit" class="btn btn-outline-primary btn-lg btn-block form-control">Submit</button>
@@ -275,8 +275,12 @@
                                                                             </div>
                                                                             <div class="modal-body col-md-12">
                                                                                 <div class="row">
-                                                                                    <div class="col-md-4">
-                                                                                        <img src="{{ asset('storage/' . $mc->foto_menu) }}" alt="{{ $mc->nama_paket_maincourse }}" class="img-fluid">
+                                                                                    <div class="images-gallery col-md-4">
+                                                                                        @foreach ($mc->images as $image)
+                                                                                            <div class="image-item">
+                                                                                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="Gambar Menu" style="max-width: 200px; max-height: 200px;">
+                                                                                            </div>
+                                                                                        @endforeach
                                                                                     </div>
                                                                                     <div class="col-md-4" style="text-align: left">
                                                                                         <p><b style="color: #435ebe">ID Paket : </b>{{ $mc->id_maincourse }}</p>
@@ -414,7 +418,7 @@
 
                                                     <div class="form-group">
                                                         <label for="foto_menu">Foto Menu</label>
-                                                        <input type="file" class="form-control" id="foto_menu" name="foto_menu">
+                                                        <input type="file" class="form-control" id="foto_menu" name="foto_menu[]" multiple>
                                                     </div>
 
                                                     <button type="submit" class="btn btn-outline-primary btn-lg btn-block form-control">Submit</button>
@@ -467,13 +471,20 @@
                                                                             <div class="modal-body col-md-12">
                                                                                 <div class="row">
                                                                                     <div class="col-md-4">
-                                                                                        <img src="{{ asset('storage/' . $ds->foto_menu) }}" alt="{{ $ds->nama_paket_dishes }}" class="img-fluid">
+                                                                                        @foreach ($ds->images as $image)
+                                                                                            <div class="image-item">
+                                                                                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="Gambar Menu" style="max-width: 200px; max-height: 200px;">
+                                                                                            </div>
+                                                                                        @endforeach
                                                                                     </div>
                                                                                     <div class="col-md-4" style="text-align: left">
                                                                                         <p><b style="color: #435ebe">ID Paket : </b>{{ $ds->id_dishes }}</p>
                                                                                         <p><b style="color: #435ebe">Nama Paket Main Course : </b>{{ $ds->nama_paket_dishes }}</p>
                                                                                         <p><b style="color: #435ebe">Harga : </b>{{ $ds->harga_paket }}</p>
-                                                                                        <p><b style="color: #435ebe">Deskripsi : </b>{{ $ds->deskripsi_makanan }}</p>
+                                                                                        <p>
+                                                                                            <b style="color: #435ebe">Deskripsi :</b><br>
+                                                                                            {!! str_replace(["\r\n", "\n", "\r"], '', nl2br(e($ds->deskripsi_makanan))) !!}
+                                                                                        </p>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

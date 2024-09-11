@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dishes;
+use App\Models\DishesImage;
 use App\Models\Maincourse;
+use App\Models\MaincourseImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,43 +34,58 @@ class MaincourseController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $fotoPath = null;
-        if ($request->hasFile('foto_menu')) {
-            $fotoPath = $request->file('foto_menu')->store('foto_menu', 'public');
-        };
- 
-        Maincourse::create([
+
+        $maincourse = Maincourse::create([
             'nama_paket_maincourse' => $request->input('nama_paket_maincourse'),
             'deskripsi_makanan' => $request->input('deskripsi_makanan'),
             'harga_paket' => $request->input('harga_paket'),
-            'foto_menu' => $fotoPath,
         ]);
-        return redirect()->back();
+    
+        if ($request->hasFile('foto_menu')) {
+            foreach ($request->file('foto_menu') as $file) {
+                $imagePath = $file->store('foto_menu', 'public');
+                MaincourseImage::create([
+                    'maincourse_id' => $maincourse->id_maincourse,
+                    'image_path' => $imagePath,
+                ]);
+            }
+        }
+        return redirect()->back()->with('success', 'Maincourse berhasil disimpan!');
     }
 
     public function storeD(Request $request)
     {
-        $fotoPath = null;
-        if ($request->hasFile('foto_menu')) {
-            $fotoPath = $request->file('foto_menu')->store('foto_menuD', 'public');
-        };
- 
-        Dishes::create([
+        $dishes = Dishes::create([
             'nama_paket_dishes' => $request->input('nama_paket_dishes'),
             'deskripsi_makanan' => $request->input('deskripsi_makanan'),
             'harga_paket' => $request->input('harga_paket'),
-            'foto_menu' => $fotoPath,
         ]);
-        return redirect()->back();
+    
+        if ($request->hasFile('foto_menu')) {
+            foreach ($request->file('foto_menu') as $file) {
+                $imagePath = $file->store('foto_menuD', 'public');
+                DishesImage::create([
+                    'dishes_id' => $dishes->id_dishes,
+                    'image_path' => $imagePath,
+                ]);
+            }
+        }
+        return redirect()->back()->with('success', 'Maincourse berhasil disimpan!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Maincourse $maincourse)
+    public function show(Maincourse $id_maincourse)
     {
-        //
+        $maincourse = Maincourse::with('images')->findOrFail($id_maincourse);
+        return view('maincourse.show', compact('maincourse'));
+    }
+
+    public function showD(Dishes $id_dishes)
+    {
+        $dishes = Dishes::with('images')->findOrFail($id_dishes);
+        return view('dishes.show', compact('dishes'));
     }
 
     /**
