@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('maincourses', function (Blueprint $table) {
-            $table->string('id_maincourse')->primary();
-            $table->string('nama_paket_maincourse');
-            $table->text('deskripsi_makanan');
-            $table->bigInteger('harga_paket');
-            $table->string('foto_menu');
+        Schema::create('bookings', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('maincourses');
+        Schema::dropIfExists('bookings');
     }
 };

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BridalstyleController;
 use App\Http\Controllers\DekorasiController;
 use App\Http\Controllers\DishesController;
@@ -113,3 +114,8 @@ Route::get('/admin/undangan', [UndanganController::class, 'index'])->name('undan
 Route::post('/admin/undangan/store',[UndanganController::class,'store'])->name('undangan.store');
 Route::get('/admin/undangan/{id_undangan}/edit', [UndanganController::class ,'edit'])->name('undangan.edit');
 Route::put('/admin/undangan/{id}', [UndanganController::class ,'update'])->name('undangan.update');
+
+
+// USER
+
+Route::get('/user/booking', [BookingController::class, 'index'])->name('undangan.index');

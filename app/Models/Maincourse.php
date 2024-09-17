@@ -16,7 +16,8 @@ class Maincourse extends Model
     protected $fillable = [
         'nama_paket_maincourse',
         'deskripsi_makanan',
-        'harga_paket'
+        'harga_paket',
+        'foto_menu',
     ];
 
     protected static function boot()

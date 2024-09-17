@@ -223,6 +223,11 @@
 
                                                     <div class="form-group">
                                                         <label for="foto_menu">Foto Menu</label>
+                                                        <input type="file" class="form-control" id="foto_menu" name="foto_menu" multiple>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="foto_menu">Foto Menu</label>
                                                         <input type="file" class="form-control" id="foto_menu" name="foto_menu[]" multiple>
                                                     </div>
 
