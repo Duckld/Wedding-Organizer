@@ -58,6 +58,7 @@
       transform: translateX(-50%); /* Mengoreksi posisi agar benar-benar berada di tengah */
       width: 500px; /* Atur lebar gambar sesuai kebutuhan */
       height: auto; /* Pertahankan rasio aspek gambar */
+      z-index: 50;
     }
 
     .navbar-profile {
@@ -155,7 +156,7 @@
   <section id="hero" class="hero d-flex align-items-center section-bg">
     <div class="container">
       <div class="row justify-content-between gy-5">
-        <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+        <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start" style="z-index: 40">
           <h2 data-aos="fade-up" style="color: #fff">Your Premium Wedding<br>Organizer</h2>
           <p data-aos="fade-up" data-aos-delay="100" style="color: #fff">Kami hadir untuk mewujudkan pernikahan impian Anda, dengan sentuhan cinta dan perhatian pada setiap detail, menjadikan hari spesial Anda sempurna dan tak terlupakan.</p>
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
@@ -163,7 +164,7 @@
             <a href="https://www.youtube.com/watch?v=IvBToRiExbk" class="glightbox btn-watch-video d-flex align-items-center" style="color: #fff"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
           </div>
         </div>
-        <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+        <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start" style="z-index: 10">
           <img src="assets/Yummy/assets/img/wedding/bride-removebg-preview.png" class="img-fluid food-image" alt="" data-aos="zoom-out" data-aos-delay="300">
         </div>
       </div>
