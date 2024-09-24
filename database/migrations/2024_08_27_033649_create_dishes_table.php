@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama_paket_dishes');
             $table->text('deskripsi_makanan');
             $table->bigInteger('harga_paket');
-            $table->string('foto_menu')->nullable();
+            $table->string('foto_menu');
             $table->timestamps();
         });
     }

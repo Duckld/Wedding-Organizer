@@ -70,12 +70,12 @@
                                 <i class="bi bi-stack"></i>
                                 <span>Features</span>
                             </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item">
-                                    <a href="/admin/maincourse">Katering</a>
-                                </li>
+                            <ul class="submenu active">
                                 <li class="submenu-item active">
                                     <a href="/admin/gedung">Gedung</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/maincourse">Katering</a>
                                 </li>
                                 <li class="submenu-item">
                                     <a href="/admin/dekorasi">Dekorasi</a>
@@ -358,8 +358,8 @@
                                                                         @csrf
                                                                         @method ('PUT') 
                                                                         <section class="section">
-                                                                           <div class="card">
-                                                                                <div class="card-body">
+                                                                            <div class="card">
+                                                                                    <div class="card-body">
                                                                                     <div class="row">
                                                                                         <div class="col-md-6">
                                                                                             <div class="form-group">
@@ -370,7 +370,7 @@
                                                                                             <div class="form-group">
                                                                                                 <label for="tipe_gedung">Tipe Gedung</label>
                                                                                                 <select class="form-select" name="tipe_gedung" required>
-                                                                                                    <option value="{{ $gd->nama_gedung }}">{{ $gd->tipe_gedung }}</option>
+                                                                                                    <option value="{{ $gd->tipe_gedung }}">{{ $gd->tipe_gedung }}</option>
                                                                                                     <option value="Indoor">Indoor</option>
                                                                                                     <option value="Outdoor">Outdoor</option>
                                                                                                     <option value="Indoor & Outdoor">Indoor & Outdoor</option>
@@ -428,16 +428,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {{-- <form action="{{ url('admin/CRUDVendor/' . $gd->id) }}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger" type="submit">
-                                                            <article id="trash-alt">
-                                                                <dt class="the-icon"><span
-                                                                        class="fa-fw select-all fas"></span></dt>
-                                                            </article>
-                                                        </button>
-                                                    </form> --}}
                                                 </div>
                                             </td>
                                         </tr>

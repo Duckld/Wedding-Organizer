@@ -70,12 +70,12 @@
                                 <i class="bi bi-stack"></i>
                                 <span>Features</span>
                             </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item">
-                                    <a href="/admin/maincourse">Katering</a>
-                                </li>
+                            <ul class="submenu active">
                                 <li class="submenu-item">
                                     <a href="/admin/gedung">Gedung</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/maincourse">Katering</a>
                                 </li>
                                 <li class="submenu-item">
                                     <a href="/admin/dekorasi">Dekorasi</a>

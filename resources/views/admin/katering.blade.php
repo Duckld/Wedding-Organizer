@@ -65,17 +65,17 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item has-sub active">
+                        <li class="sidebar-item has-sub  active">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-stack"></i>
                                 <span>Features</span>
                             </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item active">
-                                    <a href="/admin/maincourse">Katering</a>
-                                </li>
+                            <ul class="submenu active">
                                 <li class="submenu-item">
                                     <a href="/admin/gedung">Gedung</a>
+                                </li>
+                                <li class="submenu-item active">
+                                    <a href="/admin/maincourse">Katering</a>
                                 </li>
                                 <li class="submenu-item">
                                     <a href="/admin/dekorasi">Dekorasi</a>
@@ -222,13 +222,13 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="foto_menu">Foto Menu</label>
-                                                        <input type="file" class="form-control" id="foto_menu" name="foto_menu" multiple>
+                                                        <label for="foto_menu">Foto Thumbnail</label>
+                                                        <input type="file" class="form-control" id="foto_menu" name="foto_menu">
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="foto_menu">Foto Menu</label>
-                                                        <input type="file" class="form-control" id="foto_menu" name="foto_menu[]" multiple>
+                                                        <label for="multiple_foto">Foto Lainnya</label>
+                                                        <input type="file" class="form-control" id="multiple_foto" name="multiple_foto[]" multiple>
                                                     </div>
 
                                                     <button type="submit" class="btn btn-outline-primary btn-lg btn-block form-control">Submit</button>
@@ -281,11 +281,94 @@
                                                                             <div class="modal-body col-md-12">
                                                                                 <div class="row">
                                                                                     <div class="images-gallery col-md-4">
-                                                                                        @foreach ($mc->images as $image)
-                                                                                            <div class="image-item">
-                                                                                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="Gambar Menu" style="max-width: 200px; max-height: 200px;">
+                                                                                        @if($mc->foto_menu)
+                                                                                            <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $mc->id_maincourse }}">
+                                                                                                <img src="{{ asset('storage/' . $mc->foto_menu) }}" alt="Foto Menu" class="img-thumbnail">
+                                                                                            </a>
+
+                                                                                            <!-- Modal Kedua (Gambar dalam Detail Menu) -->
+                                                                                            <div class="modal fade" id="secondModal{{ $mc->id_maincourse }}" tabindex="-1" aria-labelledby="myModalLabelSecond" aria-hidden="true" role="dialog">
+                                                                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+                                                                                                    <div class="modal-content">
+                                                                                                        <div class="modal-body">
+                                                                                                            <img src="{{ asset('storage/'. $mc->foto_menu) }}" alt="Foto Menu" class="img-thumbnail">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
                                                                                             </div>
-                                                                                        @endforeach
+                                                                                        @else
+                                                                                            <p>Tidak ada Foto Thumbnail</p>
+                                                                                        @endif
+                                                                                        @if($mc->images->count() > 0)
+                                                                                            <div class="row">
+                                                                                                @foreach($mc->images as $image)
+                                                                                                    <div class="col-md-4">
+                                                                                                        <!-- Gambar Kecil -->
+                                                                                                        <a href="#" class="open-image-modal" data-bs-toggle="modal" data-bs-target="#imageModal{{ $loop->index }}">
+                                                                                                            <img src="{{ asset('storage/' . $image->image_path) }}" alt="Foto Tambahan" width="500px" class="img-thumbnail">
+                                                                                                        </a>
+                                                                                                    </div>
+
+                                                                                                    <!-- Modal untuk Gambar -->
+                                                                                                    <div class="modal fade" id="imageModal{{ $loop->index }}" tabindex="-1" aria-labelledby="imageModalLabel{{ $loop->index }}" aria-hidden="true" role="dialog">
+                                                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-body">
+                                                                                                                    <!-- Gambar di Modal -->
+                                                                                                                    <div id="carouselExampleCaptions3" class="carousel slide" data-bs-ride="carousel">
+                                                                                                                        <!-- Carousel Indicators -->
+                                                                                                                        <ol class="carousel-indicators">
+                                                                                                                            @foreach($mc->images as $index => $image)
+                                                                                                                                <li data-bs-target="#carouselExampleCaptions3" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
+                                                                                                                            @endforeach
+                                                                                                                        </ol>
+                                                                                                                
+                                                                                                                        <!-- Carousel Inner (Images) -->
+                                                                                                                        <div class="carousel-inner">
+                                                                                                                            @foreach($mc->images as $index => $image)
+                                                                                                                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                                                                                                    <img src="{{ asset('storage/' . $image->image_path) }}" class="d-block w-100 img-thumbnail" alt="Foto Tambahan">
+                                                                                                                                    {{-- <div class="carousel-caption d-none d-md-block">
+                                                                                                                                        <h5>Slide {{ $index + 1 }}</h5>
+                                                                                                                                        <p>Ini adalah foto tambahan ke-{{ $index + 1 }}</p>
+                                                                                                                                    </div> --}}
+                                                                                                                                </div>
+                                                                                                                            @endforeach
+                                                                                                                        </div>
+                                                                                                                
+                                                                                                                        <!-- Carousel Controls (Previous/Next) -->
+                                                                                                                        <a class="carousel-control-prev" href="#carouselExampleCaptions3" role="button" data-bs-slide="prev">
+                                                                                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                                                            <span class="visually-hidden">Previous</span>
+                                                                                                                        </a>
+                                                                                                                        <a class="carousel-control-next" href="#carouselExampleCaptions3" role="button" data-bs-slide="next">
+                                                                                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                                                            <span class="visually-hidden">Next</span>
+                                                                                                                        </a>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                @endforeach
+                                                                                            </div>
+                                                                                        @else
+                                                                                            <p>Tidak ada foto tambahan</p>
+                                                                                        @endif
+
+                                                                                        
+                                                                                        <!-- Tampilkan Foto Multiple dari MainCourseImage -->
+                                                                                        {{-- @if($mc->images->count() > 0)
+                                                                                            <div class="row">
+                                                                                                @foreach($mc->images as $image)
+                                                                                                    <div class="col-md-12">
+                                                                                                        <img src="{{ asset('storage/' . $image->image_path) }}" alt="Foto Tambahan" class="img-thumbnail">
+                                                                                                    </div>
+                                                                                                @endforeach
+                                                                                            </div>
+                                                                                        @else
+                                                                                            <p>Tidak ada foto tambahan</p>
+                                                                                        @endif --}}
                                                                                     </div>
                                                                                     <div class="col-md-4" style="text-align: left">
                                                                                         <p><b style="color: #435ebe">ID Paket : </b>{{ $mc->id_maincourse }}</p>
@@ -360,11 +443,53 @@
                                                                                                         </div>
                                                                             
                                                                                                         <div class="form-group">
-                                                                                                            <label for="foto_menu" style="text-align: left">Foto Menu</label>
+                                                                                                            <label for="foto_menu" style="text-align: left">Foto Thumbnail</label>
                                                                                                             <input type="file" class="form-control" id="foto_menu" name="foto_menu">
                                                                                                             @if($mc->foto_menu)
-                                                                                                                <img src="{{ asset('storage/' . $mc->foto_menu) }}" alt="Foto Menu" class="img-fluid mt-2" width="200">
+                                                                                                                <img src="{{ asset('storage/' . $mc->foto_menu) }}" alt="Foto Menu" class="img-thumbnail" width="200">
                                                                                                             @endif
+                                                                                                        </div>
+
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="multiple_foto" style="text-align: left">Foto Lainnya</label>
+                                                                                                            <input type="file" class="form-control" id="multiple_foto" name="multiple_foto[]" multiple>
+                                                                                                            <div class="d-flex justify-content-center">
+                                                                                                                @if($mc->images->count() > 0)
+                                                                                                                    <div id="carouselExampleCaptions2" class="carousel slide" data-bs-ride="carousel" style="width: 200px">
+                                                                                                                        <!-- Carousel Indicators -->
+                                                                                                                        <ol class="carousel-indicators">
+                                                                                                                            @foreach($mc->images as $index => $image)
+                                                                                                                                <li data-bs-target="#carouselExampleCaptions2" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
+                                                                                                                            @endforeach
+                                                                                                                        </ol>
+                                                                                                                
+                                                                                                                        <!-- Carousel Inner (Images) -->
+                                                                                                                        <div class="carousel-inner">
+                                                                                                                            @foreach($mc->images as $index => $image)
+                                                                                                                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                                                                                                    <img src="{{ asset('storage/' . $image->image_path) }}" class="d-block w-100 img-thumbnail" alt="Foto Tambahan">
+                                                                                                                                    {{-- <div class="carousel-caption d-none d-md-block">
+                                                                                                                                        <h5>Slide {{ $index + 1 }}</h5>
+                                                                                                                                        <p>Ini adalah foto tambahan ke-{{ $index + 1 }}</p>
+                                                                                                                                    </div> --}}
+                                                                                                                                </div>
+                                                                                                                            @endforeach
+                                                                                                                        </div>
+                                                                                                                
+                                                                                                                        <!-- Carousel Controls (Previous/Next) -->
+                                                                                                                        <a class="carousel-control-prev" href="#carouselExampleCaptions2" role="button" data-bs-slide="prev">
+                                                                                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                                                            <span class="visually-hidden">Previous</span>
+                                                                                                                        </a>
+                                                                                                                        <a class="carousel-control-next" href="#carouselExampleCaptions2" role="button" data-bs-slide="next">
+                                                                                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                                                            <span class="visually-hidden">Next</span>
+                                                                                                                        </a>
+                                                                                                                    </div>
+                                                                                                                @else
+                                                                                                                    <p>Tidak ada foto tambahan</p>
+                                                                                                                @endif
+                                                                                                            </div>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
@@ -380,16 +505,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                {{-- <form action="{{ url('admin/CRUDVendor/' . $mc->id) }}">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button class="btn btn-danger" type="submit">
-                                                                        <article id="trash-alt">
-                                                                            <dt class="the-icon"><span
-                                                                                    class="fa-fw select-all fas"></span></dt>
-                                                                        </article>
-                                                                    </button>
-                                                                </form> --}}
+
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -422,8 +538,13 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="foto_menu">Foto Menu</label>
-                                                        <input type="file" class="form-control" id="foto_menu" name="foto_menu[]" multiple>
+                                                        <label for="foto_menu">Foto Thumbnail</label>
+                                                        <input type="file" class="form-control" id="foto_menu" name="foto_menu">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="multiple_foto">Foto Lainnya</label>
+                                                        <input type="file" class="form-control" id="multiple_foto" name="multiple_foto[]" multiple>
                                                     </div>
 
                                                     <button type="submit" class="btn btn-outline-primary btn-lg btn-block form-control">Submit</button>
@@ -471,20 +592,44 @@
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <h4 class="modal-title" id="myModalLabel16">Detail
-                                                                                    Menu Main Course</h4>
+                                                                                    Menu Dishes</h4>
                                                                             </div>
                                                                             <div class="modal-body col-md-12">
                                                                                 <div class="row">
                                                                                     <div class="col-md-4">
-                                                                                        @foreach ($ds->images as $image)
-                                                                                            <div class="image-item">
-                                                                                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="Gambar Menu" style="max-width: 200px; max-height: 200px;">
+                                                                                        @if($ds->foto_menu)
+                                                                                            <img src="{{ asset('storage/' . $ds->foto_menu) }}" alt="Foto Menu" class="img-thumbnail">
+                                                                                        @else
+                                                                                            <p>Tidak ada Foto Thumbnail</p>
+                                                                                        @endif
+                                                                                        @if($ds->images->count() > 0)
+                                                                                            <div class="row">
+                                                                                                @foreach($ds->images as $image)
+                                                                                                    <div class="col-md-4">
+                                                                                                        <img src="{{ asset('storage/' . $image->image_path) }}" alt="Foto Tambahan" width="500px" class="img-thumbnail">
+                                                                                                    </div>
+                                                                                                @endforeach
                                                                                             </div>
-                                                                                        @endforeach
+                                                                                        @else
+                                                                                            <p>Tidak ada foto tambahan</p>
+                                                                                        @endif
+                                                                                        
+                                                                                        <!-- Tampilkan Foto Multiple dari MainCourseImage -->
+                                                                                        {{-- @if($mc->images->count() > 0)
+                                                                                            <div class="row">
+                                                                                                @foreach($mc->images as $image)
+                                                                                                    <div class="col-md-12">
+                                                                                                        <img src="{{ asset('storage/' . $image->image_path) }}" alt="Foto Tambahan" class="img-thumbnail">
+                                                                                                    </div>
+                                                                                                @endforeach
+                                                                                            </div>
+                                                                                        @else
+                                                                                            <p>Tidak ada foto tambahan</p>
+                                                                                        @endif --}}
                                                                                     </div>
                                                                                     <div class="col-md-4" style="text-align: left">
                                                                                         <p><b style="color: #435ebe">ID Paket : </b>{{ $ds->id_dishes }}</p>
-                                                                                        <p><b style="color: #435ebe">Nama Paket Main Course : </b>{{ $ds->nama_paket_dishes }}</p>
+                                                                                        <p><b style="color: #435ebe">Nama Paket Dishes : </b>{{ $ds->nama_paket_dishes }}</p>
                                                                                         <p><b style="color: #435ebe">Harga : </b>{{ $ds->harga_paket }}</p>
                                                                                         <p>
                                                                                             <b style="color: #435ebe">Deskripsi :</b><br>
@@ -556,8 +701,50 @@
                                                                                                             <label for="foto_menu">Foto Menu</label>
                                                                                                             <input type="file" class="form-control" id="foto_menu" name="foto_menu">
                                                                                                             @if($ds->foto_menu)
-                                                                                                                <img src="{{ asset('storage/' . $ds->foto_menu) }}" alt="Foto Menu" class="img-fluid mt-2" width="200">
+                                                                                                                <img src="{{ asset('storage/' . $mc->foto_menu) }}" alt="Foto Menu" class="img-thumbnail" width="200">
                                                                                                             @endif
+                                                                                                        </div>
+
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="multiple_foto" style="text-align: left">Foto Lainnya</label>
+                                                                                                            <input type="file" class="form-control" id="multiple_foto" name="multiple_foto[]" multiple>
+                                                                                                            <div class="d-flex justify-content-center">
+                                                                                                                @if($ds->images->count() > 0)
+                                                                                                                    <div id="carouselExampleCaptions1" class="carousel slide" data-bs-ride="carousel" style="width: 200px">
+                                                                                                                        <!-- Carousel Indicators -->
+                                                                                                                        <ol class="carousel-indicators">
+                                                                                                                            @foreach($ds->images as $index => $image)
+                                                                                                                                <li data-bs-target="#carouselExampleCaptions1" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
+                                                                                                                            @endforeach
+                                                                                                                        </ol>
+                                                                                                                
+                                                                                                                        <!-- Carousel Inner (Images) -->
+                                                                                                                        <div class="carousel-inner">
+                                                                                                                            @foreach($ds->images as $index => $image)
+                                                                                                                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                                                                                                    <img src="{{ asset('storage/' . $image->image_path) }}" class="d-block w-100 img-thumbnail" alt="Foto Tambahan">
+                                                                                                                                    {{-- <div class="carousel-caption d-none d-md-block">
+                                                                                                                                        <h5>Slide {{ $index + 1 }}</h5>
+                                                                                                                                        <p>Ini adalah foto tambahan ke-{{ $index + 1 }}</p>
+                                                                                                                                    </div> --}}
+                                                                                                                                </div>
+                                                                                                                            @endforeach
+                                                                                                                        </div>
+                                                                                                                
+                                                                                                                        <!-- Carousel Controls (Previous/Next) -->
+                                                                                                                        <a class="carousel-control-prev" href="#carouselExampleCaptions1" role="button" data-bs-slide="prev">
+                                                                                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                                                            <span class="visually-hidden">Previous</span>
+                                                                                                                        </a>
+                                                                                                                        <a class="carousel-control-next" href="#carouselExampleCaptions1" role="button" data-bs-slide="next">
+                                                                                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                                                            <span class="visually-hidden">Next</span>
+                                                                                                                        </a>
+                                                                                                                    </div>
+                                                                                                                @else
+                                                                                                                    <p>Tidak ada foto tambahan</p>
+                                                                                                                @endif
+                                                                                                            </div>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
@@ -635,6 +822,58 @@
                 icon: "success"
             });
         @endif
+    </script>
+
+    {{-- pop up foto --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Menangani tumpang tindih modal
+            var modalTriggers = document.querySelectorAll('.open-second-modal');
+
+            modalTriggers.forEach(function(trigger) {
+                trigger.addEventListener('click', function(event) {
+                    event.preventDefault(); // Mencegah aksi default anchor link
+                    var secondModalTarget = this.getAttribute('data-bs-target');
+
+                    // Tutup modal pertama
+                    var bootstrapModal = bootstrap.Modal.getInstance(currentModal);
+                    bootstrapModal.hide();
+
+                    // Tunggu modal pertama tertutup lalu buka modal kedua
+                    currentModal.addEventListener('hidden.bs.modal', function() {
+                        var secondModal = new bootstrap.Modal(document.querySelector(secondModalTarget));
+                        secondModal.show();
+                    }, { once: true });
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var modalTriggers = document.querySelectorAll('.open-image-modal');
+
+            modalTriggers.forEach(function(trigger) {
+                trigger.addEventListener('click', function(event) {
+                    event.preventDefault(); // Mencegah aksi default anchor link
+                    var secondModalTarget = this.getAttribute('data-bs-target');
+
+                    // Jika ada modal terbuka, tutup modal tersebut sebelum membuka yang baru
+                    if (currentModal) {
+                        var bootstrapModal = bootstrap.Modal.getInstance(currentModal);
+                        bootstrapModal.hide();
+
+                        currentModal.addEventListener('hidden.bs.modal', function() {
+                            var secondModal = new bootstrap.Modal(document.querySelector(secondModalTarget));
+                            secondModal.show();
+                        }, { once: true });
+                    } else {
+                        var secondModal = new bootstrap.Modal(document.querySelector(secondModalTarget));
+                        secondModal.show();
+                    }
+                });
+            });
+        });
     </script>
 </body>
 

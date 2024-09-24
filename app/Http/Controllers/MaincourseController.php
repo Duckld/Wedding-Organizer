@@ -17,7 +17,7 @@ class MaincourseController extends Controller
     public function index()
     {
         $dishes = Dishes::all();
-        $maincourse = Maincourse::all();
+        $maincourse = MainCourse::with('images')->get();
         return view('admin.katering', compact('maincourse', 'dishes'));
     }
 
@@ -26,7 +26,7 @@ class MaincourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('maincourse.create');
     }
 
     /**
@@ -35,35 +35,50 @@ class MaincourseController extends Controller
     public function store(Request $request)
     {
 
+        // Upload Foto Menu
+        $fotoPath = null;
+        if ($request->hasFile('foto_menu')) {
+            $fotoPath = $request->file('foto_menu')->store('foto_maincourse', 'public');
+        };
+
         $maincourse = Maincourse::create([
             'nama_paket_maincourse' => $request->input('nama_paket_maincourse'),
             'deskripsi_makanan' => $request->input('deskripsi_makanan'),
             'harga_paket' => $request->input('harga_paket'),
+            'foto_menu' => $fotoPath,
         ]);
     
-        if ($request->hasFile('foto_menu')) {
-            foreach ($request->file('foto_menu') as $file) {
-                $imagePath = $file->store('foto_menu', 'public');
+        if ($request->hasFile('multiple_foto')) {
+            foreach ($request->file('multiple_foto') as $file) {
+                $imagePath = $file->store('multiple_foto_maincourse', 'public');
                 MaincourseImage::create([
                     'maincourse_id' => $maincourse->id_maincourse,
                     'image_path' => $imagePath,
                 ]);
             }
-        }
+        } 
         return redirect()->back()->with('success', 'Maincourse berhasil disimpan!');
     }
 
     public function storeD(Request $request)
     {
+
+        // Upload Foto Menu
+        $fotoPath = null;
+        if ($request->hasFile('foto_menu')) {
+            $fotoPath = $request->file('foto_menu')->store('foto_dishes', 'public');
+        };
+        
         $dishes = Dishes::create([
             'nama_paket_dishes' => $request->input('nama_paket_dishes'),
             'deskripsi_makanan' => $request->input('deskripsi_makanan'),
             'harga_paket' => $request->input('harga_paket'),
+            'foto_menu' => $fotoPath,
         ]);
     
-        if ($request->hasFile('foto_menu')) {
-            foreach ($request->file('foto_menu') as $file) {
-                $imagePath = $file->store('foto_menuD', 'public');
+        if ($request->hasFile('multiple_foto')) {
+            foreach ($request->file('multiple_foto') as $file) {
+                $imagePath = $file->store('multiple_foto_dishes', 'public');
                 DishesImage::create([
                     'dishes_id' => $dishes->id_dishes,
                     'image_path' => $imagePath,
