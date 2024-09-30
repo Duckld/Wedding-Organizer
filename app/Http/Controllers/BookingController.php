@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Gedung;
 use App\Models\Maincourse;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class BookingController extends Controller
     public function index()
     {
         $maincourse = Maincourse::all();
-        return view('user.booking', compact('maincourse'));
+        $gedung = Gedung::all();
+        return view('user.booking', compact('maincourse', 'gedung'));
     }
 
     /**
