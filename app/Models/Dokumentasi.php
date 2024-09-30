@@ -31,4 +31,9 @@ class Dokumentasi extends Model
             $product->id_dokumentasi = 'DOK' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
         });
     }
+
+    public function images()
+    {
+        return $this->hasMany(DokumentasiImage::class, 'dokumentasi_id', 'id_dokumentasi');
+    }
 }

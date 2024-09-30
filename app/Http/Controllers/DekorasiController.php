@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dekorasi;
+use App\Models\DekorasiImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,18 +31,29 @@ class DekorasiController extends Controller
      */
     public function store(Request $request)
     {
+        // Upload Foto Menu
         $fotoPath = null;
         if ($request->hasFile('foto_dekorasi')) {
             $fotoPath = $request->file('foto_dekorasi')->store('foto_dekorasi', 'public');
         };
- 
-        Dekorasi::create([
+
+        $dekorasi = Dekorasi::create([
             'nama_dekorasi' => $request->input('nama_dekorasi'),
             'deskripsi_dekorasi' => $request->input('deskripsi_dekorasi'),
             'harga_dekorasi' => $request->input('harga_dekorasi'),
             'foto_dekorasi' => $fotoPath,
         ]);
-        return redirect()->back();
+    
+        if ($request->hasFile('multiple_foto')) {
+            foreach ($request->file('multiple_foto') as $file) {
+                $imagePath = $file->store('multiple_foto_dekorasi', 'public');
+                DekorasiImage::create([
+                    'dekorasi_id' => $dekorasi->id_dekorasi,
+                    'image_path' => $imagePath,
+                ]);
+            }
+        } 
+        return redirect()->back()->with('success', 'Dekorasi berhasil disimpan!');
     }
 
     /**

@@ -34,4 +34,9 @@ class Gedung extends Model
             $product->id_gedung = 'GD' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
         });
     }
+
+    public function images()
+    {
+        return $this->hasMany(GedungImage::class, 'gedung_id', 'id_gedung');
+    }
 }

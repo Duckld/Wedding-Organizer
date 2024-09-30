@@ -403,15 +403,6 @@
 
     <script src="{{ asset('assets/dist/assets/js/main.js') }}"></script>
 
-    <script>
-        @if (Session::has('success'))
-            Swal.fire({
-                title: "Berhasil!",
-                // text: "You clicked the button!",
-                icon: "success"
-            });
-        @endif
-    </script>
 </body>
 
 </html>

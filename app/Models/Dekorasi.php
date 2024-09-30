@@ -30,4 +30,9 @@ class Dekorasi extends Model
             $product->id_dekorasi = 'DEK' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
         });
     }
+
+    public function images()
+    {
+        return $this->hasMany(DekorasiImage::class, 'dekorasi_id', 'id_dekorasi');
+    }
 }

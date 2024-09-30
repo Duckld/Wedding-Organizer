@@ -218,8 +218,13 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="foto_dokumentasi">Foto Dokumentasi</label>
+                                            <label for="foto_dokumentasi">Foto Thumbnail</label>
                                             <input type="file" class="form-control" id="foto_dokumentasi" name="foto_dokumentasi">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="multiple_foto">Foto Lainnya</label>
+                                            <input type="file" class="form-control" id="multiple_foto" name="multiple_foto[]" multiple>
                                         </div>
 
                                         <button type="submit" class="btn btn-outline-primary btn-lg btn-block form-control">Submit</button>
@@ -271,14 +276,88 @@
                                                                 </div>
                                                                 <div class="modal-body col-md-12">
                                                                     <div class="row">
-                                                                        <div class="col-md-4">
-                                                                            <img src="{{ asset('storage/' . $dok->foto_dokumentasi) }}" alt="{{ $dok->nama_paket_dokumentasi }}" class="img-fluid">
+                                                                        <div class="image-gallery col-md-4">
+                                                                            @if($dok->foto_dokumentasi)
+                                                                                <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $dok->id_dokumentasi }}">
+                                                                                    <img src="{{ asset('storage/' . $dok->foto_dokumentasi) }}" alt="Foto Menu" class="img-thumbnail">
+                                                                                </a>
+
+                                                                                <!-- Modal Kedua (Gambar dalam Detail Menu) -->
+                                                                                <div class="modal fade" id="secondModal{{ $dok->id_dokumentasi }}" tabindex="-1" aria-labelledby="myModalLabelSecond" aria-hidden="true" role="dialog">
+                                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-body">
+                                                                                                <img src="{{ asset('storage/'. $dok->foto_dokumentasi) }}" alt="Foto Menu" class="img-thumbnail">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            @else
+                                                                                <p>Tidak ada Foto Thumbnail</p>
+                                                                            @endif
+                                                                            @if($dok->images->count() > 0)
+                                                                                <div class="row">
+                                                                                    @foreach($dok->images as $image)
+                                                                                        <div class="col-md-4">
+                                                                                            <!-- Gambar Kecil -->
+                                                                                            <a href="#" class="open-image-modal" data-bs-toggle="modal" data-bs-target="#imageModal{{ $loop->index }}">
+                                                                                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="Foto Tambahan" width="500px" class="img-thumbnail">
+                                                                                            </a>
+                                                                                        </div>
+
+                                                                                        <!-- Modal untuk Gambar -->
+                                                                                        <div class="modal fade" id="imageModal{{ $loop->index }}" tabindex="-1" aria-labelledby="imageModalLabel{{ $loop->index }}" aria-hidden="true" role="dialog">
+                                                                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+                                                                                                <div class="modal-content">
+                                                                                                    <div class="modal-body">
+                                                                                                        <!-- Gambar di Modal -->
+                                                                                                        <div id="carouselDokumentasi" class="carousel slide" data-bs-ride="carousel">
+                                                                                                            <!-- Carousel Indicators -->
+                                                                                                            <ol class="carousel-indicators">
+                                                                                                                @foreach($dok->images as $index => $image)
+                                                                                                                    <li data-bs-target="#carouselDokumentasi" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
+                                                                                                                @endforeach
+                                                                                                            </ol>
+                                                                                                    
+                                                                                                            <!-- Carousel Inner (Images) -->
+                                                                                                            <div class="carousel-inner">
+                                                                                                                @foreach($dok->images as $index => $image)
+                                                                                                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                                                                                        <img src="{{ asset('storage/' . $image->image_path) }}" class="d-block w-100 img-thumbnail" alt="Foto Tambahan">
+                                                                                                                        {{-- <div class="carousel-caption d-none d-md-block">
+                                                                                                                            <h5>Slide {{ $index + 1 }}</h5>
+                                                                                                                            <p>Ini adalah foto tambahan ke-{{ $index + 1 }}</p>
+                                                                                                                        </div> --}}
+                                                                                                                    </div>
+                                                                                                                @endforeach
+                                                                                                            </div>
+                                                                                                    
+                                                                                                            <!-- Carousel Controls (Previous/Next) -->
+                                                                                                            <a class="carousel-control-prev" href="#carouselDokumentasi" role="button" data-bs-slide="prev">
+                                                                                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                                                <span class="visually-hidden">Previous</span>
+                                                                                                            </a>
+                                                                                                            <a class="carousel-control-next" href="#carouselDokumentasi" role="button" data-bs-slide="next">
+                                                                                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                                                <span class="visually-hidden">Next</span>
+                                                                                                            </a>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    @endforeach
+                                                                                </div>
+                                                                            @else
+                                                                                <p>Tidak ada foto tambahan</p>
+                                                                            @endif
                                                                         </div>
                                                                         <div class="col-md-4" style="text-align: left">
                                                                             <p><b style="color: #435ebe">ID Paket : </b>{{ $dok->id_dokumentasi }}</p>
                                                                             <p><b style="color: #435ebe">Nama Paket Main Course : </b>{{ $dok->nama_paket_dokumentasi }}</p>
                                                                             <p><b style="color: #435ebe">Harga : </b>{{ $dok->harga_dokumentasi }}</p>
-                                                                            <p><b style="color: #435ebe">Deskripsi : </b>{{ $dok->deskripsi_dokumentasi }}</p>
+                                                                            <p><b style="color: #435ebe">Deskripsi : </b> <br>
+                                                                                {!! str_replace(["\r\n", "\n", "\r"], '', nl2br(e($dok->deskripsi_dokumentasi))) !!}</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>

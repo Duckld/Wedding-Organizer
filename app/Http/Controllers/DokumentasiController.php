@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dokumentasi;
+use App\Models\DokumentasiImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,19 +31,30 @@ class DokumentasiController extends Controller
      */
     public function store(Request $request)
     {
+        // Upload Foto Menu
         $fotoPath = null;
         if ($request->hasFile('foto_dokumentasi')) {
             $fotoPath = $request->file('foto_dokumentasi')->store('foto_dokumentasi', 'public');
         };
- 
-        Dokumentasi::create([
+
+        $dokumentasi = Dokumentasi::create([
             'nama_paket_dokumentasi' => $request->input('nama_paket_dokumentasi'),
             'jenis_dokumentasi' => $request->input('jenis_dokumentasi'),
             'deskripsi_dokumentasi' => $request->input('deskripsi_dokumentasi'),
             'harga_dokumentasi' => $request->input('harga_dokumentasi'),
             'foto_dokumentasi' => $fotoPath,
         ]);
-        return redirect()->back();
+    
+        if ($request->hasFile('multiple_foto')) {
+            foreach ($request->file('multiple_foto') as $file) {
+                $imagePath = $file->store('multiple_foto_dokumentasi', 'public');
+                DokumentasiImage::create([
+                    'dokumentasi_id' => $dokumentasi->id_dokumentasi,
+                    'image_path' => $imagePath,
+                ]);
+            }
+        } 
+        return redirect()->back()->with('success', 'Dokumentasi berhasil disimpan!');
     }
 
     /**

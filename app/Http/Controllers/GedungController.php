@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gedung;
+use App\Models\GedungImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,13 +31,13 @@ class GedungController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // Upload Foto Menu
         $fotoPath = null;
         if ($request->hasFile('foto_gedung')) {
             $fotoPath = $request->file('foto_gedung')->store('foto_gedung', 'public');
         };
- 
-        Gedung::create([
+
+        $gedung = Gedung::create([
             'nama_gedung' => $request->input('nama_gedung'),
             'tipe_gedung' => $request->input('tipe_gedung'),
             'alamat_gedung' => $request->input('alamat_gedung'),
@@ -46,7 +47,17 @@ class GedungController extends Controller
             'deskripsi_gedung' => $request->input('deskripsi_gedung'),
             'foto_gedung' => $fotoPath,
         ]);
-        return redirect()->back();
+    
+        if ($request->hasFile('multiple_foto')) {
+            foreach ($request->file('multiple_foto') as $file) {
+                $imagePath = $file->store('multiple_foto_gedung', 'public');
+                GedungImage::create([
+                    'gedung_id' => $gedung->id_gedung,
+                    'image_path' => $imagePath,
+                ]);
+            }
+        } 
+        return redirect()->back()->with('success', 'Gedung berhasil disimpan!');
     }
 
     /**

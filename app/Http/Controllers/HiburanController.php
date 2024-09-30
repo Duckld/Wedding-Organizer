@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hiburan;
+use App\Models\HiburanImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,18 +31,29 @@ class HiburanController extends Controller
      */
     public function store(Request $request)
     {
+        // Upload Foto Menu
         $fotoPath = null;
         if ($request->hasFile('foto_hiburan')) {
             $fotoPath = $request->file('foto_hiburan')->store('foto_hiburan', 'public');
         };
- 
-        Hiburan::create([
+
+        $hiburan = Hiburan::create([
             'nama_paket_hiburan' => $request->input('nama_paket_hiburan'),
             'deskripsi_hiburan' => $request->input('deskripsi_hiburan'),
             'harga_sewa_hiburan' => $request->input('harga_sewa_hiburan'),
             'foto_hiburan' => $fotoPath,
         ]);
-        return redirect()->back();
+    
+        if ($request->hasFile('multiple_foto')) {
+            foreach ($request->file('multiple_foto') as $file) {
+                $imagePath = $file->store('multiple_foto_hiburan', 'public');
+                HiburanImage::create([
+                    'hiburan_id' => $hiburan->id_hiburan,
+                    'image_path' => $imagePath,
+                ]);
+            }
+        } 
+        return redirect()->back()->with('success', 'Hiburan berhasil disimpan!');
     }
 
     /**

@@ -30,4 +30,9 @@ class Hiburan extends Model
             $product->id_hiburan = 'HB' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
         });
     }
+
+    public function images()
+    {
+        return $this->hasMany(HiburanImage::class, 'hiburan_id', 'id_hiburan');
+    }
 }
