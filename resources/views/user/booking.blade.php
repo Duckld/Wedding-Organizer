@@ -247,6 +247,10 @@
                   <div class="tab-pane fade" id="menu-katering">
                     @include('user.components.katering')
                   </div>
+
+                  <div class="tab-pane fade" id="menu-dekorasi">
+                    @include('user.components.dekorasi')
+                  </div>
           
                     <div class="tab-pane fade" id="menu-lunch">
           
@@ -742,7 +746,7 @@
         }
     </script>
 
-    <script>
+    {{-- <script>
         function myFunction() {
           // Ambil input pencarian
           var input = document.getElementById('myInput');
@@ -763,6 +767,32 @@
                   item.style.display = "none"; // Sembunyikan jika tidak cocok
               }
           });
+        }
+    </script> --}}
+    <script>
+        function myFunction() {
+            // Ambil input pencarian
+            var input = document.getElementById('myInput');
+            var filter = input.value.toUpperCase();
+    
+            // Ambil kontainer tab-content
+            var menuFeatures = document.getElementById('menu-features');
+    
+            // Cari tab konten yang sedang aktif
+            var activeTab = menuFeatures.querySelector('.tab-pane.active');
+    
+            // Ambil semua elemen yang ingin dicari di dalam tab yang aktif
+            var items = activeTab ? activeTab.querySelectorAll('.menu-item') : [];
+    
+            // Loop untuk setiap item dan cek apakah teks cocok dengan input
+            items.forEach(function(item) {
+                var namaItem = item.querySelector('h5').textContent || item.querySelector('h5').innerText;
+                if (namaItem.toUpperCase().indexOf(filter) > -1) {
+                    item.style.display = ""; // Tampilkan jika cocok
+                } else {
+                    item.style.display = "none"; // Sembunyikan jika tidak cocok
+                }
+            });
         }
     </script>
 
