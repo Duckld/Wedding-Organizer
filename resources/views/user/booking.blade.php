@@ -116,7 +116,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="container d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+            <a href="/user" class="logo d-flex align-items-center me-auto me-lg-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1>Wedding11<span>.</span></h1>
@@ -184,7 +184,7 @@
                 <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
 
                     <li class="nav-item">
-                        <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-gedung">
+                        <a class="nav-link show" data-bs-toggle="tab" data-bs-target="#menu-gedung">
                             <h4>Gedung</h4>
                         </a>
                     </li><!-- End tab nav item -->
@@ -231,146 +231,22 @@
                     </li><!-- End tab nav item -->
                 </ul>
                 <br><br>
-                <div class="row ">
+                <div class="row">
                     <div class="d-flex justify-content-end">
                         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." class="form-control">
                     </div>
                 </div>
                 <br>
 
-                <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
+                <div class="tab-content" data-aos="fade-up" data-aos-delay="300" id="menu-features">
 
-                    <div class="tab-pane fade active show" id="menu-gedung">
-          
-                        <div class="tab-header text-center">
-                            <p>Menu</p>
-                            <h3>Gedung</h3>
-                        </div>
+                  <div class="tab-pane fade" id="menu-gedung">
+                    @include('user.components.gedung')
+                  </div>
 
-                        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            
-                            @foreach ($gedung as $gd)
-                                <div class="col-lg-4 menu-item">
-                                    <div class="col mb-5">
-                                        <div class="card h-100">
-                                            <!-- Product image-->
-                                            @if($gd->foto_gedung)
-                                                <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $gd->id_gedung }}">
-                                                    <img src="{{ asset('storage/' . $gd->foto_gedung) }}" alt="Foto Menu" class="img-thumbnail">
-                                                </a>
-
-                                                <!-- Modal Kedua (Gambar dalam Detail Menu) -->
-                                                <div class="modal fade" id="secondModal{{ $gd->id_gedung }}" tabindex="-1" aria-labelledby="myModalLabelSecond" aria-hidden="true" role="dialog">
-                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-body">
-                                                                <img src="{{ asset('storage/'. $gd->foto_gedung) }}" alt="Foto Menu" class="img-thumbnail">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @else
-                                                <p>Tidak ada Foto Thumbnail</p>
-                                            @endif
-                                            <!-- Product details-->
-                                            <div class="card-body p-4">
-                                                <div class="text-center">
-                                                    <!-- Product name-->
-                                                    <h5 class="fw-bolder">{{ $gd->nama_gedung }}</h5>
-                                                    <!-- Product price-->
-                                                    Rp.{{ $gd->harga_sewa_gedung }}
-                                                </div>
-                                            </div>
-                                            <!-- Product actions-->
-                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View
-                                                        options</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- Menu Item -->
-                            @endforeach
-            
-                        </div>
-                    </div><!-- End Starter Menu Content -->
-          
-                    <div class="tab-pane fade" id="menu-breakfast">
-          
-                      <div class="tab-header text-center">
-                        <p>Menu</p>
-                        <h3>Breakfast</h3>
-                      </div>
-          
-                      <div class="row gy-5">
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-1.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Magnam Tiste</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $5.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Aut Luia</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $14.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Est Eligendi</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $8.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Eos Luibusdam</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $12.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Eos Luibusdam</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $12.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Laboriosam Direva</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $9.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                      </div>
-                    </div><!-- End Breakfast Menu Content -->
+                  <div class="tab-pane fade" id="menu-katering">
+                    @include('user.components.katering')
+                  </div>
           
                     <div class="tab-pane fade" id="menu-lunch">
           
@@ -528,7 +404,7 @@
                       </div>
                     </div><!-- End Dinner Menu Content -->
           
-                  </div>
+                </div>
 
                 {{-- <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"id="item-katering">
                   <div class="col mb-5">
@@ -868,25 +744,25 @@
 
     <script>
         function myFunction() {
-            // Ambil input pencarian
-            var input = document.getElementById('myInput');
-            var filter = input.value.toUpperCase();
+          // Ambil input pencarian
+          var input = document.getElementById('myInput');
+          var filter = input.value.toUpperCase();
 
-            // Ambil kontainer yang berisi item gedung
-            var menuGedung = document.querySelector("#menu-gedung .row");
-            
-            // Ambil semua elemen h5 yang berisi nama gedung
-            var items = menuGedung.querySelectorAll(".menu-item");
+          // Ambil kontainer yang berisi item gedung
+          var menuGedung = document.querySelector("#menu-features .row");
 
-            // Loop untuk setiap item gedung dan cek apakah nama gedung cocok dengan input
-            items.forEach(function(item) {
-                var namaGedung = item.querySelector("h5").textContent || item.querySelector("h5").innerText;
-                if (namaGedung.toUpperCase().indexOf(filter) > -1) {
-                    item.style.display = ""; // Tampilkan jika cocok
-                } else {
-                    item.style.display = "none"; // Sembunyikan jika tidak cocok
-                }
-            });
+          // Ambil semua elemen h5 yang berisi nama gedung
+          var items = menuGedung.querySelectorAll(".menu-item");
+
+          // Loop untuk setiap item gedung dan cek apakah nama gedung cocok dengan input
+          items.forEach(function(item) {
+              var namaGedung = item.querySelector("h5").textContent || item.querySelector("h5").innerText;
+              if (namaGedung.toUpperCase().indexOf(filter) > -1) {
+                  item.style.display = ""; // Tampilkan jika cocok
+              } else {
+                  item.style.display = "none"; // Sembunyikan jika tidak cocok
+              }
+          });
         }
     </script>
 
