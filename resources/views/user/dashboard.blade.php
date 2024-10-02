@@ -160,7 +160,7 @@
           <h2 data-aos="fade-up" style="color: #fff">Your Premium Wedding<br>Organizer</h2>
           <p data-aos="fade-up" data-aos-delay="100" style="color: #fff">Kami hadir untuk mewujudkan pernikahan impian Anda, dengan sentuhan cinta dan perhatian pada setiap detail, menjadikan hari spesial Anda sempurna dan tak terlupakan.</p>
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="user/booking" class="btn-book-a-table">Booking Sekarang</a>
+            <a href="user/booking#pemesanan" class="btn-book-a-table">Booking Sekarang</a>
             <a href="https://www.youtube.com/watch?v=IvBToRiExbk" class="glightbox btn-watch-video d-flex align-items-center" style="color: #fff"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
           </div>
         </div>
@@ -171,6 +171,7 @@
     </div>
   </section>
   <!-- End Hero Section -->
+
 
   <main id="main">
 

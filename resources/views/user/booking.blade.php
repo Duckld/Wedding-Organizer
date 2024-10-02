@@ -30,6 +30,9 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/Yummy/assets/css/main.css') }}" rel="stylesheet">
 
+    <!-- Bootstrap CSS -->
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+
 
 
     <!-- =======================================================
@@ -112,6 +115,41 @@
 
 <body>
 
+    <div class="modal fade" id="modalpemesanan" tabindex="-1" aria-labelledby="modalpemesananLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalpemesananLabel">Data Pemesan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Ini adalah isi dari modal.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Mengecek jika URL mengandung hash #modal
+        if (window.location.hash === '#pemesanan') {
+            // Inisialisasi dan tampilkan modal Bootstrap 5
+            let myModal = new bootstrap.Modal(document.getElementById('modalpemesanan'));
+            myModal.show();
+        }
+
+        // Event listener untuk menghapus hash ketika modal ditutup
+        let modalElement = document.getElementById('modalpemesanan');
+        modalElement.addEventListener('hidden.bs.modal', function () {
+            // Hapus hash dari URL
+            history.replaceState(null, null, ' ');
+        });
+    </script>
+
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="container d-flex align-items-center justify-content-between">
@@ -123,33 +161,33 @@
             </a>
 
             {{-- <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#events">Events</a></li>
-          <li><a href="#chefs">Chefs</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                 <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#chefs">Chefs</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                    <ul>
+                    <li><a href="#">Drop Down 1</a></li>
+                    <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                        <ul>
+                        <li><a href="#">Deep Drop Down 1</a></li>
+                        <li><a href="#">Deep Drop Down 2</a></li>
+                        <li><a href="#">Deep Drop Down 3</a></li>
+                        <li><a href="#">Deep Drop Down 4</a></li>
+                        <li><a href="#">Deep Drop Down 5</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Drop Down 2</a></li>
+                    <li><a href="#">Drop Down 3</a></li>
+                    <li><a href="#">Drop Down 4</a></li>
+                    </ul>
+                </li>
+                <li><a href="#contact">Contact</a></li>
                 </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav><!-- .navbar --> --}}
+            </nav><!-- .navbar --> --}}
 
             <div class="navbar-profile">
                 <img src="{{ asset('assets/Yummy/assets/img/testimonials/testimonials-1.jpg') }}" alt="Profile Picture"
@@ -160,8 +198,8 @@
                     <a href="#">Logout</a>
                 </div>
             </div>
-            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+            {{-- <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i> --}}
 
         </div>
     </header><!-- End Header -->
@@ -201,13 +239,13 @@
                     </li><!-- End tab nav item -->
 
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dkumentasi">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dokumentasi">
                             <h4>Dokumentasi</h4>
                         </a>
                     </li><!-- End tab nav item -->
 
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-hiburan">
                             <h4>Hiburan</h4>
                         </a>
                     </li><!-- End tab nav item -->
@@ -240,95 +278,25 @@
 
                 <div class="tab-content" data-aos="fade-up" data-aos-delay="300" id="menu-features">
 
-                  <div class="tab-pane fade" id="menu-gedung">
+                    <div class="tab-pane fade" id="menu-gedung">
                     @include('user.components.gedung')
-                  </div>
+                    </div>
 
-                  <div class="tab-pane fade" id="menu-katering">
+                    <div class="tab-pane fade" id="menu-katering">
                     @include('user.components.katering')
-                  </div>
+                    </div>
 
-                  <div class="tab-pane fade" id="menu-dekorasi">
+                    <div class="tab-pane fade" id="menu-dekorasi">
                     @include('user.components.dekorasi')
-                  </div>
-          
-                    <div class="tab-pane fade" id="menu-lunch">
-          
-                      <div class="tab-header text-center">
-                        <p>Menu</p>
-                        <h3>Lunch</h3>
-                      </div>
-          
-                      <div class="row gy-5">
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-1.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Magnam Tiste</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $5.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Aut Luia</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $14.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Est Eligendi</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $8.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Eos Luibusdam</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $12.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Eos Luibusdam</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $12.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Laboriosam Direva</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $9.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                      </div>
-                    </div><!-- End Lunch Menu Content -->
+                    </div>
+
+                    <div class="tab-pane fade" id="menu-dokumentasi">
+                    @include('user.components.dokumentasi')
+                    </div>
+
+                    <div class="tab-pane fade" id="menu-hiburan">
+                    @include('user.components.hiburan')
+                    </div>
           
                     <div class="tab-pane fade" id="menu-dinner">
           

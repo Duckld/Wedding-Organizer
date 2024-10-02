@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Bridalstyle;
 use App\Models\Dekorasi;
+use App\Models\Dokumentasi;
 use App\Models\Gedung;
+use App\Models\Hiburan;
 use App\Models\Maincourse;
+use App\Models\Souvenir;
+use App\Models\Undangan;
 use Illuminate\Http\Request;
+use PHPUnit\TextUI\Configuration\Source;
 
 class BookingController extends Controller
 {
@@ -18,7 +24,12 @@ class BookingController extends Controller
         $maincourse = Maincourse::all();
         $gedung = Gedung::all();
         $dekorasi = Dekorasi::all();
-        return view('user.booking', compact('maincourse', 'gedung', 'dekorasi'));
+        $dokumentasi = Dokumentasi::all();
+        $hiburan = Hiburan::all();
+        $bridalstyle = Bridalstyle::all();
+        $souvenir = Souvenir::all();
+        $undangan = Undangan::all();
+        return view('user.booking', compact('maincourse', 'gedung', 'dekorasi', 'dokumentasi', 'hiburan', 'bridalstyle', 'souvenir', 'undangan'));
     }
 
     /**
