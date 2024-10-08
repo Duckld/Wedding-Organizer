@@ -25,9 +25,13 @@ class Dekorasi extends Model
         parent::boot();
 
         static::creating(function ($product) {
-            $lastCustomer = Dekorasi::orderBy('id_dekorasi', 'desc')->first();
-            $lastId = $lastCustomer ? intval(substr($lastCustomer->id_dekorasi, 2)) : 0;
-            $product->id_dekorasi = 'DEK' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
+            do {
+                $lastCustomer = Dekorasi::orderBy('id_dekorasi', 'desc')->first();
+                $lastId = $lastCustomer ? intval(substr($lastCustomer->id_dekorasi, 3)) : 0;
+                $newId = 'DEK' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
+            } while (Dekorasi::where('id_dekorasi', $newId)->exists());
+    
+            $product->id_dekorasi = $newId;
         });
     }
 

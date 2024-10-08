@@ -32,6 +32,7 @@ class DekorasiController extends Controller
     public function store(Request $request)
     {
         // Upload Foto Menu
+        // return $request;
         $fotoPath = null;
         if ($request->hasFile('foto_dekorasi')) {
             $fotoPath = $request->file('foto_dekorasi')->store('foto_dekorasi', 'public');
@@ -43,6 +44,7 @@ class DekorasiController extends Controller
             'harga_dekorasi' => $request->input('harga_dekorasi'),
             'foto_dekorasi' => $fotoPath,
         ]);
+        
     
         if ($request->hasFile('multiple_foto')) {
             foreach ($request->file('multiple_foto') as $file) {

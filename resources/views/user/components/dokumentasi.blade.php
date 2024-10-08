@@ -5,7 +5,7 @@
 
 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
-    @foreach ($dokumentasi as $dok)
+    {{-- @foreach ($dokumentasi as $dok)
         <div class="col-lg-4 menu-item">
             <div class="col mb-5">
                 <input type="radio" id="dekorasi{{ $dok->id_dokumentasi }}" name="dekorasi" value="{{ $dok->id_dokumentasi }}" class="d-none">
@@ -48,7 +48,42 @@
             </div>
         </div>
         <!-- Menu Item -->
-    @endforeach
+    @endforeach --}}
+
+    <form action="{{ route('pemesanandokumentasi.store') }}" method="POST">
+        @csrf
+        <div class="row">
+            @foreach ($dokumentasi as $dok)
+                <div class="col-lg-4 menu-item">
+                    <div class="col mb-5">
+                        <input type="radio" id="dokumentasi{{ $dok->id_dokumentasi }}" name="dokumentasi" value="{{ $dok->id_dokumentasi }}" class="d-none">
+                        <label for="dokumentasi{{ $dok->id_dokumentasi }}">
+                            <div class="card h-100">
+                                @if($dok->foto_dokumentasi)
+                                    <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $dok->id_dokumentasi }}">
+                                        <img src="{{ asset('storage/' . $dok->foto_dokumentasi) }}" alt="Foto Menu" class="img-thumbnail">
+                                    </a>
+                                @else
+                                    <p>Tidak ada Foto Thumbnail</p>
+                                @endif
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <h5 class="fw-bolder">{{ $dok->nama_paket_dokumentasi }}</h5>
+                                        Rp.{{ $dok->harga_dokumentasi }}
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <button type="submit" class="btn btn-primary">Simpan Dokumentasi</button>
+    </form>
+    <form action="{{ route('skip.pemesanandokumentasi') }}" method="POST" class="d-inline">
+        @csrf
+        <button type="submit" class="btn btn-secondary mt-3">Skip Dokumentasi</button>
+    </form>
 </div>
 
 <div class="d-flex justify-content-center">

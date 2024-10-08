@@ -10,6 +10,7 @@ use App\Http\Controllers\HiburanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MaincourseController;
+use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\SouvenirController;
 use App\Http\Controllers\UndanganController;
 use App\Models\Maincourse;
@@ -119,3 +120,16 @@ Route::put('/admin/undangan/{id}', [UndanganController::class ,'update'])->name(
 // USER
 
 Route::get('/user/booking', [BookingController::class, 'index'])->name('undangan.index');
+Route::get('/user/pemesanan', [PemesananController::class, 'index'])->name('pemesanan');
+// PEMESANAN
+Route::post('/user/pemesanan/store', [PemesananController::class, 'store'])->name('pemesanan.store');
+
+// Routing untuk dekorasi
+Route::get('/dekorasi', [PemesananController::class, 'indexdekorasi'])->name('pemesanandekorasi.index');
+Route::post('/dekorasi', [PemesananController::class, 'storedekorasi'])->name('pemesanandekorasi.store');
+Route::post('/skip-dekorasi', [PemesananController::class, 'skipdekorasi'])->name('skip.pemesanandekorasi');
+
+// Routing untuk dokumentasi
+Route::get('/dokumentasi', [PemesananController::class, 'indexdokumentasi'])->name('pemesanandokumentasi.index');
+Route::post('/dokumentasi', [PemesananController::class, 'storedokumentasi'])->name('pemesanandokumentasi.store');
+Route::post('/skip-dokumentasi', [PemesananController::class, 'skipdokumentasi'])->name('skip.pemesanandokumentasi');

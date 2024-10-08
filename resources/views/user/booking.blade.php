@@ -221,6 +221,13 @@
             <div class="container px-4 px-lg-5 " data-aos="fade-up">
                 <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
 
+                    {{-- @if(session()->has('dekorasi_terpilih') || session()->has('dokumentasi_terpilih'))
+                        <!-- Hapus session saat refresh pada bagian `nav` -->
+                        @php
+                            session()->forget(['dekorasi_terpilih', 'dokumentasi_terpilih']);
+                        @endphp
+                    @endif --}}
+
                     <li class="nav-item">
                         <a class="nav-link show" data-bs-toggle="tab" data-bs-target="#menu-gedung">
                             <h4>Gedung</h4>
@@ -233,13 +240,19 @@
                         </a><!-- End tab nav item -->
 
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dekorasi">
+                        {{-- <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dekorasi">
+                            <h4>Dekorasi</h4>
+                        </a> --}}
+                        <a class="nav-link {{ session()->has('dekorasi_terpilih') ? 'disabled' : '' }}" data-bs-toggle="tab" data-bs-target="#menu-dekorasi">
                             <h4>Dekorasi</h4>
                         </a>
                     </li><!-- End tab nav item -->
 
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dokumentasi">
+                        {{-- <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dokumentasi">
+                            <h4>Dokumentasi</h4>
+                        </a> --}}
+                        <a class="nav-link {{ session()->has('dokumentasi_terpilih') ? 'disabled' : '' }}" data-bs-toggle="tab" data-bs-target="#menu-dokumentasi">
                             <h4>Dokumentasi</h4>
                         </a>
                     </li><!-- End tab nav item -->
@@ -599,7 +612,11 @@
 
             </div>
             <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-outline-dark btn-lg btn-block col-md-8">Submit</button>
+                {{-- <button type="submit" class="btn btn-outline-dark btn-lg btn-block col-md-8">Submit</button> --}}
+                <!-- Tombol untuk melanjutkan ke halaman pemesanan -->
+                <a href="{{ route('pemesanan') }}" class="btn btn-outline-dark btn-lg btn-block mt-3 {{ session()->has('dekorasi_terpilih') || session()->has('dokumentasi_terpilih') ? '' : 'disabled' }}">
+                    Lanjut ke Pemesanan Item
+                </a>
             </div>
         </section>
 

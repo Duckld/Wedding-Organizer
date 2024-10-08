@@ -26,9 +26,13 @@ class Dokumentasi extends Model
         parent::boot();
 
         static::creating(function ($product) {
-            $lastCustomer = Dokumentasi::orderBy('id_dokumentasi', 'desc')->first();
-            $lastId = $lastCustomer ? intval(substr($lastCustomer->id_dokumentasi, 2)) : 0;
-            $product->id_dokumentasi = 'DOK' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
+            do {
+                $lastCustomer = Dokumentasi::orderBy('id_dokumentasi', 'desc')->first();
+                $lastId = $lastCustomer ? intval(substr($lastCustomer->id_dokumentasi, 3)) : 0;
+                $newId = 'DOK' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
+            } while (Dokumentasi::where('id_dokumentasi', $newId)->exists());
+    
+            $product->id_dokumentasi = $newId;
         });
     }
 
