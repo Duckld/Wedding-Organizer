@@ -3,7 +3,7 @@
     <h3>Dekorasi</h3>
 </div>
 
-<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+<div class="row  justify-content-center">
 
     {{-- @foreach ($dekorasi as $dek)
         <form action="{{ route('pemesanan.store') }}" method="POST">
@@ -43,13 +43,13 @@
         @csrf
         <div class="row">
             @foreach ($dekorasi as $dek)
-                <div class="col-lg-4 menu-item">
+                <div class="col-12 col-lg-4 menu-item">
                     <div class="col mb-5">
                         <input type="radio" id="dekorasi{{ $dek->id_dekorasi }}" name="dekorasi" value="{{ $dek->id_dekorasi }}" class="d-none">
                         <label for="dekorasi{{ $dek->id_dekorasi }}">
                             <div class="card h-100">
                                 @if($dek->foto_dekorasi)
-                                    <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $dek->id_dekorasi }}">
+                                    <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $dek->id_dekorasi }}" style="height: 250px; overflow: hidden">
                                         <img src="{{ asset('storage/' . $dek->foto_dekorasi) }}" alt="Foto Menu" class="img-thumbnail">
                                     </a>
                                 @else
@@ -66,18 +66,18 @@
                     </div>
                 </div>
             @endforeach
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn custom-btn btn-lg btn-block col-md-12">Pilih</button>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Simpan Dekorasi</button>
-    </form>
-    <form action="{{ route('skip.pemesanandekorasi') }}" method="POST" class="d-inline">
-        @csrf
-        <button type="submit" class="btn btn-secondary mt-3">Skip Dekorasi</button>
+        <br>
+        <form action="{{ route('skip.pemesanandekorasi') }}" method="POST" class="d-inline d-flex justify-content-center">
+            @csrf
+            <button type="submit" class="btn custom-btn btn-lg btn-block col-md-12">Skip Dekorasi</button>
+        </form>
     </form>
 </div>
 
-<div class="d-flex justify-content-center">
-    <button type="submit" class="btn custom-btn btn-lg btn-block col-md-12">Submit</button>
-</div>
 
 <br><br>
 

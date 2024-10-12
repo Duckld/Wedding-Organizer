@@ -117,12 +117,10 @@ Route::get('/admin/undangan/{id_undangan}/edit', [UndanganController::class ,'ed
 Route::put('/admin/undangan/{id}', [UndanganController::class ,'update'])->name('undangan.update');
 
 
-// USER
-
-Route::get('/user/booking', [BookingController::class, 'index'])->name('undangan.index');
-Route::get('/user/pemesanan', [PemesananController::class, 'index'])->name('pemesanan');
+// Booking
+Route::get('/user/booking', [BookingController::class, 'index'])->name('booking.index');
 // PEMESANAN
-Route::post('/user/pemesanan/store', [PemesananController::class, 'store'])->name('pemesanan.store');
+Route::get('/user/pemesanan', [PemesananController::class, 'index'])->name('pemesanan');
 
 // Routing untuk dekorasi
 Route::get('/dekorasi', [PemesananController::class, 'indexdekorasi'])->name('pemesanandekorasi.index');

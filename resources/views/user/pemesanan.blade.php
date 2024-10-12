@@ -259,7 +259,7 @@
         <div class="container">
             <div class="form-container">
                 <div class="row">
-                    <!-- Form Data Pelanggan -->
+                    {{-- <!-- Form Data Pelanggan -->
                     <div class="col-md-6 mb-3">
                         <h4>Data Pelanggan</h4>
                         <form>
@@ -284,10 +284,10 @@
                                 <textarea class="form-control" id="notes" rows="5" placeholder="Tambahkan Catatan"></textarea>
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                     
                     <!-- Daftar Item Pesanan -->
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="order-items">
                             <h4>Item</h4>
                             @php
@@ -322,9 +322,7 @@
                                 <div class="item-container d-flex align-items-center">
                                     <div class="image-container">
                                         @if($dekorasi->foto_dekorasi)
-                                            <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $dekorasi->id_dekorasi }}">
-                                                <img src="{{ asset('storage/' . $dekorasi->foto_dekorasi) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
-                                            </a>
+                                            <img src="{{ asset('storage/' . $dekorasi->foto_dekorasi) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
                                         @else
                                             <p>Tidak ada Foto Thumbnail</p>
                                         @endif
@@ -342,9 +340,7 @@
                                 <div class="item-container d-flex align-items-center">
                                     <div class="image-container">
                                         @if($dokumentasi->foto_dokumentasi)
-                                            <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $dokumentasi->id_dokumentasi }}">
-                                                <img src="{{ asset('storage/' . $dokumentasi->foto_dokumentasi) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
-                                            </a>
+                                            <img src="{{ asset('storage/' . $dokumentasi->foto_dokumentasi) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
                                         @else
                                             <p>Tidak ada Foto Thumbnail</p>
                                         @endif
