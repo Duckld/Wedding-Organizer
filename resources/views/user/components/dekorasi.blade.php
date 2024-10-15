@@ -1,8 +1,3 @@
-<div class="tab-header text-center">
-    <p>Menu</p>
-    <h3>Dekorasi</h3>
-</div>
-
 <div class="row  justify-content-center">
 
     {{-- @foreach ($dekorasi as $dek)
@@ -58,7 +53,7 @@
                                 <div class="card-body p-4">
                                     <div class="text-center">
                                         <h5 class="fw-bolder">{{ $dek->nama_dekorasi }}</h5>
-                                        Rp.{{ $dek->harga_dekorasi }}
+                                        Rp.{{ number_format($dek->harga_dekorasi, 0, ',', '.') }}
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +84,7 @@
 
     /* Mengatur tampilan label agar menyerupai card */
     input[type="radio"]:checked + label .card {
-        border: 4px solid #ce1212; /* Ganti dengan warna border sesuai keinginan */
+        border: 4px solid #87CEEB; /* Ganti dengan warna border sesuai keinginan */
     }
 
     .card {
@@ -98,7 +93,7 @@
 
     /* Menambahkan efek hover pada card */
     label:hover .card {
-        border: 2px solid #ce1212; /* Ganti dengan warna hover border sesuai keinginan */
+        border: 2px solid #87CEEB; /* Ganti dengan warna hover border sesuai keinginan */
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
@@ -106,12 +101,12 @@
 
     .custom-btn {
         background-color: #fff;
-        border-color: #ce1212;
-        color: #ce1212;
+        border-color: #87CEEB;
+        color: #87CEEB;
     }
 
     .custom-btn:hover {
-        background-color: #ce1212;
+        background-color: #87CEEB;
         color: white;
     }
 

@@ -219,14 +219,64 @@
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 " data-aos="fade-up">
+                {{-- @if(session()->has('dekorasi_terpilih') || session()->has('dokumentasi_terpilih'))
+                    <!-- Hapus session saat refresh pada bagian `nav` -->
+                    @php
+                        session()->forget(['dekorasi_terpilih', 'dokumentasi_terpilih']);
+                    @endphp
+                @endif --}}
                 <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
 
-                    @if(session()->has('dekorasi_terpilih') || session()->has('dokumentasi_terpilih'))
-                        <!-- Hapus session saat refresh pada bagian `nav` -->
-                        @php
-                            session()->forget(['dekorasi_terpilih', 'dokumentasi_terpilih']);
-                        @endphp
-                    @endif
+                    <li class="nav-item">
+                      <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
+                        <h4>Starters</h4>
+                      </a>
+                    </li><!-- End tab nav item -->
+          
+                    <li class="nav-item">
+                      <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
+                        <h4>Breakfast</h4>
+                      </a><!-- End tab nav item -->
+          
+                    <li class="nav-item">
+                      <a class="nav-link {{ session()->has('dekorasi_terpilih') ? 'disabled' : '' }}" data-bs-toggle="tab" data-bs-target="#menu-dekorasi">
+                        <h4>Dekorasi</h4>
+                      </a>
+                    </li><!-- End tab nav item -->
+          
+                    <li class="nav-item">
+                      <a class="nav-link {{ session()->has('dokumentasi_ter pilih') ? 'disabled' : '' }}" data-bs-toggle="tab" data-bs-target="#menu-dokumentasi">
+                        <h4>Dokumentasi</h4>
+                      </a>
+                    </li>
+                    <!-- End tab nav item -->
+                    <li class="nav-item">
+                      <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
+                        <h4>Dinner</h4>
+                      </a>
+                    </li>
+                    <!-- End tab nav item -->
+                    <li class="nav-item">
+                      <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
+                        <h4>Dinner</h4>
+                      </a>
+                    </li>
+                    <!-- End tab nav item -->
+                    <li class="nav-item">
+                      <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
+                        <h4>Dinner</h4>
+                      </a>
+                    </li>
+                    <!-- End tab nav item -->
+                    <li class="nav-item">
+                      <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
+                        <h4>Dinner</h4>
+                      </a>
+                    </li>
+                    <!-- End tab nav item -->
+          
+                </ul>
+                {{-- <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
 
                     <li class="nav-item">
                         <a class="nav-link show" data-bs-toggle="tab" data-bs-target="#menu-gedung">
@@ -237,22 +287,17 @@
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-katering">
                             <h4>Katering</h4>
-                        </a><!-- End tab nav item -->
+                        </a>
+                    </li><!-- End tab nav item -->
 
                     <li class="nav-item">
-                        {{-- <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dekorasi">
-                            <h4>Dekorasi</h4>
-                        </a> --}}
-                        <a class="nav-link {{ session()->has('dekorasi_terpilih') ? 'disabled' : '' }}" data-bs-toggle="tab" data-bs-target="#menu-dekorasi">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dekorasi">
                             <h4>Dekorasi</h4>
                         </a>
                     </li><!-- End tab nav item -->
 
                     <li class="nav-item">
-                        {{-- <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dokumentasi">
-                            <h4>Dokumentasi</h4>
-                        </a> --}}
-                        <a class="nav-link {{ session()->has('dokumentasi_terpilih') ? 'disabled' : '' }}" data-bs-toggle="tab" data-bs-target="#menu-dokumentasi">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dokumentasi">
                             <h4>Dokumentasi</h4>
                         </a>
                     </li><!-- End tab nav item -->
@@ -280,7 +325,7 @@
                             <h4>Undangan</h4>
                         </a>
                     </li><!-- End tab nav item -->
-                </ul>
+                </ul> --}}
                 <br><br>
                 <div class="row">
                     <div class="d-flex justify-content-end">
@@ -289,7 +334,383 @@
                 </div>
                 <br>
 
-                <div class="tab-content" data-aos="fade-up" data-aos-delay="300" id="menu-features">
+                <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
+
+                    <div class="tab-pane fade active show" id="menu-starters">
+          
+                      <div class="tab-header text-center">
+                        <p>Menu</p>
+                        <h3>Starters</h3>
+                      </div>
+          
+                      <div class="row gy-5">
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-1.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Magnam Tiste</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $5.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Aut Luia</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $14.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Est Eligendi</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $8.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Eos Luibusdam</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $12.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Eos Luibusdam</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $12.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Laboriosam Direva</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $9.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                      </div>
+                    </div><!-- End Starter Menu Content -->
+          
+                    <div class="tab-pane fade" id="menu-breakfast">
+          
+                      <div class="tab-header text-center">
+                        <p>Menu</p>
+                        <h3>Breakfast</h3>
+                      </div>
+          
+                      <div class="row gy-5">
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-1.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Magnam Tiste</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $5.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Aut Luia</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $14.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Est Eligendi</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $8.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Eos Luibusdam</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $12.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Eos Luibusdam</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $12.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Laboriosam Direva</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $9.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                      </div>
+                    </div><!-- End Breakfast Menu Content -->
+          
+                    <div class="tab-pane fade" id="menu-dekorasi">
+          
+                        <div class="tab-header text-center">
+                        <p>Menu</p>
+                        <h3>Dekorasi</h3>
+                        </div>
+                        <br><br>
+
+                        <div class="row gy-5">
+
+                            @include('user.components.dekorasi')<!-- Menu Item -->
+            
+                        {{-- <div class="col-lg-4 menu-item">
+                            <a href="assets/Yummy/assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
+                            <h4>Aut Luia</h4>
+                            <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                            </p>
+                            <p class="price">
+                            $14.95
+                            </p>
+                        </div><!-- Menu Item -->
+            
+                        <div class="col-lg-4 menu-item">
+                            <a href="assets/Yummy/assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
+                            <h4>Est Eligendi</h4>
+                            <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                            </p>
+                            <p class="price">
+                            $8.95
+                            </p>
+                        </div><!-- Menu Item -->
+            
+                        <div class="col-lg-4 menu-item">
+                            <a href="assets/Yummy/assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
+                            <h4>Eos Luibusdam</h4>
+                            <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                            </p>
+                            <p class="price">
+                            $12.95
+                            </p>
+                        </div><!-- Menu Item -->
+            
+                        <div class="col-lg-4 menu-item">
+                            <a href="assets/Yummy/assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
+                            <h4>Eos Luibusdam</h4>
+                            <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                            </p>
+                            <p class="price">
+                            $12.95
+                            </p>
+                        </div><!-- Menu Item -->
+            
+                        <div class="col-lg-4 menu-item">
+                            <a href="assets/Yummy/assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
+                            <h4>Laboriosam Direva</h4>
+                            <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                            </p>
+                            <p class="price">
+                            $9.95
+                            </p>
+                        </div><!-- Menu Item --> --}}
+            
+                        </div>
+                    </div><!-- End Lunch Menu Content -->
+          
+                    <div class="tab-pane fade" id="menu-dokumentasi">
+          
+                      <div class="tab-header text-center">
+                        <p>Menu</p>
+                        <h3>Dokumentasi</h3>
+                      </div>
+                      <br><br>
+          
+                      <div class="row gy-5">
+          
+                        @include('user.components.dokumentasi')<!-- Menu Item --><!-- Menu Item -->
+          
+                        {{-- <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Aut Luia</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $14.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Est Eligendi</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $8.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Eos Luibusdam</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $12.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Eos Luibusdam</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $12.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Laboriosam Direva</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $9.95
+                          </p>
+                        </div><!-- Menu Item --> --}}
+          
+                      </div>
+                    </div><!-- End Dinner Menu Content -->
+                    <div class="tab-pane fade" id="menu-dinner">
+          
+                      <div class="tab-header text-center">
+                        <p>Menu</p>
+                        <h3>Dinner</h3>
+                      </div>
+          
+                      <div class="row gy-5">
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-1.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Magnam Tiste</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $5.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Aut Luia</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $14.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Est Eligendi</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $8.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Eos Luibusdam</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $12.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Eos Luibusdam</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $12.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Laboriosam Direva</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $9.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                      </div>
+                    </div><!-- End Dinner Menu Content -->
+          
+                </div>
+                {{-- <div class="tab-content" data-aos="fade-up" data-aos-delay="300" id="menu-features">
 
                     <div class="tab-pane fade" id="menu-gedung">
                     @include('user.components.gedung')
@@ -389,7 +810,7 @@
                       </div>
                     </div><!-- End Dinner Menu Content -->
           
-                </div>
+                </div> --}}
 
                 {{-- <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"id="item-katering">
                   <div class="col mb-5">
@@ -614,8 +1035,9 @@
             <div class="d-flex justify-content-center">
                 {{-- <button type="submit" class="btn btn-outline-dark btn-lg btn-block col-md-8">Submit</button> --}}
                 <!-- Tombol untuk melanjutkan ke halaman pemesanan -->
-                <a href="{{ route('pemesanan') }}" class="btn btn-outline-dark btn-lg btn-block mt-3 {{ session()->has('dekorasi_terpilih') || session()->has('dokumentasi_terpilih') ? '' : 'disabled' }}">
-                    Lanjut ke Pemesanan Item
+                {{-- {{ session()->has('dekorasi_terpilih') || session()->has('dokumentasi_terpilih') ? '' : 'disabled' }} --}}
+                <a href="{{ route('keranjang') }}" class="btn btn-outline-dark btn-lg btn-block mt-3">
+                    Lihat Pesanan
                 </a>
             </div>
         </section>

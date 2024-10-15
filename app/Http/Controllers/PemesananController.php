@@ -70,39 +70,39 @@ class PemesananController extends Controller
         return view('booking.index', compact('dokumentasi', 'dokumentasiTerpilih'));
     }
 
-    public function storedekorasi(Request $request)
-    {
-        // Simpan ID dekorasi yang dipilih ke session
-        session(['dekorasi_terpilih' => $request->input('dekorasi')]);
+    // public function storedekorasi(Request $request)
+    // {
+    //     // Simpan ID dekorasi yang dipilih ke session
+    //     session(['dekorasi_terpilih' => $request->input('dekorasi')]);
 
-        // Redirect kembali ke halaman dekorasi
-        return redirect()->route('booking.index');
-    }
+    //     // Redirect kembali ke halaman dekorasi
+    //     return redirect()->route('booking.index');
+    // }
 
-    public function skipdekorasi()
-    {
-        // Tandai dekorasi sebagai skipped dengan session
-        session(['dekorasi_terpilih' => 'skipped']);
+    // public function skipdekorasi()
+    // {
+    //     // Tandai dekorasi sebagai skipped dengan session
+    //     session(['dekorasi_terpilih' => 'skipped']);
 
-        return redirect()->route('booking.index');
-    }
+    //     return redirect()->route('booking.index');
+    // }
 
-    public function storedokumentasi(Request $request)
-    {
-        // Simpan ID dokumentasi yang dipilih ke session
-        session(['dokumentasi_terpilih' => $request->input('dokumentasi')]);
+    // public function storedokumentasi(Request $request)
+    // {
+    //     // Simpan ID dokumentasi yang dipilih ke session
+    //     session(['dokumentasi_terpilih' => $request->input('dokumentasi')]);
 
-        // Redirect kembali ke halaman dokumentasi
-        return redirect()->route('booking.index');
-    }
+    //     // Redirect kembali ke halaman dokumentasi
+    //     return redirect()->route('booking.index');
+    // }
 
-    public function skipdokumentasi()
-    {
-        // Tandai dokumentasi sebagai skipped dengan session
-        session(['dokumentasi_terpilih' => 'skipped']);
+    // public function skipdokumentasi()
+    // {
+    //     // Tandai dokumentasi sebagai skipped dengan session
+    //     session(['dokumentasi_terpilih' => 'skipped']);
 
-        return redirect()->route('booking.index');
-    }
+    //     return redirect()->route('booking.index');
+    // }
 
     /**
      * Display the specified resource.
