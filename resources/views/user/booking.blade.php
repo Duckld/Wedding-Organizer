@@ -245,32 +245,32 @@
                     </li><!-- End tab nav item -->
           
                     <li class="nav-item">
-                      <a class="nav-link {{ session()->has('dokumentasi_ter pilih') ? 'disabled' : '' }}" data-bs-toggle="tab" data-bs-target="#menu-dokumentasi">
+                      <a class="nav-link {{ session()->has('dokumentasi_terpilih') ? 'disabled' : '' }}" data-bs-toggle="tab" data-bs-target="#menu-dokumentasi">
                         <h4>Dokumentasi</h4>
                       </a>
                     </li>
                     <!-- End tab nav item -->
                     <li class="nav-item">
                       <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
-                        <h4>Dinner</h4>
+                        <h4>Hiburan</h4>
                       </a>
                     </li>
                     <!-- End tab nav item -->
                     <li class="nav-item">
                       <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
-                        <h4>Dinner</h4>
+                        <h4>Bridalstyle</h4>
                       </a>
                     </li>
                     <!-- End tab nav item -->
                     <li class="nav-item">
                       <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
-                        <h4>Dinner</h4>
+                        <h4>Souvenir</h4>
                       </a>
                     </li>
                     <!-- End tab nav item -->
                     <li class="nav-item">
                       <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
-                        <h4>Dinner</h4>
+                        <h4>Undangan</h4>
                       </a>
                     </li>
                     <!-- End tab nav item -->

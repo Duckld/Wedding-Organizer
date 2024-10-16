@@ -302,6 +302,7 @@
                                         @endphp
                                         <th>#</th>
                                         <th>Nama Item</th>
+                                        <th>Variant</th>
                                         <th>Harga</th>
                                         <th>Quantity</th>
                                         <th>Total</th>
@@ -366,6 +367,7 @@
                                                     <h6 class="mb-0">{{ $dekorasi->nama_dekorasi }}</h6>
                                                 </div>
                                             </td>
+                                            <td>-</td>
                                             <td>Rp.{{ number_format($dekorasi->harga_dekorasi, 0, ',', '.') }}</td>
                                             <td>1</td>
                                             <td>Rp.{{ number_format($dekorasi->harga_dekorasi, 0, ',', '.') }}</td>
@@ -390,6 +392,7 @@
                                                     <h6 class="mb-0">{{ $dokumentasi->nama_paket_dokumentasi }}</h6>
                                                 </div>
                                             </td>
+                                            <td>-</td>
                                             <td>Rp.{{ number_format($dokumentasi->harga_dokumentasi, 0, ',', '.') }}</td>
                                             <td>1</td>
                                             <td>Rp.{{ number_format($dokumentasi->harga_dokumentasi, 0, ',', '.') }}</td>

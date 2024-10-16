@@ -13,9 +13,10 @@ class KeranjangController extends Controller
      */
     public function index()
     {
-        $dekorasi = Dekorasi::all();
-        $dokumentasi = Dokumentasi::all();
-        return view('user.keranjang', compact('dekorasi', 'dokumentasi'));
+        // $dekorasi = Dekorasi::all();
+        // $dokumentasi = Dokumentasi::all();
+        return view('user.keranjang');
+        // , compact('dekorasi', 'dokumentasi')
     }
 
     public function indexdekorasi()
