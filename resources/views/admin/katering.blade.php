@@ -74,7 +74,7 @@
                                 <li class="submenu-item">
                                     <a href="/admin/gedung">Gedung</a>
                                 </li>
-                                <li class="submenu-item active">
+                                <li class="submenu active has-sub">
                                     <a href="/admin/maincourse">Katering</a>
                                 </li>
                                 <li class="submenu-item">

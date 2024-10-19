@@ -229,13 +229,13 @@
 
                     <li class="nav-item">
                       <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
-                        <h4>Starters</h4>
+                        <h4>Gedung</h4>
                       </a>
                     </li><!-- End tab nav item -->
           
                     <li class="nav-item">
                       <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
-                        <h4>Breakfast</h4>
+                        <h4>Katering</h4>
                       </a><!-- End tab nav item -->
           
                     <li class="nav-item">

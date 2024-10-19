@@ -114,7 +114,6 @@
           <li><a href="#hero">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#menu">Menu</a></li>
-          <li><a href="#events">Events</a></li>
           <li><a href="#chefs">Chefs</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -135,6 +134,7 @@
             </ul>
           </li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="#">Booking</a></li>
         </ul>
       </nav><!-- .navbar -->
 
@@ -229,13 +229,13 @@
 
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
             <div class="why-box">
-              <h3>Why Choose Yummy?</h3>
+              <h3>Kenapa harus memilih Wedding11?</h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-                Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
+                Kami menghadirkan layanan wedding organizer yang profesional dan penuh dedikasi. 
+                Setiap detail acara pernikahan Anda akan diatur dengan sempurna, mulai dari dekorasi hingga layanan catering. Tim kami siap membantu mewujudkan pernikahan impian Anda dengan pengalaman terbaik
               </p>
               <div class="text-center">
-                <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+                <a href="#about" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
               </div>
             </div>
           </div><!-- End Why Box -->
@@ -245,25 +245,25 @@
 
               <div class="col-xl-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                  <i class="bi bi-clipboard-data"></i>
-                  <h4>Corporis voluptates officia eiusmod</h4>
-                  <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                  <i class="bi bi-balloon"></i>
+                  <h4>Dekorasi Menawan</h4>
+                  <p>Kami menyajikan dekorasi pernikahan yang elegan sesuai dengan tema pilihan Anda, dari modern hingga tradisional, dengan sentuhan artistik yang memukau</p>
                 </div>
               </div><!-- End Icon Box -->
 
               <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
                   <i class="bi bi-gem"></i>
-                  <h4>Ullamco laboris ladore pan</h4>
-                  <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                  <h4>Layanan Catering Eksklusif</h4>
+                  <p>Pilihan menu yang lengkap dan lezat, disiapkan oleh koki berpengalaman, memastikan pengalaman kuliner yang sempurna di hari istimewa Anda</p>
                 </div>
               </div><!-- End Icon Box -->
 
               <div class="col-xl-4" data-aos="fade-up" data-aos-delay="400">
                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                  <i class="bi bi-inboxes"></i>
-                  <h4>Labore consequatur incidid dolore</h4>
-                  <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                  <i class="bi bi-camera"></i>
+                  <h4>Dokumentasi Profesional</h4>
+                  <p>Tim dokumentasi kami akan mengabadikan setiap momen berharga dalam pernikahan Anda dengan hasil foto dan video berkualitas tinggi</p>
                 </div>
               </div><!-- End Icon Box -->
 
@@ -284,14 +284,14 @@
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
               <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Clients</p>
+              <p>Pengantin Bahagia</p>
             </div>
           </div><!-- End Stats Item -->
 
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
               <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Projects</p>
+              <p>Acara Pernikahan Terorganisir</p>
             </div>
           </div><!-- End Stats Item -->
 
@@ -305,7 +305,7 @@
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
               <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Workers</p>
+              <p>Tim Wedding Organizer Berpengalaman</p>
             </div>
           </div><!-- End Stats Item -->
 
@@ -783,49 +783,6 @@
 
       </div>
     </section><!-- End Testimonials Section -->
-
-    <!-- ======= Events Section ======= -->
-    <section id="events" class="events">
-      <div class="container-fluid" data-aos="fade-up">
-
-        <div class="section-header">
-          <h2>Events</h2>
-          <p>Share <span>Your Moments</span> In Our Restaurant</p>
-        </div>
-
-        <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/Yummy/assets/img/events-1.jpg)">
-              <h3>Custom Parties</h3>
-              <div class="price align-self-start">$99</div>
-              <p class="description">
-                Quo corporis voluptas ea ad. Consectetur inventore sapiente ipsum voluptas eos omnis facere. Enim facilis veritatis id est rem repudiandae nulla expedita quas.
-              </p>
-            </div><!-- End Event item -->
-
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/Yummy/assets/img/events-2.jpg)">
-              <h3>Private Parties</h3>
-              <div class="price align-self-start">$289</div>
-              <p class="description">
-                In delectus sint qui et enim. Et ab repudiandae inventore quaerat doloribus. Facere nemo vero est ut dolores ea assumenda et. Delectus saepe accusamus aspernatur.
-              </p>
-            </div><!-- End Event item -->
-
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/Yummy/assets/img/events-3.jpg)">
-              <h3>Birthday Parties</h3>
-              <div class="price align-self-start">$499</div>
-              <p class="description">
-                Laborum aperiam atque omnis minus omnis est qui assumenda quos. Quis id sit quibusdam. Esse quisquam ducimus officia ipsum ut quibusdam maxime. Non enim perspiciatis.
-              </p>
-            </div><!-- End Event item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Events Section -->
 
     <!-- ======= Chefs Section ======= -->
     <section id="chefs" class="chefs section-bg">
