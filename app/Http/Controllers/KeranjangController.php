@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dekorasi;
 use App\Models\Dokumentasi;
+use App\Models\Hiburan;
 use Illuminate\Http\Request;
 
 class KeranjangController extends Controller
@@ -43,6 +44,18 @@ class KeranjangController extends Controller
         // Tampilkan view dan kirim data dokumentasi beserta dokumentasi yang dipilih (jika ada)
         return view('booking.index', compact('dokumentasi', 'dokumentasiTerpilih'));
     }
+
+    public function indexhiburan()
+    {
+        // Ambil semua data hiburan dari database
+        $hiburan = Hiburan::all();
+
+        // Cek apakah ada hiburan yang sudah dipilih (dari session)
+        $hiburanTerpilih = session('hiburan_terpilih');
+
+        // Tampilkan view dan kirim data hiburan beserta hiburan yang dipilih (jika ada)
+        return view('booking.index', compact('hiburan', 'hiburanTerpilih'));
+    }
     public function storedekorasi(Request $request)
     {
         // Simpan ID dekorasi yang dipilih ke session
@@ -58,6 +71,14 @@ class KeranjangController extends Controller
         session(['dokumentasi_terpilih' => $request->input('dokumentasi')]);
 
         // Redirect kembali ke halaman dokumentasi
+        return redirect()->route('booking.index');
+    }
+    public function storehiburan(Request $request)
+    {
+        // Simpan ID dokumentasi yang dipilih ke session
+        session(['hiburan_terpilih' => $request->input('hiburan')]);
+
+        // Redirect kembali ke halaman hiburan
         return redirect()->route('booking.index');
     }
 

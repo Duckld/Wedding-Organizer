@@ -134,3 +134,8 @@ Route::post('/skip-dekorasi', [KeranjangController::class, 'skipdekorasi'])->nam
 Route::get('/dokumentasi', [KeranjangController::class, 'indexdokumentasi'])->name('pemesanandokumentasi.index');
 Route::post('/dokumentasi', [KeranjangController::class, 'storedokumentasi'])->name('pemesanandokumentasi.store');
 Route::post('/skip-dokumentasi', [KeranjangController::class, 'skipdokumentasi'])->name('skip.pemesanandokumentasi');
+
+// Routing untuk hiburan
+Route::get('/hiburan', [KeranjangController::class, 'indexhiburan'])->name('pemesananhiburan.index');
+Route::post('/hiburan', [KeranjangController::class, 'storehiburan'])->name('pemesananhiburan.store');
+Route::post('/skip-hiburan', [KeranjangController::class, 'skiphiburan'])->name('skip.pemesananhiburan');

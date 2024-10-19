@@ -1,59 +1,44 @@
-<div class="tab-header text-center">
-    <p>Menu</p>
-    <h3>Hiburan</h3>
-</div>
+<div class="row  justify-content-center">
 
-<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
-    @foreach ($hiburan as $hb)
-        <div class="col-lg-4 menu-item">
-            <div class="col mb-5">
-                <input type="radio" id="dekorasi{{ $hb->id_hiburan }}" name="dekorasi" value="{{ $hb->id_hiburan }}" class="d-none">
-                <label for="dekorasi{{ $hb->id_hiburan }}">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        @if($hb->foto_hiburan)
-                            <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $hb->id_hiburan }}">
-                                <img src="{{ asset('storage/' . $hb->foto_hiburan) }}" alt="Foto Menu" class="img-thumbnail">
-                            </a>
-
-                            <!-- Modal Kedua (Gambar dalam Detail Menu) -->
-                            <div class="modal fade" id="secondModal{{ $hb->id_hiburan }}" tabindex="-1" aria-labelledby="myModalLabelSecond" aria-hidden="true" role="dialog">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <img src="{{ asset('storage/'. $hb->foto_hiburan) }}" alt="Foto Menu" class="img-thumbnail">
-                                        </div>
+    <form action="{{ route('pemesananhiburan.store') }}" method="POST">
+        @csrf
+        <div class="row">
+            @foreach ($hiburan as $hb)
+                <div class="col-12 col-lg-4 menu-item">
+                    <div class="col mb-5">
+                        <input type="radio" id="hiburan{{ $hb->id_hiburan }}" name="hiburan" value="{{ $hb->id_hiburan }}" class="d-none">
+                        <label for="hiburan{{ $hb->id_hiburan }}">
+                            <div class="card h-100">
+                                @if($hb->foto_hiburan)
+                                    <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $hb->id_hiburan }}" style="height: 250px; overflow: hidden">
+                                        <img src="{{ asset('storage/' . $hb->foto_hiburan) }}" alt="Foto Menu" class="img-thumbnail">
+                                    </a>
+                                @else
+                                    <p>Tidak ada Foto Thumbnail</p>
+                                @endif
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <h5 class="fw-bolder">{{ $hb->nama_paket_hiburan }}</h5>
+                                        Rp.{{ number_format($hb->harga_sewa_hiburan, 0, ',', '.') }}
                                     </div>
                                 </div>
                             </div>
-                        @else
-                            <p>Tidak ada Foto Thumbnail</p>
-                        @endif
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">{{ $hb->nama_paket_hiburan }}</h5>
-                                <!-- Product price-->
-                                Rp.{{ $hb->harga_sewa_hiburan }}
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn custom-btn btn-block mt-auto" href="#">View options</a></div>
-                        </div>
+                        </label>
                     </div>
-                </label>
+                </div>
+            @endforeach
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn custom-btn btn-lg btn-block col-md-12">Pilih</button>
             </div>
         </div>
-        <!-- Menu Item -->
-    @endforeach
+        <br>
+        <form action="{{ route('skip.pemesananhiburan') }}" method="POST" class="d-inline d-flex justify-content-center">
+            @csrf
+            <button type="submit" class="btn custom-btn btn-lg btn-block col-md-12">Skip Hiburan</button>
+        </form>
+    </form>
 </div>
 
-<div class="d-flex justify-content-center">
-    <button type="submit" class="btn custom-btn btn-lg btn-block col-md-12">Submit</button>
-</div>
 
 <br><br>
 
@@ -65,7 +50,7 @@
 
     /* Mengatur tampilan label agar menyerupai card */
     input[type="radio"]:checked + label .card {
-        border: 4px solid #ce1212; /* Ganti dengan warna border sesuai keinginan */
+        border: 4px solid #87CEEB; /* Ganti dengan warna border sesuai keinginan */
     }
 
     .card {
@@ -74,7 +59,7 @@
 
     /* Menambahkan efek hover pada card */
     label:hover .card {
-        border: 2px solid #ce1212; /* Ganti dengan warna hover border sesuai keinginan */
+        border: 2px solid #87CEEB; /* Ganti dengan warna hover border sesuai keinginan */
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
@@ -82,12 +67,12 @@
 
     .custom-btn {
         background-color: #fff;
-        border-color: #ce1212;
-        color: #ce1212;
+        border-color: #87CEEB;
+        color: #87CEEB;
     }
 
     .custom-btn:hover {
-        background-color: #ce1212;
+        background-color: #87CEEB;
         color: white;
     }
 

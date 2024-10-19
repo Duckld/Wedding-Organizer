@@ -251,7 +251,7 @@
                     </li>
                     <!-- End tab nav item -->
                     <li class="nav-item">
-                      <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
+                      <a class="nav-link {{ session()->has('hiburan_terpilih') ? 'disabled' : '' }}" data-bs-toggle="tab" data-bs-target="#menu-hiburan">
                         <h4>Hiburan</h4>
                       </a>
                     </li>
@@ -631,6 +631,77 @@
           
                       </div>
                     </div><!-- End Dinner Menu Content -->
+
+                    <div class="tab-pane fade" id="menu-hiburan">
+          
+                      <div class="tab-header text-center">
+                        <p>Menu</p>
+                        <h3>Hiburan</h3>
+                      </div>
+                      <br><br>
+          
+                      <div class="row gy-5">
+          
+                        @include('user.components.hiburan')<!-- Menu Item --><!-- Menu Item -->
+          
+                        {{-- <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Aut Luia</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $14.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Est Eligendi</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $8.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Eos Luibusdam</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $12.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Eos Luibusdam</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $12.95
+                          </p>
+                        </div><!-- Menu Item -->
+          
+                        <div class="col-lg-4 menu-item">
+                          <a href="assets/Yummy/assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
+                          <h4>Laboriosam Direva</h4>
+                          <p class="ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                          </p>
+                          <p class="price">
+                            $9.95
+                          </p>
+                        </div><!-- Menu Item --> --}}
+          
+                      </div>
+                    </div><!-- End Dinner Menu Content -->
+
                     <div class="tab-pane fade" id="menu-dinner">
           
                       <div class="tab-header text-center">

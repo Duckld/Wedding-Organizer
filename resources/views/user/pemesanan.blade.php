@@ -293,6 +293,7 @@
                             @php
                                 use App\Models\Dekorasi;
                                 use App\Models\Dokumentasi;
+                                use App\Models\Hiburan;
                             @endphp
                             <style>
                                 .item-container {
@@ -351,6 +352,49 @@
                                     </div>
                                 </div>
                             @endif
+
+                            @if(session()->has('hiburan_terpilih'))
+                                <?php $hiburan = Hiburan::find(session('hiburan_terpilih')); ?>
+                                <!-- Item List -->
+                                <div class="item-container d-flex align-items-center">
+                                    <div class="image-container">
+                                        @if($hiburan->foto_hiburan)
+                                            <img src="{{ asset('storage/' . $hiburan->foto_hiburan) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
+                                        @else
+                                            <p>Tidak ada Foto Thumbnail</p>
+                                        @endif
+                                    </div>
+                                    <div class="item-info ml-2">
+                                        <h6 class="mb-0">{{ $hiburan->nama_paket_hiburan }}</h6>
+                                        <p>Rp.{{ $hiburan->harga_sewa_hiburan }}</p>
+                                    </div>
+                                </div>
+                            @endif
+
+                            {{-- @if(session()->has('hiburan_terpilih'))
+                                <?php $hiburan = Hiburan::find(session('hiburan_terpilih')); ?>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="item-checkbox" data-harga="{{ $hiburan->harga_sewa_hiburan }}" value="{{ $hiburan->id_hiburan }}">
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="image-container me-3">
+                                                @if($hiburan->foto_hiburan)
+                                                    <img src="{{ asset('storage/' . $hiburan->foto_hiburan) }}" alt="Foto hiburan" class="img-fluid">
+                                                @else
+                                                    <p>Tidak ada Foto</p>
+                                                @endif
+                                            </div>
+                                            <h6 class="mb-0">{{ $hiburan->nama_paket_hiburan }}</h6>
+                                        </div>
+                                    </td>
+                                    <td>-</td>
+                                    <td>Rp.{{ number_format($hiburan->harga_sewa_hiburan, 0, ',', '.') }}</td>
+                                    <td>1</td>
+                                    <td>Rp.{{ number_format($hiburan->harga_sewa_hiburan, 0, ',', '.') }}</td>
+                                </tr>
+                            @endif --}}
 
                             {{-- @if(session()->has('dokumentasi_terpilih'))
                                 // <"?"php $dokumentasi = App\Models\Dokumentasi::find(session('dokumentasi_terpilih')); ?>

@@ -299,6 +299,7 @@
                                         @php
                                             use App\Models\Dekorasi;
                                             use App\Models\Dokumentasi;
+                                            use App\Models\hiburan;
                                         @endphp
                                         <th>#</th>
                                         <th>Nama Item</th>
@@ -396,6 +397,31 @@
                                             <td>Rp.{{ number_format($dokumentasi->harga_dokumentasi, 0, ',', '.') }}</td>
                                             <td>1</td>
                                             <td>Rp.{{ number_format($dokumentasi->harga_dokumentasi, 0, ',', '.') }}</td>
+                                        </tr>
+                                    @endif
+
+                                    @if(session()->has('hiburan_terpilih'))
+                                        <?php $hiburan = Hiburan::find(session('hiburan_terpilih')); ?>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="item-checkbox" data-harga="{{ $hiburan->harga_sewa_hiburan }}" value="{{ $hiburan->id_hiburan }}">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="image-container me-3">
+                                                        @if($hiburan->foto_hiburan)
+                                                            <img src="{{ asset('storage/' . $hiburan->foto_hiburan) }}" alt="Foto hiburan" class="img-fluid">
+                                                        @else
+                                                            <p>Tidak ada Foto</p>
+                                                        @endif
+                                                    </div>
+                                                    <h6 class="mb-0">{{ $hiburan->nama_paket_hiburan }}</h6>
+                                                </div>
+                                            </td>
+                                            <td>-</td>
+                                            <td>Rp.{{ number_format($hiburan->harga_sewa_hiburan, 0, ',', '.') }}</td>
+                                            <td>1</td>
+                                            <td>Rp.{{ number_format($hiburan->harga_sewa_hiburan, 0, ',', '.') }}</td>
                                         </tr>
                                     @endif
                                 </tbody>

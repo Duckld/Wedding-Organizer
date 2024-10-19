@@ -183,191 +183,570 @@
             </header>
             <div id="main-content">
                 <header>
-                    <h1>Bridalstyle</h1>
+                    <h1>BridalStyle</h1>
                     <br>
                 </header>
                 <div class="card">
-                    <form action="{{ route('bridalstyle.store') }}" method="POST" enctype="multipart/form-data" >
-                        @csrf
-                        <section class="section">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="nama_paket_bridalstyle">Nama Paket Bridalstyle</label>
-                                            <input name="nama_paket_bridalstyle" type="text" class="form-control" id="nama_paket_bridalstyle" required>
-                                        </div>
-                
-                                        <div class="form-group">
-                                            <label for="deskripsi_paket">Deskripsi Paket</label>
-                                            <textarea name="deskripsi_paket" id="deskripsi_paket" class="form-control"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="harga_paket">Harga Paket</label>
-                                            <input name="harga_paket" type="text" class="form-control" id="harga_paket" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="foto_bridalstyle">Foto Bridalstyle</label>
-                                            <input type="file" class="form-control" id="foto_bridalstyle" name="foto_bridalstyle">
-                                        </div>
-
-                                        <button type="submit" class="btn btn-outline-primary btn-lg btn-block form-control">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </form>
                     <div class="card-body">
-                        <div class="card-header" style="background: #435ebe;color: #fff;text-align: center">
-                            List Bridalstyle
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-striped" id="table1">
-                                <thead>
-                                    <tr>
-                                        <th style="text-align: center">ID</th>
-                                        <th style="text-align: center">Nama Paket Bridalstyle</th>
-                                        <th style="text-align: center">Harga</th>
-                                        <th style="text-align: center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($bridalstyle as $bs)
-                                        <tr>
-                                            <td style="text-align: center">{{ $bs->id_bridalstyle }}</td>
-                                            <td style="text-align: center">{{ $bs->nama_paket_bridalstyle }}</td>
-                                            <td style="text-align: center">{{ $bs->harga_paket }}</td>
-                                            <td style="text-align: center">
-                                                <div class="btn-group" role="group">
-                                                    <button class="btn btn-primary" type="button"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#xlarge{{ $bs->id_bridalstyle }}">
-                                                        <article id="eye">
-                                                            <dt class="the-icon"><span
-                                                                    class="fa-fw select-all fas"></span></dt>
-                                                        </article>
-                                                    </button>
-                                                    <!--Extra Large Modal -->
-                                                    <div class="modal fade text-left w-100"
-                                                        id="xlarge{{ $bs->id_bridalstyle }}" tabindex="-1" role="dialog"
-                                                        aria-labelledby="myModalLabel16" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
-                                                            role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title" id="myModalLabel16">Detail
-                                                                        Bridalstyle</h4>
-                                                                </div>
-                                                                <div class="modal-body col-md-12">
-                                                                    <div class="row">
-                                                                        <div class="col-md-4">
-                                                                            <img src="{{ asset('storage/' . $bs->foto_bridalstyle) }}" alt="{{ $bs->nama_paket_bridalstyle }}" class="img-fluid">
-                                                                        </div>
-                                                                        <div class="col-md-4" style="text-align: left">
-                                                                            <p><b style="color: #435ebe">ID Paket : </b>{{ $bs->id_bridalstyle }}</p>
-                                                                            <p><b style="color: #435ebe">Nama Paket Bridalstyle : </b>{{ $bs->nama_paket_bridalstyle }}</p>
-                                                                            <p><b style="color: #435ebe">Harga Paket : </b>{{ $bs->harga_paket }}</p>
-                                                                            <p><b style="color: #435ebe">Deskripsi : </b>{{ $bs->deskripsi_paket }}</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button"
-                                                                        class="btn btn-primary ml-1"
-                                                                        data-bs-dismiss="modal">
-                                                                        <i class="bx bx-check d-block d-sm-none"></i>
-                                                                        <span class="d-none d-sm-block">Close</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="bridalstyle-tab" data-bs-toggle="tab" href="#bridalstyle"
+                                    role="tab" aria-controls="bridalstyle" aria-selected="true">Paket</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="item-tab" data-bs-toggle="tab" href="#item"
+                                    role="tab" aria-controls="item" aria-selected="false">Item</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="bridalstyle" role="tabpanel"
+                                aria-labelledby="bridalstyle-tab">
+                                <form action="{{ route('bridalstyle.store') }}" method="POST" enctype="multipart/form-data" >
+                                    @csrf
+                                    <section class="section">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="nama_paket_bridalstyle">Nama Paket</label>
+                                                        <input name="nama_paket_bridalstyle" type="text" class="form-control" id="nama_paket_bridalstyle" required>
                                                     </div>
-                                                    <button class="btn btn-warning" type="button" style="border-top-right-radius: 4px; border-bottom-right-radius: 4px"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModalCenter{{ $bs->id_bridalstyle }}">
-                                                        <article id="pen-square">
-                                                            <dt class="the-icon"><span
-                                                                    class="fa-fw select-all fas"></span></dt>
-                                                        </article>
-                                                    </button>
-                                                    <!--Extra Large Modal -->
-                                                    <div class="modal fade"
-                                                        id="exampleModalCenter{{ $bs->id_bridalstyle }}" tabindex="-1"
-                                                        role="dialog"
-                                                        aria-labelledby="exampleModalCenterTitle{{ $bs->id_bridalstyle }}"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                                                            role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title"
-                                                                        id="exampleModalCenterTitle{{ $bs->id_bridalstyle }}">
-                                                                        Edit Data Bridalstyle</h5>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form
-                                                                        action={{ route('bridalstyle.update', ['id' => $bs->id_bridalstyle]) }}
-                                                                        method="POST" enctype="multipart/form-data">
-                                                                        @csrf
-                                                                        @method ('PUT')
-                                                                        <section class="section">
-                                                                            <div class="card">
-                                                                                <div class="card-body">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-12">
-                                                                                            <div class="form-group" style="text-align: left">
-                                                                                                <label for="nama_paket_bridalstyle">Nama Paket Bridalstyle</label>
-                                                                                                <input name="nama_paket_bridalstyle" type="text" class="form-control" id="nama_paket_bridalstyle" value="{{ $bs->nama_paket_bridalstyle }}">
+                            
+                                                    <div class="form-group">
+                                                        <label for="deskripsi_paket">Deskripsi Paket</label>
+                                                        <textarea name="deskripsi_paket" id="deskripsi_paket" class="form-control"></textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="harga_paket">Harga Paket</label>
+                                                        <input name="harga_paket" type="text" class="form-control" id="harga_paket" required>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="foto_bridalstyle">Foto Paket</label>
+                                                        <input type="file" class="form-control" id="foto_bridalstyle" name="foto_bridalstyle">
+                                                    </div>
+
+                                                    {{-- <div class="form-group">
+                                                        <label for="multiple_foto">Foto Lainnya</label>
+                                                        <input type="file" class="form-control" id="multiple_foto" name="multiple_foto[]" multiple>
+                                                    </div> --}}
+
+                                                    <button type="submit" class="btn btn-outline-primary btn-lg btn-block form-control">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </form>
+                                <div class="card">
+                                    <div class="card-header" style="background: #435ebe;color: #fff;text-align: center">
+                                        List BridalStyle
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-striped" id="table1">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center">ID</th>
+                                                    <th style="text-align: center">Nama Paket</th>
+                                                    <th style="text-align: center">Harga</th>
+                                                    <th style="text-align: center">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($bridalstyle as $bs)
+                                                    <tr>
+                                                        <td style="text-align: center">{{ $bs->id_bridalstyle }}</td>
+                                                        <td style="text-align: center">{{ $bs->nama_paket_bridalstyle }}</td>
+                                                        <td style="text-align: center">{{ $bs->harga_paket }}</td>
+                                                        <td style="text-align: center">
+                                                            <div class="btn-group" role="group">
+                                                                <button class="btn btn-primary" type="button"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#xlarge{{ $bs->id_bridalstyle }}">
+                                                                    <article id="eye">
+                                                                        <dt class="the-icon"><span
+                                                                                class="fa-fw select-all fas"></span></dt>
+                                                                    </article>
+                                                                </button>
+                                                                <!--Extra Large Modal -->
+                                                                <div class="modal fade text-left w-100"
+                                                                    id="xlarge{{ $bs->id_bridalstyle }}" tabindex="-1" role="dialog"
+                                                                    aria-labelledby="myModalLabel16" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
+                                                                        role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title" id="myModalLabel16">Detail
+                                                                                    Menu BridalStyle</h4>
+                                                                            </div>
+                                                                            <div class="modal-body col-md-12">
+                                                                                <div class="row">
+                                                                                    <div class="images-gallery col-md-4">
+                                                                                        @if($bs->foto_bridalstyle)
+                                                                                            <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $bs->id_bridalstyle }}">
+                                                                                                <img src="{{ asset('storage/' . $bs->foto_bridalstyle) }}" alt="Foto Menu" class="img-thumbnail">
+                                                                                            </a>
+
+                                                                                            <!-- Modal Kedua (Gambar dalam Detail Menu) -->
+                                                                                            <div class="modal fade" id="secondModal{{ $bs->id_bridalstyle }}" tabindex="-1" aria-labelledby="myModalLabelSecond" aria-hidden="true" role="dialog">
+                                                                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+                                                                                                    <div class="modal-content">
+                                                                                                        <div class="modal-body">
+                                                                                                            <img src="{{ asset('storage/'. $bs->foto_bridalstyle) }}" alt="Foto Menu" class="img-thumbnail">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
                                                                                             </div>
+                                                                                        @else
+                                                                                            <p>Tidak ada Foto Thumbnail</p>
+                                                                                        @endif
+                                                                                        {{-- @if($bs->images->count() > 0)
+                                                                                            <div class="row">
+                                                                                                @foreach($bs->images as $image)
+                                                                                                    <div class="col-md-4">
+                                                                                                        <!-- Gambar Kecil -->
+                                                                                                        <a href="#" class="open-image-modal" data-bs-toggle="modal" data-bs-target="#imageModal{{ $loop->index }}">
+                                                                                                            <img src="{{ asset('storage/' . $image->image_path) }}" alt="Foto Tambahan" width="500px" class="img-thumbnail">
+                                                                                                        </a>
+                                                                                                    </div>
+
+                                                                                                    <!-- Modal untuk Gambar -->
+                                                                                                    <div class="modal fade" id="imageModal{{ $loop->index }}" tabindex="-1" aria-labelledby="imageModalLabel{{ $loop->index }}" aria-hidden="true" role="dialog">
+                                                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-body">
+                                                                                                                    <!-- Gambar di Modal -->
+                                                                                                                    <div id="carouselExampleCaptions3" class="carousel slide" data-bs-ride="carousel">
+                                                                                                                        <!-- Carousel Indicators -->
+                                                                                                                        <ol class="carousel-indicators">
+                                                                                                                            @foreach($bs->images as $index => $image)
+                                                                                                                                <li data-bs-target="#carouselExampleCaptions3" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
+                                                                                                                            @endforeach
+                                                                                                                        </ol>
+                                                                                                                
+                                                                                                                        <!-- Carousel Inner (Images) -->
+                                                                                                                        <div class="carousel-inner">
+                                                                                                                            @foreach($bs->images as $index => $image)
+                                                                                                                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                                                                                                    <img src="{{ asset('storage/' . $image->image_path) }}" class="d-block w-100 img-thumbnail" alt="Foto Tambahan">
+                                                                                                                                    
+                                                                                                                                </div>
+                                                                                                                            @endforeach
+                                                                                                                        </div>
+                                                                                                                
+                                                                                                                        <!-- Carousel Controls (Previous/Next) -->
+                                                                                                                        <a class="carousel-control-prev" href="#carouselExampleCaptions3" role="button" data-bs-slide="prev">
+                                                                                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                                                            <span class="visually-hidden">Previous</span>
+                                                                                                                        </a>
+                                                                                                                        <a class="carousel-control-next" href="#carouselExampleCaptions3" role="button" data-bs-slide="next">
+                                                                                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                                                            <span class="visually-hidden">Next</span>
+                                                                                                                        </a>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                @endforeach
+                                                                                            </div>
+                                                                                        @else
+                                                                                            <p>Tidak ada foto tambahan</p>
+                                                                                        @endif --}}
+
                                                                                         
-                                                                                            <div class="form-group" style="text-align: left">
-                                                                                                <label for="deskripsi_paket">Deskripsi</label>
-                                                                                                <textarea name="deskripsi_paket" id="deskripsi_paket" class="form-control">{{ $bs->deskripsi_paket }}</textarea>
+                                                                                        <!-- Tampilkan Foto Multiple dari MainCourseImage -->
+                                                                                        {{-- @if($bs->images->count() > 0)
+                                                                                            <div class="row">
+                                                                                                @foreach($bs->images as $image)
+                                                                                                    <div class="col-md-12">
+                                                                                                        <img src="{{ asset('storage/' . $image->image_path) }}" alt="Foto Tambahan" class="img-thumbnail">
+                                                                                                    </div>
+                                                                                                @endforeach
                                                                                             </div>
-                                                                                            
-                                                                                            <div class="form-group" style="text-align: left">
-                                                                                                <label for="harga_paket">Harga Paket</label>
-                                                                                                <input name="harga_paket" type="text" class="form-control" id="harga_paket" value="{{ $bs->harga_paket }}">
-                                                                                            </div>
-                                                                
-                                                                                            <div class="form-group">
-                                                                                                <label for="foto_bridalstyle" style="text-align: left">Foto Bridalstyle</label>
-                                                                                                <input type="file" class="form-control" id="foto_bridalstyle" name="foto_bridalstyle">
-                                                                                                @if($bs->foto_bridalstyle)
-                                                                                                    <img src="{{ asset('storage/' . $bs->foto_bridalstyle) }}" alt="Foto Bridalstyle" class="img-fluid mt-2" width="200">
-                                                                                                @endif
-                                                                                            </div>
-                                                                                        </div>
+                                                                                        @else
+                                                                                            <p>Tidak ada foto tambahan</p>
+                                                                                        @endif --}}
+                                                                                    </div>
+                                                                                    <div class="col-md-4" style="text-align: left">
+                                                                                        <p><b style="color: #435ebe">ID Paket : </b>{{ $bs->id_bridalstyle }}</p>
+                                                                                        <p><b style="color: #435ebe">Nama Paket Main Course : </b>{{ $bs->nama_paket_bridalstyle }}</p>
+                                                                                        <p><b style="color: #435ebe">Harga : </b>{{ $bs->harga_paket }}</p>
+                                                                                        <p>
+                                                                                            <b style="color: #435ebe">Deskripsi :</b><br>
+                                                                                            {!! str_replace(["\r\n", "\n", "\r"], '', nl2br(e($bs->deskripsi_paket))) !!}
+                                                                                        </p>
+                                                                                        
+                                                                                        
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </section>
-                                                                        <div class="modal-footer">
-                                                                            <button type="submit"
-                                                                                class="btn btn-outline-primary btn-lg btn-block form-control">Update</button>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-primary ml-1"
+                                                                                    data-bs-dismiss="modal">
+                                                                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                                                                    <span class="d-none d-sm-block">Close</span>
+                                                                                </button>
+                                                                            </div>
                                                                         </div>
-                                                                    </form>
+                                                                    </div>
+                                                                </div>
+                                                                <button class="btn btn-warning" type="button" style="border-top-right-radius: 4px; border-bottom-right-radius: 4px"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#exampleModalCenter{{ $bs->id_bridalstyle }}">
+                                                                    <article id="pen-square">
+                                                                        <dt class="the-icon"><span
+                                                                                class="fa-fw select-all fas"></span></dt>
+                                                                    </article>
+                                                                </button>
+                                                                <!--Extra Large Modal -->
+                                                                {{-- <div class="modal fade"
+                                                                    id="exampleModalCenter{{ $bs->id_bridalstyle }}" tabindex="-1"
+                                                                    role="dialog"
+                                                                    aria-labelledby="exampleModalCenterTitle{{ $bs->id_bridalstyle }}"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                                                        role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="exampleModalCenterTitle{{ $bs->id_bridalstyle }}">
+                                                                                    Edit Data Main Course</h5>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <form
+                                                                                    action={{ route('admin.update', ['id_bridalstyle' => $bs->id_bridalstyle]) }}
+                                                                                    method="POST" enctype="multipart/form-data">
+                                                                                    @csrf
+                                                                                    @method ('PUT')
+                                                                                    <section class="section">
+                                                                                        <div class="card">
+                                                                                            <div class="card-body">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-12">
+                                                                                                        <div class="form-group" style="text-align: left">
+                                                                                                            <label for="nama_paket_bridalstyle">Nama Paket</label>
+                                                                                                            <input name="nama_paket_bridalstyle" type="text" class="form-control" id="nama_paket_bridalstyle" value="{{ $bs->nama_paket_bridalstyle }}">
+                                                                                                        </div>
+                                                                                                    
+                                                                                                        <div class="form-group" style="text-align: left">
+                                                                                                            <label for="deskripsi_makanan">Deskripsi Makanan</label>
+                                                                                                            <textarea name="deskripsi_makanan" id="deskripsi_makanan" class="form-control">{{ $bs->deskripsi_makanan }}</textarea>
+                                                                                                        </div>
+                                                                                                        
+                                                                                                        <div class="form-group" style="text-align: left">
+                                                                                                            <label for="harga_paket">Harga Paket</label>
+                                                                                                            <input name="harga_paket" type="text" class="form-control" id="harga_paket" value="{{ $bs->harga_paket }}">
+                                                                                                        </div>
+                                                                            
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="foto_bridalstyle" style="text-align: left">Foto Thumbnail</label>
+                                                                                                            <input type="file" class="form-control" id="foto_bridalstyle" name="foto_bridalstyle">
+                                                                                                            @if($bs->foto_bridalstyle)
+                                                                                                                <img src="{{ asset('storage/' . $bs->foto_bridalstyle) }}" alt="Foto Menu" class="img-thumbnail" width="200">
+                                                                                                            @endif
+                                                                                                        </div>
+
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="multiple_foto" style="text-align: left">Foto Lainnya</label>
+                                                                                                            <input type="file" class="form-control" id="multiple_foto" name="multiple_foto[]" multiple>
+                                                                                                            <div class="d-flex justify-content-center">
+                                                                                                                @if($bs->images->count() > 0)
+                                                                                                                    <div id="carouselExampleCaptions2" class="carousel slide" data-bs-ride="carousel" style="width: 200px">
+                                                                                                                        <!-- Carousel Indicators -->
+                                                                                                                        <ol class="carousel-indicators">
+                                                                                                                            @foreach($bs->images as $index => $image)
+                                                                                                                                <li data-bs-target="#carouselExampleCaptions2" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
+                                                                                                                            @endforeach
+                                                                                                                        </ol>
+                                                                                                                
+                                                                                                                        <!-- Carousel Inner (Images) -->
+                                                                                                                        <div class="carousel-inner">
+                                                                                                                            @foreach($bs->images as $index => $image)
+                                                                                                                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                                                                                                    <img src="{{ asset('storage/' . $image->image_path) }}" class="d-block w-100 img-thumbnail" alt="Foto Tambahan">
+                                                                                                                                    
+                                                                                                                                </div>
+                                                                                                                            @endforeach
+                                                                                                                        </div>
+                                                                                                                
+                                                                                                                        <!-- Carousel Controls (Previous/Next) -->
+                                                                                                                        <a class="carousel-control-prev" href="#carouselExampleCaptions2" role="button" data-bs-slide="prev">
+                                                                                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                                                            <span class="visually-hidden">Previous</span>
+                                                                                                                        </a>
+                                                                                                                        <a class="carousel-control-next" href="#carouselExampleCaptions2" role="button" data-bs-slide="next">
+                                                                                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                                                            <span class="visually-hidden">Next</span>
+                                                                                                                        </a>
+                                                                                                                    </div>
+                                                                                                                @else
+                                                                                                                    <p>Tidak ada foto tambahan</p>
+                                                                                                                @endif
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </section>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-outline-primary btn-lg btn-block form-control">Update</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> --}}
+
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <div class="tab-pane fade" id="item" role="tabpanel"
+                                aria-labelledby="item-tab">
+                                <form action="{{ route('admin.storeD') }}" method="POST" enctype="multipart/form-data" >
+                                    @csrf
+                                    <section class="section">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="nama_paket_dishes">Nama Paket</label>
+                                                        <input name="nama_paket_dishes" type="text" class="form-control" id="nama_paket_dishes" required>
+                                                    </div>
+                            
+                                                    <div class="form-group">
+                                                        <label for="deskripsi_makanan">Deskripsi Makanan</label>
+                                                        <textarea name="deskripsi_makanan" id="deskripsi_makanan" class="form-control"></textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="harga_paket">Harga Paket</label>
+                                                        <input name="harga_paket" type="text" class="form-control" id="harga_paket" required>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="foto_bridalstyle">Foto Thumbnail</label>
+                                                        <input type="file" class="form-control" id="foto_bridalstyle" name="foto_bridalstyle">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="multiple_foto">Foto Lainnya</label>
+                                                        <input type="file" class="form-control" id="multiple_foto" name="multiple_foto[]" multiple>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-outline-primary btn-lg btn-block form-control">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </form>
+                                <div class="card">
+                                    <div class="card-header" style="background: #435ebe;color: #fff;text-align: center">
+                                        List MainCourse
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-striped" id="table1">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center">ID</th>
+                                                    <th style="text-align: center">Nama Paket</th>
+                                                    <th style="text-align: center">Harga</th>
+                                                    <th style="text-align: center">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($dishes as $ds)
+                                                    <tr>
+                                                        <td style="text-align: center">{{ $ds->id_dishes }}</td>
+                                                        <td style="text-align: center">{{ $ds->nama_paket_dishes }}</td>
+                                                        <td style="text-align: center">{{ $ds->harga_paket }}</td>
+                                                        <td style="text-align: center">
+                                                            <div class="btn-group" role="group">
+                                                                <button class="btn btn-primary" type="button"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#xlarge{{ $ds->id_dishes }}">
+                                                                    <article id="eye">
+                                                                        <dt class="the-icon"><span
+                                                                                class="fa-fw select-all fas"></span></dt>
+                                                                    </article>
+                                                                </button>
+                                                                <!--Extra Large Modal -->
+                                                                <div class="modal fade text-left w-100"
+                                                                    id="xlarge{{ $ds->id_dishes }}" tabindex="-1" role="dialog"
+                                                                    aria-labelledby="myModalLabel16" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
+                                                                        role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title" id="myModalLabel16">Detail
+                                                                                    Menu Dishes</h4>
+                                                                            </div>
+                                                                            <div class="modal-body col-md-12">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-4">
+                                                                                        @if($ds->foto_bridalstyle)
+                                                                                            <img src="{{ asset('storage/' . $ds->foto_bridalstyle) }}" alt="Foto Menu" class="img-thumbnail">
+                                                                                        @else
+                                                                                            <p>Tidak ada Foto Thumbnail</p>
+                                                                                        @endif
+                                                                                        @if($ds->images->count() > 0)
+                                                                                            <div class="row">
+                                                                                                @foreach($ds->images as $image)
+                                                                                                    <div class="col-md-4">
+                                                                                                        <img src="{{ asset('storage/' . $image->image_path) }}" alt="Foto Tambahan" width="500px" class="img-thumbnail">
+                                                                                                    </div>
+                                                                                                @endforeach
+                                                                                            </div>
+                                                                                        @else
+                                                                                            <p>Tidak ada foto tambahan</p>
+                                                                                        @endif
+                                                                                    </div>
+                                                                                    <div class="col-md-4" style="text-align: left">
+                                                                                        <p><b style="color: #435ebe">ID Paket : </b>{{ $ds->id_dishes }}</p>
+                                                                                        <p><b style="color: #435ebe">Nama Paket Dishes : </b>{{ $ds->nama_paket_dishes }}</p>
+                                                                                        <p><b style="color: #435ebe">Harga : </b>{{ $ds->harga_paket }}</p>
+                                                                                        <p>
+                                                                                            <b style="color: #435ebe">Deskripsi :</b><br>
+                                                                                            {!! str_replace(["\r\n", "\n", "\r"], '', nl2br(e($ds->deskripsi_makanan))) !!}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-primary ml-1"
+                                                                                    data-bs-dismiss="modal">
+                                                                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                                                                    <span class="d-none d-sm-block">Close</span>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <button class="btn btn-warning" type="button" style="border-top-right-radius: 4px; border-bottom-right-radius: 4px"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#exampleModalCenter{{ $ds->id_dishes }}">
+                                                                    <article id="pen-square">
+                                                                        <dt class="the-icon"><span
+                                                                                class="fa-fw select-all fas"></span></dt>
+                                                                    </article>
+                                                                </button>
+                                                                <!--Extra Large Modal -->
+                                                                <div class="modal fade"
+                                                                    id="exampleModalCenter{{ $ds->id_dishes }}" tabindex="-1"
+                                                                    role="dialog"
+                                                                    aria-labelledby="exampleModalCenterTitle{{ $ds->id_dishes }}"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                                                        role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="exampleModalCenterTitle{{ $ds->id_dishes }}">
+                                                                                    Edit Data Dishes</h5>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <form
+                                                                                    action={{ route('admin.updateD', ['id_dishes' => $ds->id_dishes]) }}
+                                                                                    method="POST" enctype="multipart/form-data">
+                                                                                    @csrf
+                                                                                    @method ('PUT')
+                                                                                    <section class="section">
+                                                                                        <div class="card">
+                                                                                            <div class="card-body">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-12">
+                                                                                                        <div class="form-group" style="text-align: left">
+                                                                                                            <label for="nama_paket_dishes">Nama Paket</label>
+                                                                                                            <input name="nama_paket_dishes" type="text" class="form-control" id="nama_paket_dishes" value="{{ $ds->nama_paket_dishes }}">
+                                                                                                        </div>
+                                                                                                    
+                                                                                                        <div class="form-group" style="text-align: left">
+                                                                                                            <label for="deskripsi_makanan">Deskripsi Makanan</label>
+                                                                                                            <textarea name="deskripsi_makanan" id="deskripsi_makanan" class="form-control">{{ $ds->deskripsi_makanan }}</textarea>
+                                                                                                        </div>
+                                                                                                        
+                                                                                                        <div class="form-group" style="text-align: left">
+                                                                                                            <label for="harga_paket">Harga Paket</label>
+                                                                                                            <input name="harga_paket" type="text" class="form-control" id="harga_paket" value="{{ $ds->harga_paket }}">
+                                                                                                        </div>
+                                                                            
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="foto_bridalstyle">Foto Menu</label>
+                                                                                                            <input type="file" class="form-control" id="foto_bridalstyle" name="foto_bridalstyle">
+                                                                                                            @if($ds->foto_bridalstyle)
+                                                                                                                <img src="{{ asset('storage/' . $bs->foto_bridalstyle) }}" alt="Foto Menu" class="img-thumbnail" width="200">
+                                                                                                            @endif
+                                                                                                        </div>
+
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="multiple_foto" style="text-align: left">Foto Lainnya</label>
+                                                                                                            <input type="file" class="form-control" id="multiple_foto" name="multiple_foto[]" multiple>
+                                                                                                            <div class="d-flex justify-content-center">
+                                                                                                                @if($ds->images->count() > 0)
+                                                                                                                    <div id="carouselExampleCaptions1" class="carousel slide" data-bs-ride="carousel" style="width: 200px">
+                                                                                                                        <!-- Carousel Indicators -->
+                                                                                                                        <ol class="carousel-indicators">
+                                                                                                                            @foreach($ds->images as $index => $image)
+                                                                                                                                <li data-bs-target="#carouselExampleCaptions1" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
+                                                                                                                            @endforeach
+                                                                                                                        </ol>
+                                                                                                                
+                                                                                                                        <!-- Carousel Inner (Images) -->
+                                                                                                                        <div class="carousel-inner">
+                                                                                                                            @foreach($ds->images as $index => $image)
+                                                                                                                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                                                                                                    <img src="{{ asset('storage/' . $image->image_path) }}" class="d-block w-100 img-thumbnail" alt="Foto Tambahan">
+                                                                                                
+                                                                                                                                </div>
+                                                                                                                            @endforeach
+                                                                                                                        </div>
+                                                                                                                
+                                                                                                                        <!-- Carousel Controls (Previous/Next) -->
+                                                                                                                        <a class="carousel-control-prev" href="#carouselExampleCaptions1" role="button" data-bs-slide="prev">
+                                                                                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                                                            <span class="visually-hidden">Previous</span>
+                                                                                                                        </a>
+                                                                                                                        <a class="carousel-control-next" href="#carouselExampleCaptions1" role="button" data-bs-slide="next">
+                                                                                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                                                            <span class="visually-hidden">Next</span>
+                                                                                                                        </a>
+                                                                                                                    </div>
+                                                                                                                @else
+                                                                                                                    <p>Tidak ada foto tambahan</p>
+                                                                                                                @endif
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </section>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-outline-primary btn-lg btn-block form-control">Update</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    {{-- <form action="{{ url('admin/CRUDVendor/' . $bs->id) }}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger" type="submit">
-                                                            <article id="trash-alt">
-                                                                <dt class="the-icon"><span
-                                                                        class="fa-fw select-all fas"></span></dt>
-                                                            </article>
-                                                        </button>
-                                                    </form> --}}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

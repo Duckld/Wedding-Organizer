@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bridalstyle_images', function (Blueprint $table) {
-            $table->id();
+            $table->string('id_bridalstyleimage')->primary();
+            $table->string('bridalstyle_id')->constrained()->onDelete('cascade');
+            $table->string('image_path');
             $table->timestamps();
         });
     }
