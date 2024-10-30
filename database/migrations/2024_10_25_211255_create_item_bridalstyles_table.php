@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bridalstyle_images', function (Blueprint $table) {
-            $table->string('id_bridalstyleimage')->primary();
-            $table->string('bridalstyle_id')->constrained()->onDelete('cascade');
+        Schema::create('item_bridalstyles', function (Blueprint $table) {
+            $table->string('id_itembridalstyle')->primary();
+            $table->string('nama_gaun');
+            $table->string('foto_thumbnail');
             $table->string('image_path');
             $table->timestamps();
         });
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bridalstyle_images');
+        Schema::dropIfExists('item_bridalstyles');
     }
 };

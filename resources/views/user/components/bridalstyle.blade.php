@@ -1,25 +1,25 @@
 <div class="row  justify-content-center">
 
-    <form action="{{ route('pemesanangedung.store') }}" method="POST">
+    <form action="{{ route('pemesananbridalstyle.store') }}" method="POST">
         @csrf
         <div class="row">
-            @foreach ($gedung as $gd)
+            @foreach ($bridalstyle as $bs)
                 <div class="col-12 col-lg-4 menu-item">
                     <div class="col mb-5">
-                        <input type="radio" id="gedung{{ $gd->id_gedung }}" name="gedung" value="{{ $gd->id_gedung }}" class="d-none">
-                        <label for="gedung{{ $gd->id_gedung }}">
+                        <input type="radio" id="bridalstyle{{ $bs->id_bridalstyle }}" name="bridalstyle" value="{{ $bs->id_bridalstyle }}" class="d-none">
+                        <label for="bridalstyle{{ $bs->id_bridalstyle }}">
                             <div class="card h-100">
-                                @if($gd->foto_gedung)
-                                    <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $gd->id_gedung }}" style="height: 250px; overflow: hidden">
-                                        <img src="{{ asset('storage/' . $gd->foto_gedung) }}" alt="Foto Menu" class="img-thumbnail">
+                                @if($bs->foto_bridalstyle)
+                                    <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $bs->id_bridalstyle }}" style="height: 250px; overflow: hidden">
+                                        <img src="{{ asset('storage/' . $bs->foto_bridalstyle) }}" alt="Foto Menu" class="img-thumbnail">
                                     </a>
                                 @else
                                     <p>Tidak ada Foto Thumbnail</p>
                                 @endif
                                 <div class="card-body p-4">
                                     <div class="text-center">
-                                        <h5 class="fw-bolder">{{ $gd->nama_gedung }}</h5>
-                                        Rp.{{ number_format($gd->harga_sewa_gedung, 0, ',', '.') }}
+                                        <h5 class="fw-bolder">{{ $bs->nama_paket_bridalstyle }}</h5>
+                                        Rp.{{ number_format($bs->harga_paket, 0, ',', '.') }}
                                     </div>
                                 </div>
                             </div>
@@ -32,9 +32,9 @@
             </div>
         </div>
         <br>
-        {{-- <form action="{{ route('skip.pemesanangedung') }}" method="POST" class="d-inline d-flex justify-content-center">
+        {{-- <form action="{{ route('skip.pemesananbridalstyle') }}" method="POST" class="d-inline d-flex justify-content-center">
             @csrf
-            <button type="submit" class="btn custom-btn btn-lg btn-block col-md-12">Skip gedung</button>
+            <button type="submit" class="btn custom-btn btn-lg btn-block col-md-12">Skip bridalstyle</button>
         </form> --}}
     </form>
 </div>

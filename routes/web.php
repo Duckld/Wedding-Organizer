@@ -62,18 +62,18 @@ Route::middleware(['auth', 'can:user'])->group(function () {
 });
 
 // maincourse
-Route::get('/admin/maincourse', [MaincourseController::class, 'index'])->name('admin.index');
-Route::post('/admin/maincourse/store',[MaincourseController::class,'store'])->name('admin.store');
+Route::get('/admin/maincourse', [MaincourseController::class, 'index'])->name('maincourse.index');
+Route::post('/admin/maincourse/store',[MaincourseController::class,'store'])->name('maincourse.store');
 Route::get('/admin/maincourse/{id}', [MaincourseController::class, 'show'])->name('maincourse.show');
-Route::get('/admin/maincourse/{id_maincourse}/edit', [MaincourseController::class ,'edit'])->name('admin.edit');
-Route::put('/admin/maincourse/{id_maincourse}', [MaincourseController::class ,'update'])->name('admin.update');
+Route::get('/admin/maincourse/{id_maincourse}/edit', [MaincourseController::class ,'edit'])->name('maincourse.edit');
+Route::put('/admin/maincourse/{id_maincourse}', [MaincourseController::class ,'update'])->name('maincourse.update');
 
 // dishes
-Route::get('/admin/dishes', [MaincourseController::class, 'index'])->name('admin.indexD');
-Route::post('/admin/dishes/store',[MaincourseController::class,'storeD'])->name('admin.storeD');
-Route::get('/admin/dishes/{id}', [MaincourseController::class, 'showD'])->name('maincourse.showD');
-Route::get('/admin/dishes/{id_dishes}/edit', [MaincourseController::class ,'editD'])->name('admin.editD');
-Route::put('/admin/dishes/{id_dishes}', [MaincourseController::class ,'updateD'])->name('admin.updateD');
+Route::get('/admin/dishes', [DishesController::class, 'index'])->name('dishes.index');
+Route::post('/admin/dishes/store',[DishesController::class,'store'])->name('dishes.store');
+Route::get('/admin/dishes/{id}', [DishesController::class, 'show'])->name('dishes.show');
+Route::get('/admin/dishes/{id_dishes}/edit', [DishesController::class ,'edit'])->name('dishes.edit');
+Route::put('/admin/dishes/{id_dishes}', [DishesController::class ,'update'])->name('dishes.update');
 
 // gedung
 Route::get('/admin/gedung', [GedungController::class, 'index'])->name('gedung.index');
@@ -105,6 +105,12 @@ Route::post('/admin/bridalstyle/store',[BridalstyleController::class,'store'])->
 Route::get('/admin/bridalstyle/{id_bridalstyle}/edit', [BridalstyleController::class ,'edit'])->name('bridalstyle.edit');
 Route::put('/admin/bridalstyle/{id}', [BridalstyleController::class ,'update'])->name('bridalstyle.update');
 
+// bridalstyle
+Route::get('/admin/itembridalstyle', [BridalstyleController::class, 'itemindex'])->name('itembridalstyle.index');
+Route::post('/admin/itembridalstyle/store',[BridalstyleController::class,'store2'])->name('itembridalstyle.store');
+Route::get('/admin/itembridalstyle/{id_bridalstyle}/edit', [BridalstyleController::class ,'itemedit'])->name('itembridalstyle.edit');
+Route::put('/admin/itembridalstyle/{id}', [BridalstyleController::class ,'itemupdate'])->name('bridalstyle.update');
+
 // souvenir
 Route::get('/admin/souvenir', [SouvenirController::class, 'index'])->name('souvenir.index');
 Route::post('/admin/souvenir/store',[SouvenirController::class,'store'])->name('souvenir.store');
@@ -125,6 +131,11 @@ Route::get('/user/pemesanan', [PemesananController::class, 'index'])->name('peme
 // Keranjang
 Route::get('/user/keranjang', [KeranjangController::class, 'index'])->name('keranjang');
 
+// Routing untuk gedung
+Route::get('/gedung', [KeranjangController::class, 'indexgedung'])->name('pemesanangedung.index');
+Route::post('/gedung', [KeranjangController::class, 'storegedung'])->name('pemesanangedung.store');
+Route::post('/skip-dekorasi', [KeranjangController::class, 'skipdekorasi'])->name('skip.pemesanangedung');
+
 // Routing untuk dekorasi
 Route::get('/dekorasi', [KeranjangController::class, 'indexdekorasi'])->name('pemesanandekorasi.index');
 Route::post('/dekorasi', [KeranjangController::class, 'storedekorasi'])->name('pemesanandekorasi.store');
@@ -138,4 +149,14 @@ Route::post('/skip-dokumentasi', [KeranjangController::class, 'skipdokumentasi']
 // Routing untuk hiburan
 Route::get('/hiburan', [KeranjangController::class, 'indexhiburan'])->name('pemesananhiburan.index');
 Route::post('/hiburan', [KeranjangController::class, 'storehiburan'])->name('pemesananhiburan.store');
+Route::post('/skip-hiburan', [KeranjangController::class, 'skiphiburan'])->name('skip.pemesananhiburan');
+
+// Routing untuk bridalstyle
+Route::get('/bridalstyle', [KeranjangController::class, 'indexbridalstyle'])->name('pemesananbridalstyle.index');
+Route::post('/bridalstyle', [KeranjangController::class, 'storebridalstyle'])->name('pemesananbridalstyle.store');
+Route::post('/skip-hiburan', [KeranjangController::class, 'skiphiburan'])->name('skip.pemesananhiburan');
+
+// Routing untuk souvenir
+Route::get('/souvenir', [KeranjangController::class, 'indexsouvenir'])->name('pemesanansouvenir.index');
+Route::post('/souvenir', [KeranjangController::class, 'storesouvenir'])->name('pemesanansouvenir.store');
 Route::post('/skip-hiburan', [KeranjangController::class, 'skiphiburan'])->name('skip.pemesananhiburan');

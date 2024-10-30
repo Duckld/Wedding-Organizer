@@ -291,6 +291,7 @@
                         <div class="order-items">
                             <h4>Item</h4>
                             @php
+                                use App\Models\Gedung;
                                 use App\Models\Dekorasi;
                                 use App\Models\Dokumentasi;
                                 use App\Models\Hiburan;
@@ -317,6 +318,23 @@
 
                             </style>
                             <!-- Item List -->
+                            @if(session()->has('gedung_terpilih'))
+                                <?php $gedung = Gedung::find(session('gedung_terpilih')); ?>
+                                <!-- Item List -->
+                                <div class="item-container d-flex align-items-center">
+                                    <div class="image-container">
+                                        @if($gedung->foto_gedung)
+                                            <img src="{{ asset('storage/' . $gedung->foto_gedung) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
+                                        @else
+                                            <p>Tidak ada Foto Thumbnail</p>
+                                        @endif
+                                    </div>
+                                    <div class="item-info ml-2">
+                                        <h6 class="mb-0">{{ $gedung->nama_gedung }}</h6>
+                                        <p>Rp.{{ $gedung->harga_sewa_gedung }}</p>
+                                    </div>
+                                </div>
+                            @endif
                             @if(session()->has('dekorasi_terpilih'))
                                 <?php $dekorasi = Dekorasi::find(session('dekorasi_terpilih')); ?>
                                 <!-- Item List -->

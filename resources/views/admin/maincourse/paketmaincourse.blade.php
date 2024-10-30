@@ -74,19 +74,19 @@
                                 <li class="submenu-item">
                                     <a href="/admin/gedung">Gedung</a>
                                 </li>
-                                <li class="sidebar-item has-sub">
+                                <li class="sidebar-item has-sub active">
                                     <a href="#" class='sidebar-link'>
                                         <i class="bi bi-stack"></i>
                                         <span>Katering</span>
                                     </a>
-                                    <ul class="submenu">
+                                    <ul class="submenu active">
                                         <li class="sidebar-item has-sub">
                                             <a href="#" class='sidebar-link'>
                                                 <i class="bi bi-stack"></i>
                                                 <span>Maincourse</span>
                                             </a>
-                                            <ul class="submenu">
-                                                <li class="submenu-item">
+                                            <ul class="submenu active">
+                                                <li class="submenu-item active">
                                                     <a href="/admin/maincourse">Paket</a>
                                                 </li>
                                                 <li class="submenu-item">
@@ -101,7 +101,7 @@
                                             </a>
                                             <ul class="submenu">
                                                 <li class="submenu-item">
-                                                    <a href="/admin/maincourse">Paket</a>
+                                                    <a href="/admin/dishes">Paket</a>
                                                 </li>
                                                 <li class="submenu-item">
                                                     <a href="/admin/dekorasi">Item</a>
@@ -223,7 +223,7 @@
                     <div class="card-body">
                         <h1>Paket Maincourse</h1>
                         <br>
-                        <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data" >
+                        <form action="{{ route('maincourse.store') }}" method="POST" enctype="multipart/form-data" >
                             @csrf
                             <section class="section">
                                 <div class="card-body">
@@ -440,7 +440,7 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <form
-                                                                            action={{ route('admin.update', ['id_maincourse' => $mc->id_maincourse]) }}
+                                                                            action={{ route('maincourse.update', ['id_maincourse' => $mc->id_maincourse]) }}
                                                                             method="POST" enctype="multipart/form-data">
                                                                             @csrf
                                                                             @method ('PUT')
@@ -534,272 +534,6 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade" id="dishes" role="tabpanel"
-                                aria-labelledby="dishes-tab">
-                                <form action="{{ route('admin.storeD') }}" method="POST" enctype="multipart/form-data" >
-                                    @csrf
-                                    <section class="section">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="nama_paket_dishes">Nama Paket</label>
-                                                        <input name="nama_paket_dishes" type="text" class="form-control" id="nama_paket_dishes" required>
-                                                    </div>
-                            
-                                                    <div class="form-group">
-                                                        <label for="deskripsi_makanan">Deskripsi Makanan</label>
-                                                        <textarea name="deskripsi_makanan" id="deskripsi_makanan" class="form-control"></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="harga_paket">Harga Paket</label>
-                                                        <input name="harga_paket" type="text" class="form-control" id="harga_paket" required>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="foto_menu">Foto Thumbnail</label>
-                                                        <input type="file" class="form-control" id="foto_menu" name="foto_menu">
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="multiple_foto">Foto Lainnya</label>
-                                                        <input type="file" class="form-control" id="multiple_foto" name="multiple_foto[]" multiple>
-                                                    </div>
-
-                                                    <button type="submit" class="btn btn-outline-primary btn-lg btn-block form-control">Submit</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </form>
-                                <div class="card">
-                                    <div class="card-header" style="background: #435ebe;color: #fff;text-align: center">
-                                        List MainCourse
-                                    </div>
-                                    <div class="card-body">
-                                        <table class="table table-striped" id="table1">
-                                            <thead>
-                                                <tr>
-                                                    <th style="text-align: center">ID</th>
-                                                    <th style="text-align: center">Nama Paket</th>
-                                                    <th style="text-align: center">Harga</th>
-                                                    <th style="text-align: center">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($dishes as $ds)
-                                                    <tr>
-                                                        <td style="text-align: center">{{ $ds->id_dishes }}</td>
-                                                        <td style="text-align: center">{{ $ds->nama_paket_dishes }}</td>
-                                                        <td style="text-align: center">{{ $ds->harga_paket }}</td>
-                                                        <td style="text-align: center">
-                                                            <div class="btn-group" role="group">
-                                                                <button class="btn btn-primary" type="button"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#xlarge{{ $ds->id_dishes }}">
-                                                                    <article id="eye">
-                                                                        <dt class="the-icon"><span
-                                                                                class="fa-fw select-all fas"></span></dt>
-                                                                    </article>
-                                                                </button>
-                                                                <!--Extra Large Modal -->
-                                                                <div class="modal fade text-left w-100"
-                                                                    id="xlarge{{ $ds->id_dishes }}" tabindex="-1" role="dialog"
-                                                                    aria-labelledby="myModalLabel16" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
-                                                                        role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h4 class="modal-title" id="myModalLabel16">Detail
-                                                                                    Menu Dishes</h4>
-                                                                            </div>
-                                                                            <div class="modal-body col-md-12">
-                                                                                <div class="row">
-                                                                                    <div class="col-md-4">
-                                                                                        @if($ds->foto_menu)
-                                                                                            <img src="{{ asset('storage/' . $ds->foto_menu) }}" alt="Foto Menu" class="img-thumbnail">
-                                                                                        @else
-                                                                                            <p>Tidak ada Foto Thumbnail</p>
-                                                                                        @endif
-                                                                                        @if($ds->images->count() > 0)
-                                                                                            <div class="row">
-                                                                                                @foreach($ds->images as $image)
-                                                                                                    <div class="col-md-4">
-                                                                                                        <img src="{{ asset('storage/' . $image->image_path) }}" alt="Foto Tambahan" width="500px" class="img-thumbnail">
-                                                                                                    </div>
-                                                                                                @endforeach
-                                                                                            </div>
-                                                                                        @else
-                                                                                            <p>Tidak ada foto tambahan</p>
-                                                                                        @endif
-                                                                                        
-                                                                                        <!-- Tampilkan Foto Multiple dari MainCourseImage -->
-                                                                                        {{-- @if($mc->images->count() > 0)
-                                                                                            <div class="row">
-                                                                                                @foreach($mc->images as $image)
-                                                                                                    <div class="col-md-12">
-                                                                                                        <img src="{{ asset('storage/' . $image->image_path) }}" alt="Foto Tambahan" class="img-thumbnail">
-                                                                                                    </div>
-                                                                                                @endforeach
-                                                                                            </div>
-                                                                                        @else
-                                                                                            <p>Tidak ada foto tambahan</p>
-                                                                                        @endif --}}
-                                                                                    </div>
-                                                                                    <div class="col-md-4" style="text-align: left">
-                                                                                        <p><b style="color: #435ebe">ID Paket : </b>{{ $ds->id_dishes }}</p>
-                                                                                        <p><b style="color: #435ebe">Nama Paket Dishes : </b>{{ $ds->nama_paket_dishes }}</p>
-                                                                                        <p><b style="color: #435ebe">Harga : </b>{{ $ds->harga_paket }}</p>
-                                                                                        <p>
-                                                                                            <b style="color: #435ebe">Deskripsi :</b><br>
-                                                                                            {!! str_replace(["\r\n", "\n", "\r"], '', nl2br(e($ds->deskripsi_makanan))) !!}
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button"
-                                                                                    class="btn btn-primary ml-1"
-                                                                                    data-bs-dismiss="modal">
-                                                                                    <i class="bx bx-check d-block d-sm-none"></i>
-                                                                                    <span class="d-none d-sm-block">Close</span>
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <button class="btn btn-warning" type="button" style="border-top-right-radius: 4px; border-bottom-right-radius: 4px"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModalCenter{{ $ds->id_dishes }}">
-                                                                    <article id="pen-square">
-                                                                        <dt class="the-icon"><span
-                                                                                class="fa-fw select-all fas"></span></dt>
-                                                                    </article>
-                                                                </button>
-                                                                <!--Extra Large Modal -->
-                                                                <div class="modal fade"
-                                                                    id="exampleModalCenter{{ $ds->id_dishes }}" tabindex="-1"
-                                                                    role="dialog"
-                                                                    aria-labelledby="exampleModalCenterTitle{{ $ds->id_dishes }}"
-                                                                    aria-hidden="true">
-                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                                                                        role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title"
-                                                                                    id="exampleModalCenterTitle{{ $ds->id_dishes }}">
-                                                                                    Edit Data Dishes</h5>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <form
-                                                                                    action={{ route('admin.updateD', ['id_dishes' => $ds->id_dishes]) }}
-                                                                                    method="POST" enctype="multipart/form-data">
-                                                                                    @csrf
-                                                                                    @method ('PUT')
-                                                                                    <section class="section">
-                                                                                        <div class="card">
-                                                                                            <div class="card-body">
-                                                                                                <div class="row">
-                                                                                                    <div class="col-md-12">
-                                                                                                        <div class="form-group" style="text-align: left">
-                                                                                                            <label for="nama_paket_dishes">Nama Paket</label>
-                                                                                                            <input name="nama_paket_dishes" type="text" class="form-control" id="nama_paket_dishes" value="{{ $ds->nama_paket_dishes }}">
-                                                                                                        </div>
-                                                                                                    
-                                                                                                        <div class="form-group" style="text-align: left">
-                                                                                                            <label for="deskripsi_makanan">Deskripsi Makanan</label>
-                                                                                                            <textarea name="deskripsi_makanan" id="deskripsi_makanan" class="form-control">{{ $ds->deskripsi_makanan }}</textarea>
-                                                                                                        </div>
-                                                                                                        
-                                                                                                        <div class="form-group" style="text-align: left">
-                                                                                                            <label for="harga_paket">Harga Paket</label>
-                                                                                                            <input name="harga_paket" type="text" class="form-control" id="harga_paket" value="{{ $ds->harga_paket }}">
-                                                                                                        </div>
-                                                                            
-                                                                                                        <div class="form-group">
-                                                                                                            <label for="foto_menu">Foto Menu</label>
-                                                                                                            <input type="file" class="form-control" id="foto_menu" name="foto_menu">
-                                                                                                            @if($ds->foto_menu)
-                                                                                                                <img src="{{ asset('storage/' . $mc->foto_menu) }}" alt="Foto Menu" class="img-thumbnail" width="200">
-                                                                                                            @endif
-                                                                                                        </div>
-
-                                                                                                        <div class="form-group">
-                                                                                                            <label for="multiple_foto" style="text-align: left">Foto Lainnya</label>
-                                                                                                            <input type="file" class="form-control" id="multiple_foto" name="multiple_foto[]" multiple>
-                                                                                                            <div class="d-flex justify-content-center">
-                                                                                                                @if($ds->images->count() > 0)
-                                                                                                                    <div id="carouselExampleCaptions1" class="carousel slide" data-bs-ride="carousel" style="width: 200px">
-                                                                                                                        <!-- Carousel Indicators -->
-                                                                                                                        <ol class="carousel-indicators">
-                                                                                                                            @foreach($ds->images as $index => $image)
-                                                                                                                                <li data-bs-target="#carouselExampleCaptions1" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
-                                                                                                                            @endforeach
-                                                                                                                        </ol>
-                                                                                                                
-                                                                                                                        <!-- Carousel Inner (Images) -->
-                                                                                                                        <div class="carousel-inner">
-                                                                                                                            @foreach($ds->images as $index => $image)
-                                                                                                                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                                                                                                                    <img src="{{ asset('storage/' . $image->image_path) }}" class="d-block w-100 img-thumbnail" alt="Foto Tambahan">
-                                                                                                                                    {{-- <div class="carousel-caption d-none d-md-block">
-                                                                                                                                        <h5>Slide {{ $index + 1 }}</h5>
-                                                                                                                                        <p>Ini adalah foto tambahan ke-{{ $index + 1 }}</p>
-                                                                                                                                    </div> --}}
-                                                                                                                                </div>
-                                                                                                                            @endforeach
-                                                                                                                        </div>
-                                                                                                                
-                                                                                                                        <!-- Carousel Controls (Previous/Next) -->
-                                                                                                                        <a class="carousel-control-prev" href="#carouselExampleCaptions1" role="button" data-bs-slide="prev">
-                                                                                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                                                                                            <span class="visually-hidden">Previous</span>
-                                                                                                                        </a>
-                                                                                                                        <a class="carousel-control-next" href="#carouselExampleCaptions1" role="button" data-bs-slide="next">
-                                                                                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                                                                                            <span class="visually-hidden">Next</span>
-                                                                                                                        </a>
-                                                                                                                    </div>
-                                                                                                                @else
-                                                                                                                    <p>Tidak ada foto tambahan</p>
-                                                                                                                @endif
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </section>
-                                                                                    <div class="modal-footer">
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-outline-primary btn-lg btn-block form-control">Update</button>
-                                                                                    </div>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                {{-- <form action="{{ url('admin/CRUDVendor/' . $ds->id) }}">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button class="btn btn-danger" type="submit">
-                                                                        <article id="trash-alt">
-                                                                            <dt class="the-icon"><span
-                                                                                    class="fa-fw select-all fas"></span></dt>
-                                                                        </article>
-                                                                    </button>
-                                                                </form> --}}
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

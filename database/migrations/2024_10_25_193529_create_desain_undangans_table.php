@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('item_main_courses', function (Blueprint $table) {
-            $table->string('id_item_maincourse')->primary();
-            $table->string('nama_makanan');
-            $table->string('jenis_makanan');
-            $table->string('deskripsi_makanan');
-            $table->string('foto_makanan');
+        Schema::create('desain_undangans', function (Blueprint $table) {
+            $table->string('id_desain_undangan')->primary();
+            $table->string('nama_gaun');
+            $table->string('foto_thumbnail');
             $table->string('image_path');
             $table->timestamps();
         });
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('item_main_courses');
+        Schema::dropIfExists('desain_undangans');
     }
 };

@@ -297,9 +297,12 @@
                                 <thead class="table-light">
                                     <tr>
                                         @php
+                                            use App\Models\Gedung;
                                             use App\Models\Dekorasi;
                                             use App\Models\Dokumentasi;
                                             use App\Models\hiburan;
+                                            use App\Models\bridalstyle;
+                                            use App\Models\souvenir;
                                         @endphp
                                         <th>#</th>
                                         <th>Nama Item</th>
@@ -350,6 +353,31 @@
                                             font-size: 1rem;
                                         }
                                     </style>
+                                    @if(session()->has('gedung_terpilih'))
+                                        <?php $gedung = Gedung::find(session('gedung_terpilih')); ?>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="item-checkbox" data-harga="{{ $gedung->harga_sewa_gedung }}" value="{{ $gedung->id_gedung }}">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="image-container me-3">
+                                                        @if($gedung->foto_gedung)
+                                                            <img src="{{ asset('storage/' . $gedung->foto_gedung) }}" alt="Foto Dekorasi" class="img-fluid">
+                                                        @else
+                                                            <p>Tidak ada Foto</p>
+                                                        @endif
+                                                    </div>
+                                                    <h6 class="mb-0">{{ $gedung->nama_gedung }}</h6>
+                                                </div>
+                                            </td>
+                                            <td>-</td>
+                                            <td>Rp.{{ number_format($gedung->harga_sewa_gedung, 0, ',', '.') }}</td>
+                                            <td>1</td>
+                                            <td>Rp.{{ number_format($gedung->harga_sewa_gedung, 0, ',', '.') }}</td>
+                                        </tr>
+                                    @endif
+
                                     @if(session()->has('dekorasi_terpilih'))
                                         <?php $dekorasi = Dekorasi::find(session('dekorasi_terpilih')); ?>
                                         <tr>
@@ -424,6 +452,55 @@
                                             <td>Rp.{{ number_format($hiburan->harga_sewa_hiburan, 0, ',', '.') }}</td>
                                         </tr>
                                     @endif
+
+                                    @if(session()->has('bridalstyle_terpilih'))
+                                        <?php $bridalstyle = Bridalstyle::find(session('bridalstyle_terpilih')); ?>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="item-checkbox" data-harga="{{ $bridalstyle->harga_paket }}" value="{{ $bridalstyle->id_bridalstyle }}">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="image-container me-3">
+                                                        @if($bridalstyle->foto_bridalstyle)
+                                                            <img src="{{ asset('storage/' . $bridalstyle->foto_bridalstyle) }}" alt="Foto bridalstyle" class="img-fluid">
+                                                        @else
+                                                            <p>Tidak ada Foto</p>
+                                                        @endif
+                                                    </div>
+                                                    <h6 class="mb-0">{{ $bridalstyle->nama_paket_bridalstyle }}</h6>
+                                                </div>
+                                            </td>
+                                            <td>-</td>
+                                            <td>Rp.{{ number_format($bridalstyle->harga_paket, 0, ',', '.') }}</td>
+                                            <td>1</td>
+                                            <td>Rp.{{ number_format($bridalstyle->harga_paket, 0, ',', '.') }}</td>
+                                        </tr>
+                                    @endif
+                                    @if(session()->has('souvenir_terpilih'))
+                                        <?php $souvenir = Souvenir::find(session('souvenir_terpilih')); ?>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="item-checkbox" data-harga="{{ $souvenir->harga_paket_souvenir }}" value="{{ $souvenir->id_souvenir }}">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="image-container me-3">
+                                                        @if($souvenir->foto_souvenir)
+                                                            <img src="{{ asset('storage/' . $souvenir->foto_souvenir) }}" alt="Foto bridalstyle" class="img-fluid">
+                                                        @else
+                                                            <p>Tidak ada Foto</p>
+                                                        @endif
+                                                    </div>
+                                                    <h6 class="mb-0">{{ $souvenir->nama_paket_souvenir }}</h6>
+                                                </div>
+                                            </td>
+                                            <td>-</td>
+                                            <td>Rp.{{ number_format($souvenir->harga_paket_souvenir, 0, ',', '.') }}</td>
+                                            <td>1</td>
+                                            <td>Rp.{{ number_format($souvenir->harga_paket_souvenir, 0, ',', '.') }}</td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
 
@@ -446,7 +523,7 @@
                     </div>
                 </div>
                 <br>
-                <button type="submit" class="btn custom-btn col-12">Checkout</button>
+                <a href="{{ route('pemesanan') }}" class="btn custom-btn col-12">Checkout</a>
             </div>
         </div>
 

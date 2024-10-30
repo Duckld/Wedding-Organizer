@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('item_main_courses', function (Blueprint $table) {
-            $table->string('id_item_maincourse')->primary();
-            $table->string('nama_makanan');
-            $table->string('jenis_makanan');
-            $table->string('deskripsi_makanan');
-            $table->string('foto_makanan');
+        Schema::create('item_bridal_images', function (Blueprint $table) {
+            $table->string('itembridalstyle_id')->constrained()->onDelete('cascade');
             $table->string('image_path');
             $table->timestamps();
         });
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('item_main_courses');
+        Schema::dropIfExists('item_bridal_images');
     }
 };

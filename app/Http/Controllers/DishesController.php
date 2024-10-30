@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dishes;
+use App\Models\DishesImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,7 +15,7 @@ class DishesController extends Controller
     public function index()
     {
         $dishes = Dishes::all();
-        return view('admin.katering', compact('dishes'));
+        return view('admin.dishes.paketdishes', compact('dishes'));
     }
 
     /**
@@ -30,26 +31,38 @@ class DishesController extends Controller
      */
     public function store(Request $request)
     {
+        // Upload Foto Menu
         $fotoPath = null;
         if ($request->hasFile('foto_menu')) {
-            $fotoPath = $request->file('foto_menu')->store('foto_menuD', 'public');
+            $fotoPath = $request->file('foto_menu')->store('foto_dishes', 'public');
         };
- 
-        Dishes::create([
+        
+        $dishes = Dishes::create([
             'nama_paket_dishes' => $request->input('nama_paket_dishes'),
             'deskripsi_makanan' => $request->input('deskripsi_makanan'),
             'harga_paket' => $request->input('harga_paket'),
             'foto_menu' => $fotoPath,
         ]);
-        return redirect()->back();
+    
+        if ($request->hasFile('multiple_foto')) {
+            foreach ($request->file('multiple_foto') as $file) {
+                $imagePath = $file->store('multiple_foto_dishes', 'public');
+                DishesImage::create([
+                    'dishes_id' => $dishes->id_dishes,
+                    'image_path' => $imagePath,
+                ]);
+            }
+        }
+        return redirect()->back()->with('success', 'Maincourse berhasil disimpan!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Dishes $dishes)
+    public function show(Dishes $id_dishes)
     {
-        //
+        $dishes = Dishes::with('images')->findOrFail($id_dishes);
+        return view('dishes.show', compact('dishes'));
     }
 
     /**

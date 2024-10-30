@@ -65,7 +65,7 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item has-sub active">
+                        <li class="sidebar-item has-sub  active">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-stack"></i>
                                 <span>Features</span>
@@ -74,8 +74,41 @@
                                 <li class="submenu-item">
                                     <a href="/admin/gedung">Gedung</a>
                                 </li>
-                                <li class="submenu-item">
-                                    <a href="/admin/maincourse">Katering</a>
+                                <li class="sidebar-item has-sub">
+                                    <a href="#" class='sidebar-link'>
+                                        <i class="bi bi-stack"></i>
+                                        <span>Katering</span>
+                                    </a>
+                                    <ul class="submenu">
+                                        <li class="sidebar-item has-sub">
+                                            <a href="#" class='sidebar-link'>
+                                                <i class="bi bi-stack"></i>
+                                                <span>Maincourse</span>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li class="submenu-item">
+                                                    <a href="/admin/maincourse">Paket</a>
+                                                </li>
+                                                <li class="submenu-item">
+                                                    <a href="/admin/dekorasi">Item</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="sidebar-item has-sub">
+                                            <a href="#" class='sidebar-link'>
+                                                <i class="bi bi-stack"></i>
+                                                <span>Dishes</span>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li class="submenu-item">
+                                                    <a href="/admin/dishes">Paket</a>
+                                                </li>
+                                                <li class="submenu-item">
+                                                    <a href="/admin/dekorasi">Item</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li class="submenu-item">
                                     <a href="/admin/dekorasi">Dekorasi</a>

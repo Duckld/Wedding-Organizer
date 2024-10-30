@@ -16,9 +16,8 @@ class MaincourseController extends Controller
      */
     public function index()
     {
-        $dishes = Dishes::all();
         $maincourse = MainCourse::with('images')->get();
-        return view('admin.katering', compact('maincourse', 'dishes'));
+        return view('admin.maincourse.paketmaincourse', compact('maincourse'));
     }
 
     /**
@@ -60,33 +59,6 @@ class MaincourseController extends Controller
         return redirect()->back()->with('success', 'Maincourse berhasil disimpan!');
     }
 
-    public function storeD(Request $request)
-    {
-
-        // Upload Foto Menu
-        $fotoPath = null;
-        if ($request->hasFile('foto_menu')) {
-            $fotoPath = $request->file('foto_menu')->store('foto_dishes', 'public');
-        };
-        
-        $dishes = Dishes::create([
-            'nama_paket_dishes' => $request->input('nama_paket_dishes'),
-            'deskripsi_makanan' => $request->input('deskripsi_makanan'),
-            'harga_paket' => $request->input('harga_paket'),
-            'foto_menu' => $fotoPath,
-        ]);
-    
-        if ($request->hasFile('multiple_foto')) {
-            foreach ($request->file('multiple_foto') as $file) {
-                $imagePath = $file->store('multiple_foto_dishes', 'public');
-                DishesImage::create([
-                    'dishes_id' => $dishes->id_dishes,
-                    'image_path' => $imagePath,
-                ]);
-            }
-        }
-        return redirect()->back()->with('success', 'Maincourse berhasil disimpan!');
-    }
 
     /**
      * Display the specified resource.
@@ -95,12 +67,6 @@ class MaincourseController extends Controller
     {
         $maincourse = Maincourse::with('images')->findOrFail($id_maincourse);
         return view('maincourse.show', compact('maincourse'));
-    }
-
-    public function showD(Dishes $id_dishes)
-    {
-        $dishes = Dishes::with('images')->findOrFail($id_dishes);
-        return view('dishes.show', compact('dishes'));
     }
 
     /**
@@ -112,11 +78,6 @@ class MaincourseController extends Controller
         return view('admin/maincourse', compact('maincourse'));
     }
 
-    public function editD(Maincourse $id_dishes)
-    {
-        $dishes = Dishes::find($id_dishes);
-        return view('admin/dishes', compact('dishes'));
-    }
 
     /**
      * Update the specified resource in storage.
@@ -140,27 +101,6 @@ class MaincourseController extends Controller
         ]);
 
         return redirect()->route('admin.index')->with('success', 'Data berhasil diupdate');
-    }
-
-    public function updateD(Request $request, $id_dishes)
-    {
-        $dishes = Dishes::findOrFail($id_dishes);
-
-        if ($request->hasFile('foto_menu')) {
-            if ($dishes->foto_menu) {
-                Storage::delete('public/' . $dishes->foto_menu);
-            }
-            $dishes->foto_menu = $request->file('foto_menu')->store('foto_menuD', 'public');
-        }
-
-        $dishes->update([
-            'nama_paket_maincourse' => $request->input('nama_paket_maincourse'),
-            'deskripsi_makanan' => $request->input('deskripsi_makanan'),
-            'harga_paket' => $request->input('harga_paket'),
-            'foto_menu' => $dishes->foto_menu,
-        ]);
-
-        return redirect()->route('admin.indexD')->with('success', 'Data berhasil diupdate');
     }
 
     /**

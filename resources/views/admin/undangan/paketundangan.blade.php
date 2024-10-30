@@ -74,19 +74,19 @@
                                 <li class="submenu-item">
                                     <a href="/admin/gedung">Gedung</a>
                                 </li>
-                                <li class="sidebar-item has-sub">
+                                <li class="sidebar-item has-sub active">
                                     <a href="#" class='sidebar-link'>
                                         <i class="bi bi-stack"></i>
                                         <span>Katering</span>
                                     </a>
-                                    <ul class="submenu">
+                                    <ul class="submenu active">
                                         <li class="sidebar-item has-sub">
                                             <a href="#" class='sidebar-link'>
                                                 <i class="bi bi-stack"></i>
                                                 <span>Maincourse</span>
                                             </a>
-                                            <ul class="submenu">
-                                                <li class="submenu-item">
+                                            <ul class="submenu active">
+                                                <li class="submenu-item active">
                                                     <a href="/admin/maincourse">Paket</a>
                                                 </li>
                                                 <li class="submenu-item">
@@ -116,7 +116,7 @@
                                 <li class="submenu-item">
                                     <a href="/admin/dokumentasi">Dokumentasi</a>
                                 </li>
-                                <li class="submenu-item active">
+                                <li class="submenu-item">
                                     <a href="/admin/hiburan">Hiburan</a>
                                 </li>
                                 <li class="submenu-item">
@@ -125,8 +125,19 @@
                                 <li class="submenu-item">
                                     <a href="/admin/souvenir">Souvenir</a>
                                 </li>
-                                <li class="submenu-item">
-                                    <a href="/admin/undangan">Undangan</a>
+                                <li class="sidebar-item has-sub active">
+                                    <a href="#" class='sidebar-link'>
+                                        <i class="bi bi-stack"></i>
+                                        <span>Katering</span>
+                                    </a>
+                                    <ul class="submenu active">
+                                        <li class="submenu-item active">
+                                            <a href="/admin/undangan">Paket</a>
+                                        </li>
+                                        <li class="submenu-item">
+                                            <a href="/admin/dekorasi">Item</a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </li>
@@ -216,38 +227,45 @@
             </header>
             <div id="main-content">
                 <header>
-                    <h1>Hiburan</h1>
+                    <h1>Undangan</h1>
                     <br>
                 </header>
                 <div class="card">
-                    <form action="{{ route('hiburan.store') }}" method="POST" enctype="multipart/form-data" >
+                    <form action="{{ route('undangan.store') }}" method="POST" enctype="multipart/form-data" >
                         @csrf
                         <section class="section">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="nama_paket_hiburan">Nama Paket Hiburan</label>
-                                            <input name="nama_paket_hiburan" type="text" class="form-control" id="nama_paket_hiburan" required>
+                                            <label for="bahan_undangan">Bahan Undangan</label>
+                                            <select class="form-select" name="bahan_undangan" required>
+                                                <option value=""> </option>
+                                                <option value="Kertas Jasmine">Kertas Jasmine</option>
+                                                <option value="Matt Paper">Matt Paper</option>
+                                                <option value="Art Paper">Art Paper</option>
+                                                <option value="Aster">Aster</option>
+                                                <option value="Art Carton">Art Carton</option>
+                                                <option value="Concorde">Concorde</option>
+                                                <option value="Samson Kraft">Samson Kraft</option>
+                                                <option value="Ivory">Ivory</option>
+                                                <option value="Linen">Linen</option>
+                                                <option value="Akasia">Akasia</option>
+                                            </select>
                                         </div>
                 
                                         <div class="form-group">
-                                            <label for="deskripsi_hiburan">Deskripsi</label>
-                                            <textarea name="deskripsi_hiburan" id="deskripsi_hiburan" class="form-control"></textarea>
+                                            <label for="deskripsi_undangan">Deskripsi</label>
+                                            <textarea name="deskripsi_undangan" id="deskripsi_undangan" class="form-control"></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <label for="harga_sewa_hiburan">Harga Sewa</label>
-                                            <input name="harga_sewa_hiburan" type="text" class="form-control" id="harga_sewa_hiburan" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="foto_hiburan">Foto Thumbnail</label>
-                                            <input type="file" class="form-control" id="foto_hiburan" name="foto_hiburan">
+                                            <label for="harga_undangan">Harga</label>
+                                            <input name="harga_undangan" type="text" class="form-control" id="harga_undangan" required>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="multiple_foto">Foto Lainnya</label>
-                                            <input type="file" class="form-control" id="multiple_foto" name="multiple_foto[]" multiple>
+                                            <label for="foto_undangan">Foto Undangan</label>
+                                            <input type="file" class="form-control" id="foto_undangan" name="foto_undangan">
                                         </div>
 
                                         <button type="submit" class="btn btn-outline-primary btn-lg btn-block form-control">Submit</button>
@@ -258,29 +276,29 @@
                     </form>
                     <div class="card-body">
                         <div class="card-header" style="background: #435ebe;color: #fff;text-align: center">
-                            List Hiburan
+                            List Undangan
                         </div>
                         <div class="card-body">
                             <table class="table table-striped" id="table1">
                                 <thead>
                                     <tr>
                                         <th style="text-align: center">ID</th>
-                                        <th style="text-align: center">Nama Paket Hiburan</th>
+                                        <th style="text-align: center">Nama Bahan Undangan</th>
                                         <th style="text-align: center">Harga</th>
                                         <th style="text-align: center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($hiburan as $hb)
+                                    @foreach ($undangan as $ud)
                                         <tr>
-                                            <td style="text-align: center">{{ $hb->id_hiburan }}</td>
-                                            <td style="text-align: center">{{ $hb->nama_paket_hiburan }}</td>
-                                            <td style="text-align: center">{{ $hb->harga_sewa_hiburan }}</td>
+                                            <td style="text-align: center">{{ $ud->id_undangan }}</td>
+                                            <td style="text-align: center">{{ $ud->bahan_undangan }}</td>
+                                            <td style="text-align: center">{{ $ud->harga_undangan }}</td>
                                             <td style="text-align: center">
                                                 <div class="btn-group" role="group">
                                                     <button class="btn btn-primary" type="button"
                                                         data-bs-toggle="modal"
-                                                        data-bs-target="#xlarge{{ $hb->id_hiburan }}">
+                                                        data-bs-target="#xlarge{{ $ud->id_undangan }}">
                                                         <article id="eye">
                                                             <dt class="the-icon"><span
                                                                     class="fa-fw select-all fas"></span></dt>
@@ -288,99 +306,25 @@
                                                     </button>
                                                     <!--Extra Large Modal -->
                                                     <div class="modal fade text-left w-100"
-                                                        id="xlarge{{ $hb->id_hiburan }}" tabindex="-1" role="dialog"
+                                                        id="xlarge{{ $ud->id_undangan }}" tabindex="-1" role="dialog"
                                                         aria-labelledby="myModalLabel16" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
                                                             role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h4 class="modal-title" id="myModalLabel16">Detail
-                                                                        Hiburan</h4>
+                                                                        Undangan</h4>
                                                                 </div>
                                                                 <div class="modal-body col-md-12">
                                                                     <div class="row">
                                                                         <div class="col-md-4">
-                                                                            @if($hb->foto_hiburan)
-                                                                                <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $hb->id_hiburan }}">
-                                                                                    <img src="{{ asset('storage/' . $hb->foto_hiburan) }}" alt="Foto Menu" class="img-thumbnail">
-                                                                                </a>
-
-                                                                                <!-- Modal Kedua (Gambar dalam Detail Menu) -->
-                                                                                <div class="modal fade" id="secondModal{{ $hb->id_hiburan }}" tabindex="-1" aria-labelledby="myModalLabelSecond" aria-hidden="true" role="dialog">
-                                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
-                                                                                        <div class="modal-content">
-                                                                                            <div class="modal-body">
-                                                                                                <img src="{{ asset('storage/'. $hb->foto_hiburan) }}" alt="Foto Menu" class="img-thumbnail">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            @else
-                                                                                <p>Tidak ada Foto Thumbnail</p>
-                                                                            @endif
-                                                                            @if($hb->images->count() > 0)
-                                                                                <div class="row">
-                                                                                    @foreach($hb->images as $image)
-                                                                                        <div class="col-md-4">
-                                                                                            <!-- Gambar Kecil -->
-                                                                                            <a href="#" class="open-image-modal" data-bs-toggle="modal" data-bs-target="#imageModal{{ $loop->index }}">
-                                                                                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="Foto Tambahan" width="500px" class="img-thumbnail">
-                                                                                            </a>
-                                                                                        </div>
-
-                                                                                        <!-- Modal untuk Gambar -->
-                                                                                        <div class="modal fade" id="imageModal{{ $loop->index }}" tabindex="-1" aria-labelledby="imageModalLabel{{ $loop->index }}" aria-hidden="true" role="dialog">
-                                                                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
-                                                                                                <div class="modal-content">
-                                                                                                    <div class="modal-body">
-                                                                                                        <!-- Gambar di Modal -->
-                                                                                                        <div id="carouselHiburan" class="carousel slide" data-bs-ride="carousel">
-                                                                                                            <!-- Carousel Indicators -->
-                                                                                                            <ol class="carousel-indicators">
-                                                                                                                @foreach($hb->images as $index => $image)
-                                                                                                                    <li data-bs-target="#carouselHiburan" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
-                                                                                                                @endforeach
-                                                                                                            </ol>
-                                                                                                    
-                                                                                                            <!-- Carousel Inner (Images) -->
-                                                                                                            <div class="carousel-inner">
-                                                                                                                @foreach($hb->images as $index => $image)
-                                                                                                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                                                                                                        <img src="{{ asset('storage/' . $image->image_path) }}" class="d-block w-100 img-thumbnail" alt="Foto Tambahan">
-                                                                                                                        {{-- <div class="carousel-caption d-none d-md-block">
-                                                                                                                            <h5>Slide {{ $index + 1 }}</h5>
-                                                                                                                            <p>Ini adalah foto tambahan ke-{{ $index + 1 }}</p>
-                                                                                                                        </div> --}}
-                                                                                                                    </div>
-                                                                                                                @endforeach
-                                                                                                            </div>
-                                                                                                    
-                                                                                                            <!-- Carousel Controls (Previous/Next) -->
-                                                                                                            <a class="carousel-control-prev" href="#carouselHiburan" role="button" data-bs-slide="prev">
-                                                                                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                                                                                <span class="visually-hidden">Previous</span>
-                                                                                                            </a>
-                                                                                                            <a class="carousel-control-next" href="#carouselHiburan" role="button" data-bs-slide="next">
-                                                                                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                                                                                <span class="visually-hidden">Next</span>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    @endforeach
-                                                                                </div>
-                                                                            @else
-                                                                                <p>Tidak ada foto tambahan</p>
-                                                                            @endif
+                                                                            <img src="{{ asset('storage/' . $ud->foto_undangan) }}" alt="{{ $ud->bahan_undangan }}" class="img-fluid">
                                                                         </div>
                                                                         <div class="col-md-4" style="text-align: left">
-                                                                            <p><b style="color: #435ebe">ID Paket : </b>{{ $hb->id_hiburan }}</p>
-                                                                            <p><b style="color: #435ebe">Nama Paket Hiburan : </b>{{ $hb->nama_paket_hiburan }}</p>
-                                                                            <p><b style="color: #435ebe">Harga : </b>{{ $hb->harga_sewa_hiburan }}</p>
-                                                                            <p><b style="color: #435ebe">Deskripsi : </b> <br>
-                                                                                {!! str_replace(["\r\n", "\n", "\r"], '', nl2br(e($hb->deskripsi_hiburan))) !!}</p>
+                                                                            <p><b style="color: #435ebe">ID Undangan : </b>{{ $ud->id_undangan }}</p>
+                                                                            <p><b style="color: #435ebe">Nama Bahan Undangan : </b>{{ $ud->bahan_undangan }}</p>
+                                                                            <p><b style="color: #435ebe">Harga : </b>{{ $ud->harga_undangan }}</p>
+                                                                            <p><b style="color: #435ebe">Deskripsi : </b>{{ $ud->deskripsi_undangan }}</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -397,7 +341,7 @@
                                                     </div>
                                                     <button class="btn btn-warning" type="button" style="border-top-right-radius: 4px; border-bottom-right-radius: 4px"
                                                         data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModalCenter{{ $hb->id_hiburan }}">
+                                                        data-bs-target="#exampleModalCenter{{ $ud->id_undangan }}">
                                                         <article id="pen-square">
                                                             <dt class="the-icon"><span
                                                                     class="fa-fw select-all fas"></span></dt>
@@ -405,21 +349,21 @@
                                                     </button>
                                                     <!--Extra Large Modal -->
                                                     <div class="modal fade"
-                                                        id="exampleModalCenter{{ $hb->id_hiburan }}" tabindex="-1"
+                                                        id="exampleModalCenter{{ $ud->id_undangan }}" tabindex="-1"
                                                         role="dialog"
-                                                        aria-labelledby="exampleModalCenterTitle{{ $hb->id_hiburan }}"
+                                                        aria-labelledby="exampleModalCenterTitle{{ $ud->id_undangan }}"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                                             role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title"
-                                                                        id="exampleModalCenterTitle{{ $hb->id_hiburan }}">
-                                                                        Edit Data Hiburan</h5>
+                                                                        id="exampleModalCenterTitle{{ $ud->id_undangan }}">
+                                                                        Edit Data Undangan</h5>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <form
-                                                                        action={{ route('hiburan.update', ['id' => $hb->id_hiburan]) }}
+                                                                        action={{ route('undangan.update', ['id' => $ud->id_undangan]) }}
                                                                         method="POST" enctype="multipart/form-data">
                                                                         @csrf
                                                                         @method ('PUT')
@@ -428,26 +372,38 @@
                                                                                 <div class="card-body">
                                                                                     <div class="row">
                                                                                         <div class="col-md-12">
-                                                                                            <div class="form-group" style="text-align: left">
-                                                                                                <label for="nama_paket_hiburan">Nama Paket Hiburan</label>
-                                                                                                <input name="nama_paket_hiburan" type="text" class="form-control" id="nama_paket_hiburan" value="{{ $hb->nama_paket_hiburan }}">
+                                                                                            <div class="form-group">
+                                                                                                <label for="bahan_undangan">Bahan Undangan</label>
+                                                                                                <select class="form-select" name="bahan_undangan" required>
+                                                                                                    <option value="{{ $ud->bahan_undangan }}">{{ $ud->bahan_undangan }}</option>
+                                                                                                    <option value="Kertas Jasmine">Kertas Jasmine</option>
+                                                                                                    <option value="Matt Paper">Matt Paper</option>
+                                                                                                    <option value="Art Paper">Art Paper</option>
+                                                                                                    <option value="Aster">Aster</option>
+                                                                                                    <option value="Art Carton">Art Carton</option>
+                                                                                                    <option value="Concorde">Concorde</option>
+                                                                                                    <option value="Samson Kraft">Samson Kraft</option>
+                                                                                                    <option value="Ivory">Ivory</option>
+                                                                                                    <option value="Linen">Linen</option>
+                                                                                                    <option value="Akasia">Akasia</option>
+                                                                                                </select>
                                                                                             </div>
                                                                                         
                                                                                             <div class="form-group" style="text-align: left">
-                                                                                                <label for="deskripsi_hiburan">Deskripsi</label>
-                                                                                                <textarea name="deskripsi_hiburan" id="deskripsi_hiburan" class="form-control">{{ $hb->deskripsi_hiburan }}</textarea>
+                                                                                                <label for="deskripsi_undangan">Deskripsi</label>
+                                                                                                <textarea name="deskripsi_undangan" id="deskripsi_undangan" class="form-control">{{ $ud->deskripsi_undangan }}</textarea>
                                                                                             </div>
                                                                                             
                                                                                             <div class="form-group" style="text-align: left">
-                                                                                                <label for="harga_sewa_hiburan">Harga Sewa</label>
-                                                                                                <input name="harga_sewa_hiburan" type="text" class="form-control" id="harga_sewa_hiburan" value="{{ $hb->harga_sewa_hiburan }}">
+                                                                                                <label for="harga_undangan">Harga</label>
+                                                                                                <input name="harga_undangan" type="text" class="form-control" id="harga_undangan" value="{{ $ud->harga_undangan }}">
                                                                                             </div>
                                                                 
                                                                                             <div class="form-group">
-                                                                                                <label for="foto_hiburan" style="text-align: left">Foto Hiburan</label>
-                                                                                                <input type="file" class="form-control" id="foto_hiburan" name="foto_hiburan">
-                                                                                                @if($hb->foto_hiburan)
-                                                                                                    <img src="{{ asset('storage/' . $hb->foto_hiburan) }}" alt="Foto Hiburan" class="img-fluid mt-2" width="200">
+                                                                                                <label for="foto_undangan" style="text-align: left">Foto Undangan</label>
+                                                                                                <input type="file" class="form-control" id="foto_undangan" name="foto_undangan">
+                                                                                                @if($ud->foto_undangan)
+                                                                                                    <img src="{{ asset('storage/' . $ud->foto_undangan) }}" alt="Foto Undangan" class="img-fluid mt-2" width="200">
                                                                                                 @endif
                                                                                             </div>
                                                                                         </div>
@@ -464,7 +420,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {{-- <form action="{{ url('admin/CRUDVendor/' . $hb->id) }}">
+                                                    {{-- <form action="{{ url('admin/CRUDVendor/' . $ud->id) }}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger" type="submit">

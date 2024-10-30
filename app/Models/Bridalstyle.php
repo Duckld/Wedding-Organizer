@@ -30,4 +30,9 @@ class Bridalstyle extends Model
             $product->id_bridalstyle = 'BS' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
         });
     }
+
+    public function images()
+    {
+        return $this->hasMany(BridalstyleImage::class, 'bridalstyle_id', 'id_bridalstyle');
+    }
 }

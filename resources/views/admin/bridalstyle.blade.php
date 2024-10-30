@@ -506,7 +506,7 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                             {{-- <div class="tab-pane fade" id="item" role="tabpanel"
