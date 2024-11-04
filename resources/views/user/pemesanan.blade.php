@@ -331,7 +331,7 @@
                                     </div>
                                     <div class="item-info ml-2">
                                         <h6 class="mb-0">{{ $gedung->nama_gedung }}</h6>
-                                        <p>Rp.{{ $gedung->harga_sewa_gedung }}</p>
+                                        <p>Rp.{{ number_format($gedung->harga_sewa_gedung, 0, ',', '.') }}</p>
                                     </div>
                                 </div>
                             @endif
@@ -348,7 +348,7 @@
                                     </div>
                                     <div class="item-info ml-2">
                                         <h6 class="mb-0">{{ $dekorasi->nama_dekorasi }}</h6>
-                                        <p>Rp.{{ $dekorasi->harga_dekorasi }}</p>
+                                        <p>Rp.{{ number_format($dekorasi->harga_dekorasi, 0, ',', '.') }}</p>
                                     </div>
                                 </div>
                             @endif
@@ -366,7 +366,7 @@
                                     </div>
                                     <div class="item-info ml-2">
                                         <h6 class="mb-0">{{ $dokumentasi->nama_paket_dokumentasi }}</h6>
-                                        <p>Rp.{{ $dokumentasi->harga_dokumentasi }}</p>
+                                        <p>Rp.{{ number_format($dokumentasi->harga_dokumentasi, 0, ',', '.') }}</p>
                                     </div>
                                 </div>
                             @endif
@@ -384,7 +384,7 @@
                                     </div>
                                     <div class="item-info ml-2">
                                         <h6 class="mb-0">{{ $hiburan->nama_paket_hiburan }}</h6>
-                                        <p>Rp.{{ $hiburan->harga_sewa_hiburan }}</p>
+                                        <p>Rp.{{ number_format($hiburan->harga_sewa_hiburan, 0, ',', '.') }}</p>
                                     </div>
                                 </div>
                             @endif

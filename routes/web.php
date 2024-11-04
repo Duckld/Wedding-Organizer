@@ -49,6 +49,7 @@ require __DIR__.'/auth.php';
 // Route untuk Admin
 Route::middleware(['auth', 'can:admin'])->group(function () {
     Route::get('/admin', [HomeController::class, 'Dadmin']);
+    Route::get('/admin', [HomeController::class, 'dashboard']);
 });
 
 Route::post('/logout', function () {

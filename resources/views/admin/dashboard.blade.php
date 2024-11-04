@@ -50,7 +50,7 @@
                                 <i class="bi bi-stack"></i>
                                 <span>Features</span>
                             </a>
-                            <ul class="submenu active">
+                            <ul class="submenu">
                                 <li class="submenu-item ">
                                     <a href="/admin/gedung">Gedung</a>
                                 </li>
@@ -196,7 +196,7 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         <h6 class="text-muted font-semibold">Pendapatan</h6>
-                                                        <h6 class="font-extrabold mb-0">112.000</h6>
+                                                        <h6 class="font-extrabold mb-0">0</h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,7 +213,7 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         <h6 class="text-muted font-semibold">Total Order</h6>
-                                                        <h6 class="font-extrabold mb-0">183.000</h6>
+                                                        <h6 class="font-extrabold mb-0">0</h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -230,7 +230,7 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         <h6 class="text-muted font-semibold">Registerasi User</h6>
-                                                        <h6 class="font-extrabold mb-0">80.000</h6>
+                                                        <h6 class="font-extrabold mb-0">{{ $jumlahLoginUser }}</h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -242,12 +242,12 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <div class="stats-icon red">
-                                                            <i class="iconly-boldBookmark"></i>
+                                                            <i class="iconly-boldHome"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <h6 class="text-muted font-semibold">Saved Post</h6>
-                                                        <h6 class="font-extrabold mb-0">112</h6>
+                                                        <h6 class="text-muted font-semibold">Close Venue</h6>
+                                                        <h6 class="font-extrabold mb-0">0</h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -267,7 +267,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12 col-xl-4">
+                                    {{-- <div class="col-12 col-xl-4">
                                         <div class="card">
                                             <div class="card-header">
                                                 <h4>Profile Visit</h4>
@@ -329,8 +329,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-xl-8">
+                                    </div> --}}
+                                    <div class="col-12 col-xl-12">
                                         <div class="card">
                                             <div class="card-header">
                                                 <h4>Testimoni</h4>
@@ -492,14 +492,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card">
+                                {{-- <div class="card">
                                     <div class="card-header">
                                         <h4>Visitors Profile</h4>
                                     </div>
                                     <div class="card-body">
                                         <div id="chart-visitors-profile"></div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </section>
                     </div>
@@ -532,9 +532,6 @@
             series: [{
                 name: 'Pendapatan',
                 data: [76, 85, 101, 98, 87, 105, 91, 114, 94, 100] // Data untuk Pendapatan
-            }, {
-                name: 'Pengeluaran',
-                data: [35, 41, 36, 26, 45, 48, 52, 53, 41, 55] // Data untuk Pengeluaran
             }],
             xaxis: {
                 categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'] // Label pada sumbu X
@@ -569,7 +566,7 @@
                     }
                 }
             },
-            colors: ['#00E396', '#FF5733']
+            colors: ['#00E396']
         };
 
         var chart = new ApexCharts(document.querySelector("#bar"), options);

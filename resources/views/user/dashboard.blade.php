@@ -141,6 +141,7 @@
         <img src="assets/Yummy/assets/img/testimonials/testimonials-1.jpg" alt="Profile Picture" class="profile-picture" onclick="toggleDropdown()">
         <div id="dropdownMenu" class="dropdown-menu">
           <a href="#">Profile</a>
+          <a href="#">Pesanan Saya</a>
           <a href="#">Settings</a>
           <a href="#">Logout</a>
         </div>
@@ -794,12 +795,12 @@
 
         <div class="gallery-slider swiper">
           <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Yummy/assets/img/gallery/gallery-1.jpg"><img src="assets/Yummy/assets/img/gallery/gallery-1.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Yummy/assets/img/gallery/gallery-2.jpg"><img src="assets/Yummy/assets/img/gallery/gallery-2.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Yummy/assets/img/gallery/gallery-3.jpg"><img src="assets/Yummy/assets/img/gallery/gallery-3.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Yummy/assets/img/gallery/gallery-4.jpg"><img src="assets/Yummy/assets/img/gallery/gallery-4.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Yummy/assets/img/gallery/gallery-5.jpg"><img src="assets/Yummy/assets/img/gallery/gallery-5.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Yummy/assets/img/gallery/gallery-6.jpg"><img src="assets/Yummy/assets/img/gallery/gallery-6.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Yummy/assets/img/gallery/1.jpg"><img src="assets/Yummy/assets/img/gallery/1.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Yummy/assets/img/gallery/2.jpg"><img src="assets/Yummy/assets/img/gallery/2.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Yummy/assets/img/gallery/3.jpg"><img src="assets/Yummy/assets/img/gallery/3.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Yummy/assets/img/gallery/4.jpg"><img src="assets/Yummy/assets/img/gallery/4.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Yummy/assets/img/gallery/5.jpg"><img src="assets/Yummy/assets/img/gallery/5.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Yummy/assets/img/gallery/6.jpg"><img src="assets/Yummy/assets/img/gallery/6.jpg" class="img-fluid" alt=""></a></div>
             <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Yummy/assets/img/gallery/gallery-7.jpg"><img src="assets/Yummy/assets/img/gallery/gallery-7.jpg" class="img-fluid" alt=""></a></div>
             <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Yummy/assets/img/gallery/gallery-8.jpg"><img src="assets/Yummy/assets/img/gallery/gallery-8.jpg" class="img-fluid" alt=""></a></div>
           </div>
@@ -819,7 +820,8 @@
         </div>
 
         <div class="mb-3">
-          <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
+          {{-- <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe> --}}
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31684.780528653904!2d107.52474017431642!3d-6.938605499999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ef4f76059d55%3A0xd56558d8293a349e!2sClassic%20Management%20%7C%20Wedding%20Organizer!5e0!3m2!1sid!2sid!4v1730699990374!5m2!1sid!2sid" width="100%" height="350" style="border:0;" frameborder="0" allowfullscreen></iframe>
         </div><!-- End Google Maps -->
 
         <div class="row gy-4">
@@ -829,7 +831,7 @@
               <i class="icon bi bi-map flex-shrink-0"></i>
               <div>
                 <h3>Our Address</h3>
-                <p>A108 Adam Street, New York, NY 535022</p>
+                <p>Jl. Taman Holis Indah II No.A2 no. 4, Cigondewah Kaler, Kec. Bandung Kulon, Kota Bandung, Jawa Barat 40214</p>
               </div>
             </div>
           </div><!-- End Info Item -->
@@ -849,7 +851,7 @@
               <i class="icon bi bi-telephone flex-shrink-0"></i>
               <div>
                 <h3>Call Us</h3>
-                <p>+1 5589 55488 55</p>
+                <p>0815-6005-610</p>
               </div>
             </div>
           </div><!-- End Info Item -->
@@ -859,8 +861,8 @@
               <i class="icon bi bi-share flex-shrink-0"></i>
               <div>
                 <h3>Opening Hours</h3>
-                <div><strong>Mon-Sat:</strong> 11AM - 23PM;
-                  <strong>Sunday:</strong> Closed
+                <div><strong>Senin-Jumat:</strong> 08.00 - 23.00;
+                  <strong>Sabtu - Minggu:</strong> Tutup
                 </div>
               </div>
             </div>

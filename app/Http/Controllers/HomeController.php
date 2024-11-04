@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+     public function dashboard()
+     {
+         $jumlahLoginUser = DB::table('users')->where('usertype', 'user')->count(); // Sesuaikan dengan nama tabel Anda
+         return view('admin.dashboard', compact('jumlahLoginUser'));
+     }
 
     public function login(Request $request)
     {
