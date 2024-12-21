@@ -32,6 +32,18 @@ class BookingController extends Controller
         return view('user.booking', compact('maincourse', 'gedung', 'dekorasi', 'dokumentasi', 'hiburan', 'bridalstyle', 'souvenir', 'undangan'));
     }
 
+
+    public function storeSession(Request $request)
+    {
+        // Simpan data ke session
+        session([
+            'jumlah_tamu' => $request->jumlah_tamu,
+            'tanggal_acara' => $request->tanggal_acara,
+        ]);
+
+        return redirect()->back()->with('success', 'Data pemesanan telah disimpan ke session.');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

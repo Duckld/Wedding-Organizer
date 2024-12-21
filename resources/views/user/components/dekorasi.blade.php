@@ -1,42 +1,36 @@
 <div class="row  justify-content-center">
 
-    {{-- @foreach ($dekorasi as $dek)
-        <form action="{{ route('pemesanan.store') }}" method="POST">
-            @csrf
-            <div class="col-lg-4 menu-item">
-                <div class="col mb-5">
-                    <input type="radio" id="dekorasi{{ $dek->id_dekorasi }}" name="dekorasi" value="{{ $dek->id_dekorasi }}" class="d-none">
-                    <label for="dekorasi{{ $dek->id_dekorasi }}">
-                        <div class="card h-100">
-                            @if($dek->foto_dekorasi)
-                                <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $dek->id_dekorasi }}">
-                                    <img src="{{ asset('storage/' . $dek->foto_dekorasi) }}" alt="Foto Menu" class="img-thumbnail">
-                                </a>
-                            @else
-                                <p>Tidak ada Foto Thumbnail</p>
-                            @endif
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <h5 class="fw-bolder">{{ $dek->nama_dekorasi }}</h5>
-                                    Rp.{{ $dek->harga_dekorasi }}
-                                </div>
-                            </div>
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn custom-btn btn-block mt-auto" href="#">View options</a></div>
-                            </div>
-                        </div>
-                    </label>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Simpan Dekorasi</button>
-        </form>
-    
-        <!-- Menu Item -->
-    @endforeach --}}
-
     <form action="{{ route('pemesanandekorasi.store') }}" method="POST">
         @csrf
-        <div class="row">
+
+        <!-- Search Feature -->
+        <div class="mb-4">
+            <input type="text" id="searchBox" class="form-control" placeholder="Cari dekorasi..." onkeyup="searchDekorasi()">
+        </div>
+
+        <script>
+            function searchDekorasi() {
+                // Get the input field and filter text
+                const input = document.getElementById('searchBox');
+                const filter = input.value.toLowerCase();
+                const dekorasiContainer = document.getElementById('dekorasiContainer');
+                const items = dekorasiContainer.getElementsByClassName('menu-item');
+        
+                // Loop through all cards and hide those that don't match the search query
+                for (let i = 0; i < items.length; i++) {
+                    const item = items[i];
+                    const name = item.querySelector('.dekorasi-name').textContent || item.querySelector('.dekorasi-name').innerText;
+        
+                    if (name.toLowerCase().indexOf(filter) > -1) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            }
+        </script>        
+
+        <div class="row" id="dekorasiContainer">
             @foreach ($dekorasi as $dek)
                 <div class="col-12 col-lg-4 menu-item">
                     <div class="col mb-5">
@@ -52,8 +46,50 @@
                                 @endif
                                 <div class="card-body p-4">
                                     <div class="text-center">
-                                        <h5 class="fw-bolder">{{ $dek->nama_dekorasi }}</h5>
+                                        <h5 class="fw-bolder dekorasi-name">{{ $dek->nama_dekorasi }}</h5>
                                         Rp.{{ number_format($dek->harga_dekorasi, 0, ',', '.') }}
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn custom-btn btn-block mt-auto" data-bs-toggle="modal" data-bs-target="#viewOptionsModal{{ $dek->id_dekorasi }}">Lihat Detail</a></div>
+                                </div>
+
+                                <!-- Modal Structure -->
+                                <div class="modal fade" id="viewOptionsModal{{ $dek->id_dekorasi }}" tabindex="-1" aria-labelledby="viewOptionsModalLabel{{ $dek->id_dekorasi }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="viewOptionsModalLabel{{ $dek->id_dekorasi }}">Detail {{ $dek->nama_dekorasi }}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Product section-->
+                                                <section class="py-5">
+                                                    <div class="container px-4 px-lg-5 my-5">
+                                                        <div class="row gx-4 gx-lg-5 align-items-center">
+                                                            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ asset('storage/' . $dek->foto_dekorasi) }}" alt="..." /></div>
+                                                            <div class="col-md-6">
+                                                                {{-- <div class="small mb-1">SKU: BST-498</div> --}}
+                                                                <h1 class="display-5 fw-bolder">{{ $dek->nama_dekorasi }}</h1>
+                                                                <div class="fs-5 mb-5">
+                                                                    {{-- <span class="text-decoration-line-through">$45.00</span> --}}
+                                                                    <span>Rp.{{ number_format($dek->harga_dekorasi, 0, ',', '.') }}</span>
+                                                                </div>
+                                                                <p class="lead">{{$dek->deskripsi_dekorasi}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="d-flex">
+                                                            <button class="btn custom-btn col-12" type=" ">
+                                                                <i class="bi-cart-fill me-1"></i>
+                                                                Add to cart
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -66,10 +102,6 @@
             </div>
         </div>
         <br>
-        <form action="{{ route('skip.pemesanandekorasi') }}" method="POST" class="d-inline d-flex justify-content-center">
-            @csrf
-            <button type="submit" class="btn custom-btn btn-lg btn-block col-md-12">Skip Dekorasi</button>
-        </form>
     </form>
 </div>
 

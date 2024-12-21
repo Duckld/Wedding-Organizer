@@ -81,21 +81,46 @@ class DishesController extends Controller
     {
         $dishes = Dishes::findOrFail($id_dishes);
 
+        $dishes->nama_paket_dishes = $request->nama_paket_dishes;
+        $dishes->deskripsi_makanan = $request->deskripsi_makanan;
+        $dishes->harga_paket = $request->harga_paket;
+
+        // Update Foto Menu
         if ($request->hasFile('foto_menu')) {
             if ($dishes->foto_menu) {
-                Storage::delete('public/' . $dishes->foto_menu);
+                Storage::delete($dishes->foto_menu);
             }
-            $dishes->foto_menu = $request->file('foto_menu')->store('foto_menuD', 'public');
+            $dishes->foto_menu = $request->file('foto_menu')->store('dishes');
         }
 
-        $dishes->update([
-            'nama_paket_maincourse' => $request->input('nama_paket_maincourse'),
-            'deskripsi_makanan' => $request->input('deskripsi_makanan'),
-            'harga_paket' => $request->input('harga_paket'),
-            'foto_menu' => $dishes->foto_menu,
-        ]);
+        $dishes->save();
 
-        return redirect()->route('admin.indexD')->with('success', 'Data berhasil diupdate');
+        // Update Foto Lainnya
+        if ($request->hasFile('multiple_foto')) {
+            foreach ($request->file('multiple_foto') as $foto) {
+                $imagePath = $foto->store('dishes/multiple');
+                $dishes->images()->create(['image_path' => $imagePath]);
+            }
+        }
+
+        return redirect()->route('dishes.index')->with('success', 'Data berhasil diupdate');
+        // $dishes = Dishes::findOrFail($id_dishes);
+
+        // if ($request->hasFile('foto_menu')) {
+        //     if ($dishes->foto_menu) {
+        //         Storage::delete('public/' . $dishes->foto_menu);
+        //     }
+        //     $dishes->foto_menu = $request->file('foto_menu')->store('foto_menuD', 'public');
+        // }
+
+        // $dishes->update([
+        //     'nama_paket_maincourse' => $request->input('nama_paket_maincourse'),
+        //     'deskripsi_makanan' => $request->input('deskripsi_makanan'),
+        //     'harga_paket' => $request->input('harga_paket'),
+        //     'foto_menu' => $dishes->foto_menu,
+        // ]);
+
+        // return redirect()->route('dishes.index')->with('success', 'Data berhasil diupdate');
     }
 
     /**

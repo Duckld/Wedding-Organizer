@@ -174,7 +174,8 @@
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li><a class="dropdown-item" href="#"><i
-                                                class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
+                                        class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -193,6 +194,10 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
+                                        {{-- <div class="form-group">
+                                            <label for="nama_undangan">Nama Undangan</label>
+                                            <input name="nama_undangan" type="text" class="form-control" id="nama_undangan" required>
+                                        </div> --}}
                                         <div class="form-group">
                                             <label for="bahan_undangan">Bahan Undangan</label>
                                             <select class="form-select" name="bahan_undangan" required>

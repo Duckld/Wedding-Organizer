@@ -258,50 +258,24 @@
         <br>
         <div class="container">
             <div class="form-container">
-                <div class="row">
-                    {{-- <!-- Form Data Pelanggan -->
-                    <div class="col-md-6 mb-3">
-                        <h4>Data Pelanggan</h4>
-                        <form>
-                            <div class="mb-3">
-                                <label for="groom-name" class="form-label">Nama Pengantin Pria</label>
-                                <input type="text" class="form-control" id="groom-name" placeholder="Masukkan Nama Pengantin Pria">
-                            </div>
-                            <div class="mb-3">
-                                <label for="bride-name" class="form-label">Nama Pengantin Wanita</label>
-                                <input type="text" class="form-control" id="bride-name" placeholder="Masukkan Nama Pengantin Wanita">
-                            </div>
-                            <div class="mb-3">
-                                <label for="phone-number" class="form-label">No Handphone</label>
-                                <input type="text" class="form-control" id="phone-number" placeholder="Masukkan No Handphone">
-                            </div>
-                            <div class="mb-3">
-                                <label for="event-date" class="form-label">Tanggal Acara</label>
-                                <input type="date" class="form-control" id="event-date">
-                            </div>
-                            <div class="mb-3">
-                                <label for="notes" class="form-label">Catatan</label>
-                                <textarea class="form-control" id="notes" rows="5" placeholder="Tambahkan Catatan"></textarea>
-                            </div>
-                        </form>
-                    </div> --}}
-                    
+                <div class="row">                    
                     <!-- Daftar Item Pesanan -->
                     <div class="col-md-12">
+                        
                         <div class="order-items">
                             <h4>Item</h4>
-                            
-                            
                             <!-- Item List -->
                             <table class="item-table table table-bordered">
                                 <thead class="table-light">
                                     <tr>
                                         @php
                                             use App\Models\Gedung;
+                                            use App\Models\Maincourse;
                                             use App\Models\Dekorasi;
                                             use App\Models\Dokumentasi;
                                             use App\Models\hiburan;
                                             use App\Models\bridalstyle;
+                                            use App\Models\undangan;
                                             use App\Models\souvenir;
                                         @endphp
                                         <th>#</th>
@@ -378,10 +352,35 @@
                                         </tr>
                                     @endif
 
+                                    @if(session()->has('maincourse_terpilih'))
+                                        <?php $maincourse = Maincourse::find(session('maincourse_terpilih')); ?>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="item-checkbox" data-harga="{{ $maincourse->harga_paket }}" value="{{ $maincourse->id_maincourse }}">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="image-container me-3">
+                                                        @if($maincourse->foto_menu)
+                                                            <img src="{{ asset('storage/' . $maincourse->foto_menu) }}" alt="Foto Maincourse" class="img-fluid">
+                                                        @else
+                                                            <p>Tidak ada Foto</p>
+                                                        @endif
+                                                    </div>
+                                                    <h6 class="mb-0">{{ $maincourse->nama_paket_maincourse }}</h6>
+                                                </div>
+                                            </td>
+                                            <td>-</td>
+                                            <td>Rp.{{ number_format($maincourse->harga_paket, 0, ',', '.') }}</td>
+                                            <td>1</td>
+                                            <td>Rp.{{ number_format($maincourse->harga_paket, 0, ',', '.') }}</td>
+                                        </tr>
+                                    @endif
+
                                     @if(session()->has('dekorasi_terpilih'))
                                         <?php $dekorasi = Dekorasi::find(session('dekorasi_terpilih')); ?>
                                         <tr>
-                                            <td>
+                                            <td> 
                                                 <input type="checkbox" class="item-checkbox" data-harga="{{ $dekorasi->harga_dekorasi }}" value="{{ $dekorasi->id_dekorasi }}">
                                             </td>
                                             <td>
@@ -402,7 +401,7 @@
                                             <td>Rp.{{ number_format($dekorasi->harga_dekorasi, 0, ',', '.') }}</td>
                                         </tr>
                                     @endif
-                            
+
                                     @if(session()->has('dokumentasi_terpilih'))
                                         <?php $dokumentasi = Dokumentasi::find(session('dokumentasi_terpilih')); ?>
                                         <tr>
@@ -501,6 +500,30 @@
                                             <td>Rp.{{ number_format($souvenir->harga_paket_souvenir, 0, ',', '.') }}</td>
                                         </tr>
                                     @endif
+                                    @if(session()->has('undangan_terpilih'))
+                                        <?php $undangan = Undangan::find(session('undangan_terpilih')); ?>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="item-checkbox" data-harga="{{ $undangan->harga_undangan }}" value="{{ $undangan->id_undangan }}">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="image-container me-3">
+                                                        @if($undangan->foto_undangan)
+                                                            <img src="{{ asset('storage/' . $undangan->foto_undangan) }}" alt="Foto undangan" class="img-fluid">
+                                                        @else
+                                                            <p>Tidak ada Foto</p>
+                                                        @endif
+                                                    </div>
+                                                    <h6 class="mb-0">{{ $undangan->bahan_undangan }}</h6>
+                                                </div>
+                                            </td>
+                                            <td>-</td>
+                                            <td>Rp.{{ number_format($undangan->harga_undangan, 0, ',', '.') }}</td>
+                                            <td>1</td>
+                                            <td>Rp.{{ number_format($undangan->harga_undangan, 0, ',', '.') }}</td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
 
@@ -510,16 +533,9 @@
                                     <span>Subtotal</span>
                                     <span id="subtotal">0</span>
                                 </div>
-                                {{-- <div class="d-flex justify-content-between">
-                                    <span>Tax (4%)</span>
-                                    <span>Rp.2.045.000</span>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <strong>Total</strong>
-                                    <strong>Rp.207.500.000</strong>
-                                </div> --}}
                             </div>
                         </div>
+                        
                     </div>
                 </div>
                 <br>
@@ -702,33 +718,30 @@
         }
     </script>
 
-    {{-- Menghitung Subtotal --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Ambil semua checkbox item
-            let checkboxes = document.querySelectorAll('.item-checkbox');
-            let subtotalElement = document.getElementById('subtotal');
-
-            // Fungsi untuk menghitung subtotal
-            function calculateSubtotal() {
+        {{-- Menghitung Subtotal --}}
+        <script>
+            // Function to calculate the subtotal
+            function updateSubtotal() {
                 let subtotal = 0;
-                checkboxes.forEach(function (checkbox) {
-                    if (checkbox.checked) {
-                        // Tambahkan harga item jika checkbox dipilih
-                        subtotal += parseInt(checkbox.getAttribute('data-harga'));
-                    }
+
+                // Loop through each checked item and add the value to the subtotal
+                document.querySelectorAll('.item-checkbox:checked').forEach(function(checkbox) {
+                    let price = parseFloat(checkbox.getAttribute('data-harga')) || 0;  // Default to 0 if invalid
+                    subtotal += price;
                 });
-                // Format angka ke rupiah
-                subtotalElement.textContent = 'Rp.' + new Intl.NumberFormat('id-ID').format(subtotal);
+
+                // Update the subtotal display
+                document.getElementById('subtotal').innerText = 'Rp.' + subtotal.toLocaleString('id-ID');
             }
 
-            // Tambahkan event listener ke setiap checkbox
-            checkboxes.forEach(function (checkbox) {
-                checkbox.addEventListener('change', calculateSubtotal);
+            // Add event listener to all item checkboxes to update subtotal when checked/unchecked
+            document.querySelectorAll('.item-checkbox').forEach(function(checkbox) {
+                checkbox.addEventListener('change', updateSubtotal);
             });
-        });
 
-    </script>
+            // Initial calculation when the page is loaded
+            updateSubtotal();
+        </script>
 
 
 </body>

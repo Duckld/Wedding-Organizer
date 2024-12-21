@@ -2,7 +2,35 @@
 
     <form action="{{ route('pemesananhiburan.store') }}" method="POST">
         @csrf
-        <div class="row">
+
+        <!-- Search Feature -->
+        <div class="mb-4">
+            <input type="text" id="searchBoxhiburan" class="form-control" placeholder="Cari hiburan..." onkeyup="searchHiburan()">
+        </div>
+
+        <script>
+            function searchHiburan() {
+                // Get the input field and filter text
+                const input = document.getElementById('searchBoxhiburan');
+                const filter = input.value.toLowerCase();
+                const hiburanContainer = document.getElementById('hiburanContainer');
+                const items = hiburanContainer.getElementsByClassName('menu-item');
+        
+                // Loop through all cards and hide those that don't match the search query
+                for (let i = 0; i < items.length; i++) {
+                    const item = items[i];
+                    const name = item.querySelector('.hiburan-name').textContent || item.querySelector('.hiburan-name').innerText;
+        
+                    if (name.toLowerCase().indexOf(filter) > -1) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            }
+        </script>  
+
+        <div class="row" id="hiburanContainer">
             @foreach ($hiburan as $hb)
                 <div class="col-12 col-lg-4 menu-item">
                     <div class="col mb-5">
@@ -18,8 +46,51 @@
                                 @endif
                                 <div class="card-body p-4">
                                     <div class="text-center">
-                                        <h5 class="fw-bolder">{{ $hb->nama_paket_hiburan }}</h5>
+                                        <h5 class="fw-bolder hiburan-name">{{ $hb->nama_paket_hiburan }}</h5>
                                         Rp.{{ number_format($hb->harga_sewa_hiburan, 0, ',', '.') }}
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn custom-btn btn-block mt-auto" data-bs-toggle="modal" data-bs-target="#viewOptionsModal{{ $hb->id_hiburan }}">Lihat Detail</a></div>
+                                </div>
+
+                                <!-- Modal Structure -->
+                                <div class="modal fade" id="viewOptionsModal{{ $hb->id_hiburan }}" tabindex="-1" aria-labelledby="viewOptionsModalLabel{{ $hb->id_hiburan }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="viewOptionsModalLabel{{ $hb->id_hiburan }}">Detail {{ $hb->nama_paket_hiburan }}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Product section-->
+                                                <section class="py-5">
+                                                    <div class="container px-4 px-lg-5 my-5">
+                                                        <div class="row gx-4 gx-lg-5 align-items-center">
+                                                            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ asset('storage/' . $hb->foto_hiburan) }}" alt="..." /></div>
+                                                            <div class="col-md-6">
+                                                                {{-- <div class="small mb-1">SKU: BST-498</div> --}}
+                                                                <h1 class="display-5 fw-bolder">{{ $hb->nama_paket_hiburan }}</h1>
+                                                                <div class="fs-5 mb-5">
+                                                                    {{-- <span class="text-decoration-line-through">$45.00</span> --}}
+                                                                    <span>Rp.{{ number_format($hb->harga_sewa_hiburan, 0, ',', '.') }}</span>
+                                                                </div>
+                                                                <p class="lead">{{$hb->deskripsi_hiburan}}</p>
+
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="d-flex">
+                                                            <button class="btn custom-btn col-12" type=" ">
+                                                                <i class="bi-cart-fill me-1"></i>
+                                                                Add to cart
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -32,10 +103,6 @@
             </div>
         </div>
         <br>
-        <form action="{{ route('skip.pemesananhiburan') }}" method="POST" class="d-inline d-flex justify-content-center">
-            @csrf
-            <button type="submit" class="btn custom-btn btn-lg btn-block col-md-12">Skip Hiburan</button>
-        </form>
     </form>
 </div>
 

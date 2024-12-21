@@ -1,66 +1,38 @@
 <div class="row  justify-content-center">
 
-    <form action="{{ route('pemesanansouvenir.store') }}" method="POST">
+    <form action="{{ route('pemesanankatering2.store') }}" method="POST">
         @csrf
-
-        <!-- Search Feature -->
-        <div class="mb-4">
-            <input type="text" id="searchBoxsouvenir" class="form-control" placeholder="Cari souvenir..." onkeyup="searchSouvenir()">
-        </div>
-
-        <script>
-            function searchSouvenir() {
-                // Get the input field and filter text
-                const input = document.getElementById('searchBoxsouvenir');
-                const filter = input.value.toLowerCase();
-                const souvenirContainer = document.getElementById('souvenirContainer');
-                const items = souvenirContainer.getElementsByClassName('menu-item');
-        
-                // Loop through all cards and hide those that don't match the search query
-                for (let i = 0; i < items.length; i++) {
-                    const item = items[i];
-                    const name = item.querySelector('.souvenir-name').textContent || item.querySelector('.souvenir-name').innerText;
-        
-                    if (name.toLowerCase().indexOf(filter) > -1) {
-                        item.style.display = '';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                }
-            }
-        </script>  
-
-        <div class="row" id="souvenirContainer">
-            @foreach ($souvenir as $sv)
+        <div class="row">
+            @foreach ($dishes as $ds)
                 <div class="col-12 col-lg-4 menu-item">
                     <div class="col mb-5">
-                        <input type="radio" id="souvenir{{ $sv->id_souvenir }}" name="souvenir" value="{{ $sv->id_souvenir }}" class="d-none">
-                        <label for="souvenir{{ $sv->id_souvenir }}">
+                        <input type="radio" id="maincourse{{ $ds->id_dishes }}" name="maincourse" value="{{ $ds->id_dishes }}" class="d-none">
+                        <label for="maincourse{{ $ds->id_dishes }}">
                             <div class="card h-100">
-                                @if($sv->foto_souvenir)
-                                    <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $sv->id_souvenir }}" style="height: 250px; overflow: hidden">
-                                        <img src="{{ asset('storage/' . $sv->foto_souvenir) }}" alt="Foto Menu" class="img-thumbnail">
+                                @if($ds->foto_menu)
+                                    <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $ds->id_dishes }}" style="height: 250px; overflow: hidden">
+                                        <img src="{{ asset('storage/' . $ds->foto_menu) }}" alt="Foto Menu" class="img-thumbnail">
                                     </a>
                                 @else
                                     <p>Tidak ada Foto Thumbnail</p>
                                 @endif
                                 <div class="card-body p-4">
                                     <div class="text-center">
-                                        <h5 class="fw-bolder souvenir-name">{{ $sv->nama_paket_souvenir }}</h5>
-                                        Rp.{{ number_format($sv->harga_paket_souvenir, 0, ',', '.') }}
+                                        <h5 class="fw-bolder">{{ $ds->nama_paket_dishes }}</h5>
+                                        Rp.{{ number_format($ds->harga_paket, 0, ',', '.') }}
                                     </div>
                                 </div>
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn custom-btn btn-block mt-auto" data-bs-toggle="modal" data-bs-target="#viewOptionsModal{{ $sv->id_souvenir }}">Lihat Detailnya</a></div>
+                                    <div class="text-center"><a class="btn custom-btn btn-block mt-auto" data-bs-toggle="modal" data-bs-target="#viewOptionsModal{{ $ds->id_dishes }}">Lihat Detail</a></div>
                                 </div>
 
                                 <!-- Modal Structure -->
-                                <div class="modal fade" id="viewOptionsModal{{ $sv->id_souvenir }}" tabindex="-1" aria-labelledby="viewOptionsModalLabel{{ $sv->id_souvenir }}" aria-hidden="true">
+                                <div class="modal fade" id="viewOptionsModal{{ $ds->id_dishes }}" tabindex="-1" aria-labelledby="viewOptionsModalLabel{{ $ds->id_dishes }}" aria-hidden="true">
                                     <div class="modal-dialog modal-xl modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="viewOptionsModalLabel{{ $sv->id_souvenir }}">Detail {{ $sv->nama_paket_souvenir }}</h5>
+                                                <h5 class="modal-title" id="viewOptionsModalLabel{{ $ds->id_dishes }}">Detail {{ $ds->nama_paket_dishes }}</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -68,26 +40,27 @@
                                                 <section class="py-5">
                                                     <div class="container px-4 px-lg-5 my-5">
                                                         <div class="row gx-4 gx-lg-5 align-items-center">
-                                                            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ asset('storage/' . $sv->foto_souvenir) }}" alt="..." /></div>
+                                                            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ asset('storage/' . $ds->foto_menu) }}" alt="..." /></div>
                                                             <div class="col-md-6">
                                                                 {{-- <div class="small mb-1">SKU: BST-498</div> --}}
-                                                                <h1 class="display-5 fw-bolder">Desain {{ $sv->nama_paket_souvenir }}</h1>
+                                                                <h1 class="display-5 fw-bolder">{{ $ds->nama_paket_dishes }}</h1>
                                                                 <div class="fs-5 mb-5">
                                                                     {{-- <span class="text-decoration-line-through">$45.00</span> --}}
-                                                                    <span>Rp.{{ number_format($sv->harga_paket_souvenir, 0, ',', '.') }}</span>
+                                                                    <span>Rp.{{ number_format($ds->harga_paket, 0, ',', '.') }}</span>
                                                                 </div>
-                                                                <p class="lead">{{$sv->deskripsi_paket_souvenir}}</p>
+                                                                <p class="lead">{{$ds->deskripsi_makanan}}</p>
+
                                                             </div>
                                                         </div>
                                                         <br><br>
-                                                        <div class="col-12">
-                                                            <label class="d-flex">Souvenir :</label>
-                                                        </div>
+                                                        {{-- <div class="col-12">
+                                                            <label class="d-flex">Tipe maincourse :</label>
+                                                        </div> --}}
                                                         <br>
                                                         <div class="row">
-                                                            <div class="col-6">
-                                                                <input type="text" class="form-control" value="{{ $sv->deskripsi_paket_souvenir }}" readonly>
-                                                            </div>
+                                                            {{-- <div class="col-6">
+                                                                <input type="text" class="form-control" value="{{ $ds->tipe_maincourse }}" readonly>
+                                                            </div> --}}
                                                             <div class="col-6">
                                                                 <button class="btn custom-btn col-12" type=" ">
                                                                     <i class="bi-cart-fill me-1"></i>
@@ -111,10 +84,6 @@
             </div>
         </div>
         <br>
-        {{-- <form action="{{ route('skip.pemesanansouvenir') }}" method="POST" class="d-inline d-flex justify-content-center">
-            @csrf
-            <button type="submit" class="btn custom-btn btn-lg btn-block col-md-12">Skip souvenir</button>
-        </form> --}}
     </form>
 </div>
 

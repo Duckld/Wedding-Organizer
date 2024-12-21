@@ -144,6 +144,10 @@ return [
         // 'store' => 'redis',
     ],
 
+    'providers' => [
+        Barryvdh\DomPDF\ServiceProvider::class,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

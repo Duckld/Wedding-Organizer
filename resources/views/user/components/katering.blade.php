@@ -1,6 +1,45 @@
+<ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
+
+    <li class="nav-item">
+      <a class="nav-link {{ session()->has('maincourse_terpilih') ? 'disabled' : '' }}" data-bs-toggle="tab" data-bs-target="#menu-maincourse">
+        <h4>Maincourse</h4>
+      </a>
+    </li><!-- End tab nav item -->
+
+    <li class="nav-item">
+      <a class="nav-link {{ session()->has('dishes_terpilih') ? 'disabled' : '' }}" data-bs-toggle="tab" data-bs-target="#menu-dishes">
+        <h4>Dishes</h4>
+      </a>
+    </li><!-- End tab nav item -->
+</ul>
+
+
+<div class="tab-content" data-aos="fade-up" data-aos-delay="300">
+
+    <br><br>
+    <div class="tab-pane fade" id="menu-maincourse">
+
+
+      <div class="row gy-5">
+
+        @include('user.components.maincourse')<!-- Menu Item -->
+
+      </div>
+    </div><!-- End Starter Menu Content -->
+
+    <div class="tab-pane fade" id="menu-breakfast">
+
+      <div class="row gy-5">
+
+        {{-- @include('user.components.dishes') --}}
+
+      </div>
+    </div><!-- End Breakfast Menu Content -->
+</div>
+
 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
-    @foreach ($maincourse as $mc)
+    {{-- @foreach ($maincourse as $mc)
         <div class="col-lg-4 menu-item">
             <div class="col mb-5">
                 <input type="radio" id="katering{{ $mc->id_maincourse }}" name="katering" value="{{ $mc->id_maincourse }}" class="d-none">
@@ -43,11 +82,7 @@
             </div>
         </div>
         <!-- Menu Item -->
-    @endforeach
-</div>
-
-<div class="d-flex justify-content-center">
-    <button type="submit" class="btn custom-btn btn-lg btn-block col-md-12">Submit</button>
+    @endforeach --}}
 </div>
 
 <br><br>

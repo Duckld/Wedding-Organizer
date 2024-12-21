@@ -115,22 +115,30 @@
 
 <body>
 
-    <div class="modal fade" id="modalpemesanan" tabindex="-1" aria-labelledby="modalpemesananLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
+  <div class="modal fade" id="modalpemesanan" tabindex="-1" aria-labelledby="modalpemesananLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('pemesanan.storeSession') }}">
+                @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalpemesananLabel">Data Pemesan</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="modalpemesananLabel">Data Pemesanan</h5>
+                    {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
                 </div>
                 <div class="modal-body">
-                    Ini adalah isi dari modal.
+                    <div class="mb-3">
+                        <label for="jumlahTamu" class="form-label">Jumlah Tamu</label>
+                        <input type="number" class="form-control" id="jumlahTamu" name="jumlah_tamu" required>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button> --}}
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
+  </div>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -159,35 +167,6 @@
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1>Wedding11<span>.</span></h1>
             </a>
-
-            {{-- <nav id="navbar" class="navbar">
-                <ul>
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#events">Events</a></li>
-                <li><a href="#chefs">Chefs</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                    <ul>
-                    <li><a href="#">Drop Down 1</a></li>
-                    <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                        <ul>
-                        <li><a href="#">Deep Drop Down 1</a></li>
-                        <li><a href="#">Deep Drop Down 2</a></li>
-                        <li><a href="#">Deep Drop Down 3</a></li>
-                        <li><a href="#">Deep Drop Down 4</a></li>
-                        <li><a href="#">Deep Drop Down 5</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Drop Down 2</a></li>
-                    <li><a href="#">Drop Down 3</a></li>
-                    <li><a href="#">Drop Down 4</a></li>
-                    </ul>
-                </li>
-                <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav><!-- .navbar --> --}}
 
             <div class="navbar-profile">
                 <img src="{{ asset('assets/Yummy/assets/img/testimonials/testimonials-1.jpg') }}" alt="Profile Picture"
@@ -219,12 +198,12 @@
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 " data-aos="fade-up">
-                {{-- @if(session()->has('dekorasi_terpilih') || session()->has('dokumentasi_terpilih'))
+                @if(session()->has('dekorasi_terpilih') || session()->has('dokumentasi_terpilih') || session()->has('hiburan_terpilih'))
                     <!-- Hapus session saat refresh pada bagian `nav` -->
                     @php
-                        session()->forget(['gedung_terpilih', 'dekorasi_terpilih', 'dokumentasi_terpilih', 'bridalstyle_terpilih', 'souvenir_terpilih']);
+                        session()->forget(['gedung_terpilih', 'maincourse_terpilih', 'dekorasi_terpilih', 'dokumentasi_terpilih', 'hiburan_terpilih', 'bridalstyle_terpilih', 'souvenir_terpilih', 'undangan_terpilih']);
                     @endphp
-                @endif --}}
+                @endif
                 <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
 
                     <li class="nav-item">
@@ -234,10 +213,10 @@
                     </li><!-- End tab nav item -->
           
                     <li class="nav-item">
-                      <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
+                      <a class="nav-link {{ session()->has('dishes_terpilih') ? 'disabled' : '' }}" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
                         <h4>Katering</h4>
                       </a><!-- End tab nav item -->
-          
+                    </li>
                     <li class="nav-item">
                       <a class="nav-link {{ session()->has('dekorasi_terpilih') ? 'disabled' : '' }}" data-bs-toggle="tab" data-bs-target="#menu-dekorasi">
                         <h4>Dekorasi</h4>
@@ -267,70 +246,14 @@
                       </a>
                     </li><!-- End tab nav item -->
                     <li class="nav-item">
-                      <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
+                      <a class="nav-link {{ session()->has('undangan_terpilih') ? 'disabled' : '' }}" data-bs-toggle="tab" data-bs-target="#menu-undangan">
                         <h4>Undangan</h4>
                       </a>
                     </li>
                     <!-- End tab nav item -->
           
                 </ul>
-                {{-- <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
-
-                    <li class="nav-item">
-                        <a class="nav-link show" data-bs-toggle="tab" data-bs-target="#menu-gedung">
-                            <h4>Gedung</h4>
-                        </a>
-                    </li><!-- End tab nav item -->
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-katering">
-                            <h4>Katering</h4>
-                        </a>
-                    </li><!-- End tab nav item -->
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dekorasi">
-                            <h4>Dekorasi</h4>
-                        </a>
-                    </li><!-- End tab nav item -->
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dokumentasi">
-                            <h4>Dokumentasi</h4>
-                        </a>
-                    </li><!-- End tab nav item -->
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-hiburan">
-                            <h4>Hiburan</h4>
-                        </a>
-                    </li><!-- End tab nav item -->
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
-                            <h4>Bridalstyle</h4>
-                        </a>
-                    </li><!-- End tab nav item -->
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
-                            <h4>Souvenir</h4>
-                        </a>
-                    </li><!-- End tab nav item -->
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
-                            <h4>Undangan</h4>
-                        </a>
-                    </li><!-- End tab nav item -->
-                </ul> --}}
                 <br><br>
-                <div class="row">
-                    <div class="d-flex justify-content-end">
-                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." class="form-control">
-                    </div>
-                </div>
-                <br>
 
                 <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
 
@@ -355,7 +278,7 @@
                         <p>Menu</p>
                         <h3>Katering</h3>
                       </div>
-                      <br><br>
+                      <br>
           
                       <div class="row gy-5">
           
@@ -376,61 +299,6 @@
 
                             @include('user.components.dekorasi')<!-- Menu Item -->
             
-                        {{-- <div class="col-lg-4 menu-item">
-                            <a href="assets/Yummy/assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
-                            <h4>Aut Luia</h4>
-                            <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                            </p>
-                            <p class="price">
-                            $14.95
-                            </p>
-                        </div><!-- Menu Item -->
-            
-                        <div class="col-lg-4 menu-item">
-                            <a href="assets/Yummy/assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
-                            <h4>Est Eligendi</h4>
-                            <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                            </p>
-                            <p class="price">
-                            $8.95
-                            </p>
-                        </div><!-- Menu Item -->
-            
-                        <div class="col-lg-4 menu-item">
-                            <a href="assets/Yummy/assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
-                            <h4>Eos Luibusdam</h4>
-                            <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                            </p>
-                            <p class="price">
-                            $12.95
-                            </p>
-                        </div><!-- Menu Item -->
-            
-                        <div class="col-lg-4 menu-item">
-                            <a href="assets/Yummy/assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
-                            <h4>Eos Luibusdam</h4>
-                            <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                            </p>
-                            <p class="price">
-                            $12.95
-                            </p>
-                        </div><!-- Menu Item -->
-            
-                        <div class="col-lg-4 menu-item">
-                            <a href="assets/Yummy/assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
-                            <h4>Laboriosam Direva</h4>
-                            <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                            </p>
-                            <p class="price">
-                            $9.95
-                            </p>
-                        </div><!-- Menu Item --> --}}
-            
                         </div>
                     </div><!-- End Lunch Menu Content -->
           
@@ -446,61 +314,6 @@
           
                         @include('user.components.dokumentasi')<!-- Menu Item --><!-- Menu Item -->
           
-                        {{-- <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Aut Luia</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $14.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Est Eligendi</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $8.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Eos Luibusdam</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $12.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Eos Luibusdam</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $12.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Laboriosam Direva</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $9.95
-                          </p>
-                        </div><!-- Menu Item --> --}}
-          
                       </div>
                     </div><!-- End Dinner Menu Content -->
 
@@ -515,61 +328,6 @@
                       <div class="row gy-5">
           
                         @include('user.components.hiburan')<!-- Menu Item --><!-- Menu Item -->
-          
-                        {{-- <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Aut Luia</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $14.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Est Eligendi</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $8.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Eos Luibusdam</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $12.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Eos Luibusdam</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $12.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Laboriosam Direva</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $9.95
-                          </p>
-                        </div><!-- Menu Item --> --}}
           
                       </div>
                     </div><!-- End Dinner Menu Content -->
@@ -603,328 +361,23 @@
           
                       </div>
                     </div><!-- End Dinner Menu Content -->
-          
-                </div>
-                {{-- <div class="tab-content" data-aos="fade-up" data-aos-delay="300" id="menu-features">
 
-                    <div class="tab-pane fade" id="menu-gedung">
-                    @include('user.components.gedung')
-                    </div>
-
-                    <div class="tab-pane fade" id="menu-katering">
-                    @include('user.components.katering')
-                    </div>
-
-                    <div class="tab-pane fade" id="menu-dekorasi">
-                    @include('user.components.dekorasi')
-                    </div>
-
-                    <div class="tab-pane fade" id="menu-dokumentasi">
-                    @include('user.components.dokumentasi')
-                    </div>
-
-                    <div class="tab-pane fade" id="menu-hiburan">
-                    @include('user.components.hiburan')
-                    </div>
-          
-                    <div class="tab-pane fade" id="menu-dinner">
+                    <div class="tab-pane fade" id="menu-undangan">
           
                       <div class="tab-header text-center">
                         <p>Menu</p>
-                        <h3>Dinner</h3>
+                        <h3>Undangan</h3>
                       </div>
+                      <br><br>
           
                       <div class="row gy-5">
           
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-1.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Magnam Tiste</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $5.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Aut Luia</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $14.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Est Eligendi</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $8.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Eos Luibusdam</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $12.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Eos Luibusdam</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $12.95
-                          </p>
-                        </div><!-- Menu Item -->
-          
-                        <div class="col-lg-4 menu-item">
-                          <a href="assets/Yummy/assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/Yummy/assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
-                          <h4>Laboriosam Direva</h4>
-                          <p class="ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                          </p>
-                          <p class="price">
-                            $9.95
-                          </p>
-                        </div><!-- Menu Item -->
+                        @include('user.components.undangan')<!-- Menu Item -->
           
                       </div>
                     </div><!-- End Dinner Menu Content -->
           
-                </div> --}}
-
-                {{-- <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"id="item-katering">
-                  <div class="col mb-5">
-                      <div class="card h-100">
-                          <!-- Product image-->
-                          <img class="card-img-top"
-                              src="{{ asset('assets/Yummy/assets/img/menu/menu-item-1.png') }}" alt="..." />
-                          <!-- Product details-->
-                          <div class="card-body p-4">
-                              <div class="text-center">
-                                  <!-- Product name-->
-                                  <h5 class="fw-bolder">Fancy Product</h5>
-                                  <!-- Product price-->
-                                  $40.00 - $80.00
-                              </div>
-                          </div>
-                          <!-- Product actions-->
-                          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View
-                                      options</a></div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col mb-5">
-                      <div class="card h-100">
-                          <!-- Sale badge-->
-                          <div class="badge bg-dark text-white position-absolute"
-                              style="top: 0.5rem; right: 0.5rem">Sale</div>
-                          <!-- Product image-->
-                          <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                              alt="..." />
-                          <!-- Product details-->
-                          <div class="card-body p-4">
-                              <div class="text-center">
-                                  <!-- Product name-->
-                                  <h5 class="fw-bolder">Special Item</h5>
-                                  <!-- Product reviews-->
-                                  <div class="d-flex justify-content-center small text-warning mb-2">
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                  </div>
-                                  <!-- Product price-->
-                                  <span class="text-muted text-decoration-line-through">$20.00</span>
-                                  $18.00
-                              </div>
-                          </div>
-                          <!-- Product actions-->
-                          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add
-                                      to cart</a></div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col mb-5">
-                      <div class="card h-100">
-                          <!-- Sale badge-->
-                          <div class="badge bg-dark text-white position-absolute"
-                              style="top: 0.5rem; right: 0.5rem">Sale</div>
-                          <!-- Product image-->
-                          <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                              alt="..." />
-                          <!-- Product details-->
-                          <div class="card-body p-4">
-                              <div class="text-center">
-                                  <!-- Product name-->
-                                  <h5 class="fw-bolder">Sale Item</h5>
-                                  <!-- Product price-->
-                                  <span class="text-muted text-decoration-line-through">$50.00</span>
-                                  $25.00
-                              </div>
-                          </div>
-                          <!-- Product actions-->
-                          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add
-                                      to cart</a></div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col mb-5">
-                      <div class="card h-100">
-                          <!-- Product image-->
-                          <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                              alt="..." />
-                          <!-- Product details-->
-                          <div class="card-body p-4">
-                              <div class="text-center">
-                                  <!-- Product name-->
-                                  <h5 class="fw-bolder">Popular Item</h5>
-                                  <!-- Product reviews-->
-                                  <div class="d-flex justify-content-center small text-warning mb-2">
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                  </div>
-                                  <!-- Product price-->
-                                  $40.00
-                              </div>
-                          </div>
-                          <!-- Product actions-->
-                          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add
-                                      to cart</a></div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col mb-5">
-                      <div class="card h-100">
-                          <!-- Sale badge-->
-                          <div class="badge bg-dark text-white position-absolute"
-                              style="top: 0.5rem; right: 0.5rem">Sale</div>
-                          <!-- Product image-->
-                          <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                              alt="..." />
-                          <!-- Product details-->
-                          <div class="card-body p-4">
-                              <div class="text-center">
-                                  <!-- Product name-->
-                                  <h5 class="fw-bolder">Sale Item</h5>
-                                  <!-- Product price-->
-                                  <span class="text-muted text-decoration-line-through">$50.00</span>
-                                  $25.00
-                              </div>
-                          </div>
-                          <!-- Product actions-->
-                          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add
-                                      to cart</a></div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col mb-5">
-                      <div class="card h-100">
-                          <!-- Product image-->
-                          <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                              alt="..." />
-                          <!-- Product details-->
-                          <div class="card-body p-4">
-                              <div class="text-center">
-                                  <!-- Product name-->
-                                  <h5 class="fw-bolder">Fancy Product</h5>
-                                  <!-- Product price-->
-                                  $120.00 - $280.00
-                              </div>
-                          </div>
-                          <!-- Product actions-->
-                          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View
-                                      options</a></div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col mb-5">
-                      <div class="card h-100">
-                          <!-- Sale badge-->
-                          <div class="badge bg-dark text-white position-absolute"
-                              style="top: 0.5rem; right: 0.5rem">Sale</div>
-                          <!-- Product image-->
-                          <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                              alt="..." />
-                          <!-- Product details-->
-                          <div class="card-body p-4">
-                              <div class="text-center">
-                                  <!-- Product name-->
-                                  <h5 class="fw-bolder">Special Item</h5>
-                                  <!-- Product reviews-->
-                                  <div class="d-flex justify-content-center small text-warning mb-2">
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                  </div>
-                                  <!-- Product price-->
-                                  <span class="text-muted text-decoration-line-through">$20.00</span>
-                                  $18.00
-                              </div>
-                          </div>
-                          <!-- Product actions-->
-                          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add
-                                      to cart</a></div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col mb-5">
-                      <div class="card h-100">
-                          <!-- Product image-->
-                          <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                              alt="..." />
-                          <!-- Product details-->
-                          <div class="card-body p-4">
-                              <div class="text-center">
-                                  <!-- Product name-->
-                                  <h5 class="fw-bolder">Popular Item</h5>
-                                  <!-- Product reviews-->
-                                  <div class="d-flex justify-content-center small text-warning mb-2">
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                      <div class="bi-star-fill"></div>
-                                  </div>
-                                  <!-- Product price-->
-                                  $40.00
-                              </div>
-                          </div>
-                          <!-- Product actions-->
-                          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add
-                                      to cart</a></div>
-                          </div>
-                      </div>
-                  </div>
-                </div> --}}
+                </div>
 
             </div>
             <div class="d-flex justify-content-center">

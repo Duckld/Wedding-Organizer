@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Dekorasi;
 use App\Models\Dokumentasi;
+use App\Models\Pemesanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PemesananController extends Controller
 {
@@ -13,8 +15,8 @@ class PemesananController extends Controller
      */
     public function index()
     {
-
-        return view('user.pemesanan');
+        $user = Auth::user(); // Mengambil data user yang sedang login
+        return view('user.pemesanan', compact('user'));
     }
 
     /**
@@ -28,21 +30,19 @@ class PemesananController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(Request $request)
-    // {
+    public function store(Request $request)
+    {
+        Pemesanan::create([
+            'id_customer' => $request->id_customer,
+            'tanggal_pemesanan' => now(),
+            'tanggal_acara' => $request->tanggal_acara,
+            'status_pemesanan' => 'Pending',
+            'total_biaya' => $request->total_biaya, 
+        ]);
 
-    //     // Ambil data dekorasi yang dipilih
-    //     $id_dekorasi = $request->input('dekorasi');
-        
-    //     // Simpan ke sesi untuk digunakan di halaman lain (opsional)
-    //     session(['dekorasi_terpilih' => $id_dekorasi]);
+        return redirect()->back()->with('success', 'data pemesanan berhasil di simpan');
 
-    //     // Ambil detail dekorasi yang dipilih dari database
-    //     $dekorasi = Dekorasi::find($id_dekorasi);
-
-    //     // Tampilkan halaman pemesanan item dengan data dekorasi yang dipilih
-    //     return view('user.pemesanan', compact('dekorasi'));
-    // }
+    }
 
     // Method index untuk menampilkan list dekorasi
     public function indexdekorasi()

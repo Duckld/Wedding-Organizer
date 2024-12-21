@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Bridalstyle;
 use App\Models\Dekorasi;
+use App\Models\Dishes;
 use App\Models\Dokumentasi;
 use App\Models\Gedung;
 use App\Models\Hiburan;
+use App\Models\Maincourse;
 use App\Models\Souvenir;
+use App\Models\Undangan;
 use Illuminate\Http\Request;
+
 
 class KeranjangController extends Controller
 {
@@ -33,6 +37,29 @@ class KeranjangController extends Controller
 
         // Tampilkan view dan kirim data dekorasi beserta dekorasi yang dipilih (jika ada)
         return view('booking.index', compact('gedung', 'gedungTerpilih'));
+    }
+
+    public function indexkatering()
+    {
+        // Ambil semua data dari database
+        $maincourse = Maincourse::all();
+
+        $maincourseTerpilih = session('maincourse_terpilih');
+
+        // Tampilkan view dan kirim data dekorasi beserta dekorasi yang dipilih (jika ada)
+        return view('booking.index', compact('maincourse', 'maincourseTerpilih'));
+    }
+
+    public function indexkatering2()
+    {
+        // Ambil semua data dari database
+        // $maincourse = Maincourse::all();
+        $dishes = Dishes::all();
+
+        $dishesTerpilih = session('dishes_terpilih');
+
+        // Tampilkan view dan kirim data dekorasi beserta dekorasi yang dipilih (jika ada)
+        return view('booking.index', compact('dishes', 'dishesTerpilih'));
     }
 
     public function indexdekorasi()
@@ -96,10 +123,40 @@ class KeranjangController extends Controller
         return view('booking.index', compact('souvenir', 'souvenirTerpilih'));
     }
 
+    public function indexundangan()
+    {
+        // Ambil semua data hiburan dari database
+        $undangan = Undangan::all();
+
+        // Cek apakah ada hiburan yang sudah dipilih (dari session)
+        $undanganTerpilih = session('undangan_terpilih');
+
+        // Tampilkan view dan kirim data hiburan beserta hiburan yang dipilih (jika ada)
+        return view('booking.index', compact('undangan', 'undanganTerpilih'));
+    }
+
     public function storegedung(Request $request)
     {
         // Simpan ID dekorasi yang dipilih ke session
         session(['gedung_terpilih' => $request->input('gedung')]);
+
+        // Redirect kembali ke halaman dekorasi
+        return redirect()->route('booking.index');
+    }
+
+    public function storekatering(Request $request)
+    {
+        // Simpan ID dekorasi yang dipilih ke session
+        session(['maincourse_terpilih' => $request->input('maincourse')]);
+
+        // Redirect kembali ke halaman dekorasi
+        return redirect()->route('booking.index');
+    }
+
+    public function storekatering2(Request $request)
+    {
+        // Simpan ID dekorasi yang dipilih ke session
+        session(['dishes_terpilih' => $request->input('dishes')]);
 
         // Redirect kembali ke halaman dekorasi
         return redirect()->route('booking.index');
@@ -144,6 +201,15 @@ class KeranjangController extends Controller
     {
         // Simpan ID dokumentasi yang dipilih ke session
         session(['souvenir_terpilih' => $request->input('souvenir')]);
+
+        // Redirect kembali ke halaman hiburan
+        return redirect()->route('booking.index');
+    }
+
+    public function storeundangan(Request $request)
+    {
+        // Simpan ID dokumentasi yang dipilih ke session
+        session(['undangan_terpilih' => $request->input('undangan')]);
 
         // Redirect kembali ke halaman hiburan
         return redirect()->route('booking.index');
@@ -198,4 +264,5 @@ class KeranjangController extends Controller
     {
         //
     }
+
 }

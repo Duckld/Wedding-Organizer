@@ -77,6 +77,35 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Order</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item ">
+                                    <a href="/admin/pending-order">Pending Order</a>
+                                </li>
+                                <li class="submenu-item has-sub">
+                                    <a href="/admin/confirm-order">Confirm Order</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/ongoing-order">Ongoing Order</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/finished-order">Finished Order</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/admin/order">Histori Order</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="/admin/pembayaran" class='sidebar-link'>
+                                <i class="bi bi-cash-stack"></i>
+                                <span>Pembayaran</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
@@ -140,12 +169,8 @@
                                     <li>
                                         <h6 class="dropdown-header">Hello, John!</h6>
                                     </li>
-                                    <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
+                                    <li><a class="dropdown-item" href="admin/profile"><i class="icon-mid bi bi-person me-2"></i> My
                                             Profile</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
-                                            Settings</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-wallet me-2"></i>
-                                            Wallet</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -213,7 +238,7 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         <h6 class="text-muted font-semibold">Total Order</h6>
-                                                        <h6 class="font-extrabold mb-0">0</h6>
+                                                        <h6 class="font-extrabold mb-0">{{ $jumlahTotalOrder }}</h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -235,7 +260,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="col-6 col-lg-3 col-md-6">
                                         <div class="card">
                                             <div class="card-body px-3 py-4-5">
@@ -397,44 +422,33 @@
                                 </div>
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Pesan Terbaru</h4>
+                                        <h4>Pesanan Terbaru</h4>
                                     </div>
                                     <div class="card-content pb-4">
-                                        <div class="recent-message d-flex px-4 py-3">
-                                            <div class="avatar avatar-lg">
-                                                <img src="/assets/dist/assets/images/faces/4.jpg">
+                                        @foreach ($pemesanan as $pm)
+                                            <div class="recent-message d-flex px-4 py-3">
+                                                <div class="avatar avatar-lg">
+                                                    <img src="/assets/dist/assets/images/faces/{{$loop->iteration}}.jpg">
+                                                </div>
+                                                <div class="name ms-4">
+                                                    <h5 class="mb-1">
+                                                        {{ $pm->user->name ?? 'User' }} <!-- Mengambil nama user terkait -->
+                                                    </h5>
+                                                    <h6 class="text-muted mb-0">
+                                                        {{ $pm->id_pemesanan }}
+                                                    </h6>
+                                                </div>
                                             </div>
-                                            <div class="name ms-4">
-                                                <h5 class="mb-1">Hank Schrader</h5>
-                                                <h6 class="text-muted mb-0">@johnducky</h6>
-                                            </div>
-                                        </div>
-                                        <div class="recent-message d-flex px-4 py-3">
-                                            <div class="avatar avatar-lg">
-                                                <img src="/assets/dist/assets/images/faces/5.jpg">
-                                            </div>
-                                            <div class="name ms-4">
-                                                <h5 class="mb-1">Dean Winchester</h5>
-                                                <h6 class="text-muted mb-0">@imdean</h6>
-                                            </div>
-                                        </div>
-                                        <div class="recent-message d-flex px-4 py-3">
-                                            <div class="avatar avatar-lg">
-                                                <img src="/assets/dist/assets/images/faces/1.jpg">
-                                            </div>
-                                            <div class="name ms-4">
-                                                <h5 class="mb-1">John Dodol</h5>
-                                                <h6 class="text-muted mb-0">@dodoljohn</h6>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                         <div class="px-4">
-                                            <button type="button" class='btn btn-block btn-xl btn-light-primary font-bold mt-3' data-bs-toggle="modal"
-                                            data-bs-target="#defaultSize">Semua Pesan Masuk</button>
-                                        </div>
+                                            <a href="{{ route('pending-order') }}" class="btn btn-block btn-xl btn-light-primary font-bold mt-3">
+                                                Lihat Semua Pesanan Masuk
+                                            </a>
+                                        </div>                                        
                                         
-                                        <div class="modal fade text-left" id="defaultSize" tabindex="-1"
+                                        {{-- <div class="modal fade text-left" id="defaultSize" tabindex="-1"
                                             role="dialog" aria-labelledby="myModalLabel18" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                            <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"
                                                 role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -489,7 +503,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 {{-- <div class="card">

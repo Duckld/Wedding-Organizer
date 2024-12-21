@@ -2,7 +2,35 @@
 
     <form action="{{ route('pemesananbridalstyle.store') }}" method="POST">
         @csrf
-        <div class="row">
+
+        <!-- Search Feature -->
+        <div class="mb-4">
+            <input type="text" id="searchBoxbridal" class="form-control" placeholder="Cari bridal..." onkeyup="searchBridal()">
+        </div>
+
+        <script>
+            function searchBridal() {
+                // Get the input field and filter text
+                const input = document.getElementById('searchBoxbridal');
+                const filter = input.value.toLowerCase();
+                const bridalContainer = document.getElementById('bridalContainer');
+                const items = bridalContainer.getElementsByClassName('menu-item');
+        
+                // Loop through all cards and hide those that don't match the search query
+                for (let i = 0; i < items.length; i++) {
+                    const item = items[i];
+                    const name = item.querySelector('.bridal-name').textContent || item.querySelector('.bridal-name').innerText;
+        
+                    if (name.toLowerCase().indexOf(filter) > -1) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            }
+        </script>  
+
+        <div class="row" id="bridalContainer">
             @foreach ($bridalstyle as $bs)
                 <div class="col-12 col-lg-4 menu-item">
                     <div class="col mb-5">
@@ -18,9 +46,13 @@
                                 @endif
                                 <div class="card-body p-4">
                                     <div class="text-center">
-                                        <h5 class="fw-bolder">{{ $bs->nama_paket_bridalstyle }}</h5>
+                                        <h5 class="fw-bolder bridal-name">{{ $bs->nama_paket_bridalstyle }}</h5>
                                         Rp.{{ number_format($bs->harga_paket, 0, ',', '.') }}
                                     </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn custom-btn btn-block mt-auto" href="#">View options</a></div>
                                 </div>
                             </div>
                         </label>

@@ -259,32 +259,282 @@
         <div class="container">
             <div class="form-container">
                 <div class="row">
-                    {{-- <!-- Form Data Pelanggan -->
-                    <div class="col-md-6 mb-3">
-                        <h4>Data Pelanggan</h4>
-                        <form>
-                            <div class="mb-3">
-                                <label for="groom-name" class="form-label">Nama Pengantin Pria</label>
-                                <input type="text" class="form-control" id="groom-name" placeholder="Masukkan Nama Pengantin Pria">
+                    <div class="col-md-12">
+                        <form action="{{ route('pemesanan.store') }}" method="POST">
+                            @csrf
+                            <div class="container mt-4">
+                                <div class="mb-3">
+                                    <label for="id_customer" class="form-label">ID Customer</label>
+                                    <input type="text" id="id_customer" name="id_customer" class="form-control" value="{{ $user->id_customer}}" readonly>
+                                </div>
+                        
+                                <div class="mb-3">
+                                    <label for="jumlah_tamu" class="form-label">Jumlah tamu</label>
+                                    <input type="text" id="jumlah_tamu" name="jumlah_tamu" class="form-control" value="{{ session('jumlah_tamu') ?? 'Belum diisi' }}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="tanggal_acara" class="form-label">Tanggal Acara</label>
+                                    <input type="date" id="tanggal_acara" name="tanggal_acara" class="form-control" required>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="bride-name" class="form-label">Nama Pengantin Wanita</label>
-                                <input type="text" class="form-control" id="bride-name" placeholder="Masukkan Nama Pengantin Wanita">
+                            
+
+                            <div class="order-items">
+                                <h4>Item</h4>
+                                @php
+                                    use App\Models\Gedung;
+                                    use App\Models\Maincourse;
+                                    use App\Models\Dekorasi;
+                                    use App\Models\Dokumentasi;
+                                    use App\Models\Hiburan;
+                                    use App\Models\Bridalstyle;
+                                    use App\Models\Souvenir;
+                                    use App\Models\Undangan;
+                                @endphp
+                                <style>
+                                    .item-container {
+                                        display: flex;
+                                        align-items: center;
+                                    }
+                                    .image-container {
+                                        width: 50px;
+                                        height: 50px;
+                                        overflow: hidden;
+                                        margin-right: 10px;
+                                    }
+                                    .image-container img {
+                                        width: 100%;
+                                        height: auto;
+                                    }
+                                    .item-info {
+                                        display: flex;
+                                        flex-direction: column;
+                                    }
+                                </style>
+                                <!-- Item List -->
+                                <div id="items">
+                                    @if(session()->has('gedung_terpilih'))
+                                        <?php $gedung = Gedung::find(session('gedung_terpilih')); ?>
+                                        <!-- Item List -->
+                                        <div class="item-container d-flex align-items-center" data-harga="{{ $gedung->harga_sewa_gedung }}">
+                                            <div class="image-container">
+                                                @if($gedung->foto_gedung)
+                                                    <img src="{{ asset('storage/' . $gedung->foto_gedung) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
+                                                @else
+                                                    <p>Tidak ada Foto Thumbnail</p>
+                                                @endif
+                                            </div>
+                                            <div class="item-info ml-2">
+                                                <h6 class="mb-0">{{ $gedung->nama_gedung }}</h6>
+                                                <p>Rp.{{ number_format($gedung->harga_sewa_gedung, 0, ',', '.') }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if(session()->has('maincourse_terpilih'))
+                                        <?php $maincourse = Maincourse::find(session('maincourse_terpilih')); ?>
+                                        <!-- Item List -->
+                                        <div class="item-container d-flex align-items-center" data-harga="{{ $maincourse->harga_paket }}">
+                                            <div class="image-container">
+                                                @if($maincourse->foto_menu)
+                                                    <img src="{{ asset('storage/' . $maincourse->foto_menu) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
+                                                @else
+                                                    <p>Tidak ada Foto Thumbnail</p>
+                                                @endif
+                                            </div>
+                                            <div class="item-info ml-2">
+                                                <h6 class="mb-0">{{ $maincourse->nama_paket_maincourse }}</h6>
+                                                <p>Rp.{{ number_format($maincourse->harga_paket, 0, ',', '.') }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                        
+                                    @if(session()->has('dekorasi_terpilih'))
+                                        <?php $dekorasi = Dekorasi::find(session('dekorasi_terpilih')); ?>
+                                        <!-- Item List -->
+                                        <div class="item-container d-flex align-items-center" data-harga="{{ $dekorasi->harga_dekorasi }}">
+                                            <div class="image-container">
+                                                @if($dekorasi->foto_dekorasi)
+                                                    <img src="{{ asset('storage/' . $dekorasi->foto_dekorasi) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
+                                                @else
+                                                    <p>Tidak ada Foto Thumbnail</p>
+                                                @endif
+                                            </div>
+                                            <div class="item-info ml-2">
+                                                <h6 class="mb-0">{{ $dekorasi->nama_dekorasi }}</h6>
+                                                <p>Rp.{{ number_format($dekorasi->harga_dekorasi, 0, ',', '.') }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                        
+                                    @if(session()->has('dokumentasi_terpilih'))
+                                        <?php $dokumentasi = Dokumentasi::find(session('dokumentasi_terpilih')); ?>
+                                        <!-- Item List -->
+                                        <div class="item-container d-flex align-items-center" data-harga="{{ $dokumentasi->harga_dokumentasi }}">
+                                            <div class="image-container">
+                                                @if($dokumentasi->foto_dokumentasi)
+                                                    <img src="{{ asset('storage/' . $dokumentasi->foto_dokumentasi) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
+                                                @else
+                                                    <p>Tidak ada Foto Thumbnail</p>
+                                                @endif
+                                            </div>
+                                            <div class="item-info ml-2">
+                                                <h6 class="mb-0">{{ $dokumentasi->nama_paket_dokumentasi }}</h6>
+                                                <p>Rp.{{ number_format($dokumentasi->harga_dokumentasi, 0, ',', '.') }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                        
+                                    @if(session()->has('hiburan_terpilih'))
+                                        <?php $hiburan = Hiburan::find(session('hiburan_terpilih')); ?>
+                                        <!-- Item List -->
+                                        <div class="item-container d-flex align-items-center" data-harga="{{ $hiburan->harga_sewa_hiburan }}">
+                                            <div class="image-container">
+                                                @if($hiburan->foto_hiburan)
+                                                    <img src="{{ asset('storage/' . $hiburan->foto_hiburan) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
+                                                @else
+                                                    <p>Tidak ada Foto Thumbnail</p>
+                                                @endif
+                                            </div>
+                                            <div class="item-info ml-2">
+                                                <h6 class="mb-0">{{ $hiburan->nama_paket_hiburan }}</h6>
+                                                <p>Rp.{{ number_format($hiburan->harga_sewa_hiburan, 0, ',', '.') }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                        
+                                    @if(session()->has('bridalstyle_terpilih'))
+                                        <?php $bridalstyle = Bridalstyle::find(session('bridalstyle_terpilih')); ?>
+                                        <div class="item-container d-flex align-items-center" data-harga="{{ $bridalstyle->harga_paket }}">
+                                            <div class="image-container">
+                                                @if($bridalstyle->foto_bridalstyle)
+                                                    <img src="{{ asset('storage/' . $bridalstyle->foto_bridalstyle) }}" alt="Foto Bridalstyle" class="img-fluid" style="width: 50px; height: 50px;">
+                                                @else
+                                                    <p>Tidak ada Foto Thumbnail</p>
+                                                @endif
+                                            </div>
+                                            <div class="item-info ml-2">
+                                                <h6 class="mb-0">{{ $bridalstyle->nama_paket_bridalstyle }}</h6>
+                                                <p>Rp.{{ number_format($bridalstyle->harga_paket, 0, ',', '.') }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                        
+                                    @if(session()->has('souvenir_terpilih'))
+                                        <?php $souvenir = Souvenir::find(session('souvenir_terpilih')); ?>
+                                        <div class="item-container d-flex align-items-center" data-harga="{{ $souvenir->harga_paket_souvenir }}">
+                                            <div class="image-container">
+                                                @if($souvenir->foto_souvenir)
+                                                    <img src="{{ asset('storage/' . $souvenir->foto_souvenir) }}" alt="Foto Souvenir" class="img-fluid" style="width: 50px; height: 50px;">
+                                                @else
+                                                    <p>Tidak ada Foto Thumbnail</p>
+                                                @endif
+                                            </div>
+                                            <div class="item-info ml-2">
+                                                <h6 class="mb-0">{{ $souvenir->nama_paket_souvenir }}</h6>
+                                                <p>Rp.{{ number_format($souvenir->harga_paket_souvenir, 0, ',', '.') }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                        
+                                    @if(session()->has('undangan_terpilih'))
+                                        <?php $undangan = Undangan::find(session('undangan_terpilih')); ?>
+                                        <div class="item-container d-flex align-items-center" data-harga="{{ $undangan->harga_undangan }}">
+                                            <div class="image-container">
+                                                @if($undangan->foto_undangan)
+                                                    <img src="{{ asset('storage/' . $undangan->foto_undangan) }}" alt="Foto Undangan" class="img-fluid" style="width: 50px; height: 50px;">
+                                                @else
+                                                    <p>Tidak ada Foto Thumbnail</p>
+                                                @endif
+                                            </div>
+                                            <div class="item-info ml-2">
+                                                <h6 class="mb-0">{{ $undangan->bahan_undangan }}</h6>
+                                                <p>Rp.{{ number_format($undangan->harga_undangan, 0, ',', '.') }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                        
+                                <!-- Subtotal -->
+                                <div class="total-section">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Subtotal</span>
+                                        <span id="subtotal">Rp.0</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Tax (4%)</span>
+                                        <span id="tax">Rp.0</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <strong>Total</strong>
+                                        <strong id="total">Rp.0</strong>
+                                    </div>
+                                    <!-- Hidden input untuk menyimpan total biaya -->
+                                    <input type="hidden" id="total_biaya" name="total_biaya" value="0">
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                        let items = document.querySelectorAll('.item-container');
+                                        let subtotalElement = document.getElementById('subtotal');
+                                        let taxElement = document.getElementById('tax');
+                                        let totalElement = document.getElementById('total');
+                                        let totalBiayaInput = document.getElementById('total_biaya'); // Hidden input
+
+                                        // Fungsi untuk menghitung subtotal
+                                        function calculateSubtotal() {
+                                            let subtotal = 0;
+
+                                            // Iterasi setiap item dan tambahkan harganya ke subtotal
+                                            items.forEach(function (item) {
+                                                let harga = parseInt(item.getAttribute('data-harga')) || 0; // Default ke 0 jika NaN
+                                                subtotal += harga;
+                                            });
+
+                                            // Hitung pajak 4%
+                                            let tax = subtotal * 0.04;
+                                            let total = subtotal + tax;
+
+                                            // Tampilkan hasil dengan format rupiah
+                                            subtotalElement.textContent = 'Rp.' + new Intl.NumberFormat('id-ID').format(subtotal);
+                                            taxElement.textContent = 'Rp.' + new Intl.NumberFormat('id-ID').format(tax);
+                                            totalElement.textContent = 'Rp.' + new Intl.NumberFormat('id-ID').format(total);
+
+                                            // Update hidden input dengan nilai total biaya
+                                            totalBiayaInput.value = total; // Update nilai hidden input
+                                        }
+
+                                        // Panggil fungsi untuk menghitung subtotal saat halaman dimuat
+                                        calculateSubtotal();
+                                    });
+
+                                    </script>
+                                </div>
+                        
+                                <!-- Metode Pembayaran -->
+                                {{-- <div class="payment-method">
+                                    <h4>Metode Pembayaran</h4>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="payment-method" id="dp" value="dp">
+                                        <label class="form-check-label" for="dp">DP</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="payment-method" id="full-payment" value="full">
+                                        <label class="form-check-label" for="full-payment">Langsung Lunas</label>
+                                    </div>
+                                </div> --}}
                             </div>
-                            <div class="mb-3">
-                                <label for="phone-number" class="form-label">No Handphone</label>
-                                <input type="text" class="form-control" id="phone-number" placeholder="Masukkan No Handphone">
-                            </div>
-                            <div class="mb-3">
-                                <label for="event-date" class="form-label">Tanggal Acara</label>
-                                <input type="date" class="form-control" id="event-date">
-                            </div>
-                            <div class="mb-3">
-                                <label for="notes" class="form-label">Catatan</label>
-                                <textarea class="form-control" id="notes" rows="5" placeholder="Tambahkan Catatan"></textarea>
-                            </div>
+                            <br>
+                            <button type="submit" class="btn custom-btn col-12">Submit</button>
                         </form>
-                    </div> --}}
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        {{-- <div class="container">
+            <div class="form-container">
+                <div class="row">
                     
                     <!-- Daftar Item Pesanan -->
                     <div class="col-md-12">
@@ -295,6 +545,9 @@
                                 use App\Models\Dekorasi;
                                 use App\Models\Dokumentasi;
                                 use App\Models\Hiburan;
+                                use App\Models\Bridalstyle;
+                                use App\Models\Souvenir;
+                                use App\Models\Undangan;
                             @endphp
                             <style>
                                 .item-container {
@@ -315,150 +568,180 @@
                                     display: flex;
                                     flex-direction: column;
                                 }
-
                             </style>
                             <!-- Item List -->
-                            @if(session()->has('gedung_terpilih'))
-                                <?php $gedung = Gedung::find(session('gedung_terpilih')); ?>
-                                <!-- Item List -->
-                                <div class="item-container d-flex align-items-center">
-                                    <div class="image-container">
-                                        @if($gedung->foto_gedung)
-                                            <img src="{{ asset('storage/' . $gedung->foto_gedung) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
-                                        @else
-                                            <p>Tidak ada Foto Thumbnail</p>
-                                        @endif
-                                    </div>
-                                    <div class="item-info ml-2">
-                                        <h6 class="mb-0">{{ $gedung->nama_gedung }}</h6>
-                                        <p>Rp.{{ number_format($gedung->harga_sewa_gedung, 0, ',', '.') }}</p>
-                                    </div>
-                                </div>
-                            @endif
-                            @if(session()->has('dekorasi_terpilih'))
-                                <?php $dekorasi = Dekorasi::find(session('dekorasi_terpilih')); ?>
-                                <!-- Item List -->
-                                <div class="item-container d-flex align-items-center">
-                                    <div class="image-container">
-                                        @if($dekorasi->foto_dekorasi)
-                                            <img src="{{ asset('storage/' . $dekorasi->foto_dekorasi) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
-                                        @else
-                                            <p>Tidak ada Foto Thumbnail</p>
-                                        @endif
-                                    </div>
-                                    <div class="item-info ml-2">
-                                        <h6 class="mb-0">{{ $dekorasi->nama_dekorasi }}</h6>
-                                        <p>Rp.{{ number_format($dekorasi->harga_dekorasi, 0, ',', '.') }}</p>
-                                    </div>
-                                </div>
-                            @endif
-                            <!-- Item List -->
-                            @if(session()->has('dokumentasi_terpilih'))
-                                <?php $dokumentasi = Dokumentasi::find(session('dokumentasi_terpilih')); ?>
-                                <!-- Item List -->
-                                <div class="item-container d-flex align-items-center">
-                                    <div class="image-container">
-                                        @if($dokumentasi->foto_dokumentasi)
-                                            <img src="{{ asset('storage/' . $dokumentasi->foto_dokumentasi) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
-                                        @else
-                                            <p>Tidak ada Foto Thumbnail</p>
-                                        @endif
-                                    </div>
-                                    <div class="item-info ml-2">
-                                        <h6 class="mb-0">{{ $dokumentasi->nama_paket_dokumentasi }}</h6>
-                                        <p>Rp.{{ number_format($dokumentasi->harga_dokumentasi, 0, ',', '.') }}</p>
-                                    </div>
-                                </div>
-                            @endif
-
-                            @if(session()->has('hiburan_terpilih'))
-                                <?php $hiburan = Hiburan::find(session('hiburan_terpilih')); ?>
-                                <!-- Item List -->
-                                <div class="item-container d-flex align-items-center">
-                                    <div class="image-container">
-                                        @if($hiburan->foto_hiburan)
-                                            <img src="{{ asset('storage/' . $hiburan->foto_hiburan) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
-                                        @else
-                                            <p>Tidak ada Foto Thumbnail</p>
-                                        @endif
-                                    </div>
-                                    <div class="item-info ml-2">
-                                        <h6 class="mb-0">{{ $hiburan->nama_paket_hiburan }}</h6>
-                                        <p>Rp.{{ number_format($hiburan->harga_sewa_hiburan, 0, ',', '.') }}</p>
-                                    </div>
-                                </div>
-                            @endif
-
-                            {{-- @if(session()->has('hiburan_terpilih'))
-                                <?php $hiburan = Hiburan::find(session('hiburan_terpilih')); ?>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="item-checkbox" data-harga="{{ $hiburan->harga_sewa_hiburan }}" value="{{ $hiburan->id_hiburan }}">
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="image-container me-3">
-                                                @if($hiburan->foto_hiburan)
-                                                    <img src="{{ asset('storage/' . $hiburan->foto_hiburan) }}" alt="Foto hiburan" class="img-fluid">
-                                                @else
-                                                    <p>Tidak ada Foto</p>
-                                                @endif
-                                            </div>
-                                            <h6 class="mb-0">{{ $hiburan->nama_paket_hiburan }}</h6>
-                                        </div>
-                                    </td>
-                                    <td>-</td>
-                                    <td>Rp.{{ number_format($hiburan->harga_sewa_hiburan, 0, ',', '.') }}</td>
-                                    <td>1</td>
-                                    <td>Rp.{{ number_format($hiburan->harga_sewa_hiburan, 0, ',', '.') }}</td>
-                                </tr>
-                            @endif --}}
-
-                            {{-- @if(session()->has('dokumentasi_terpilih'))
-                                // <"?"php $dokumentasi = App\Models\Dokumentasi::find(session('dokumentasi_terpilih')); ?>
-
-                                <!-- Cek apakah data dokumentasi ditemukan -->
-                                @if($dokumentasi)
+                            <div id="items">
+                                @if(session()->has('gedung_terpilih'))
+                                    <?php $gedung = Gedung::find(session('gedung_terpilih')); ?>
                                     <!-- Item List -->
-                                    <div class="item-container d-flex align-items-center">
+                                    <div class="item-container d-flex align-items-center" data-harga="{{ $gedung->harga_sewa_gedung }}">
+                                        <div class="image-container">
+                                            @if($gedung->foto_gedung)
+                                                <img src="{{ asset('storage/' . $gedung->foto_gedung) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
+                                            @else
+                                                <p>Tidak ada Foto Thumbnail</p>
+                                            @endif
+                                        </div>
+                                        <div class="item-info ml-2">
+                                            <h6 class="mb-0">{{ $gedung->nama_gedung }}</h6>
+                                            <p>Rp.{{ number_format($gedung->harga_sewa_gedung, 0, ',', '.') }}</p>
+                                        </div>
+                                    </div>
+                                @endif
+                    
+                                @if(session()->has('dekorasi_terpilih'))
+                                    <?php $dekorasi = Dekorasi::find(session('dekorasi_terpilih')); ?>
+                                    <!-- Item List -->
+                                    <div class="item-container d-flex align-items-center" data-harga="{{ $dekorasi->harga_dekorasi }}">
+                                        <div class="image-container">
+                                            @if($dekorasi->foto_dekorasi)
+                                                <img src="{{ asset('storage/' . $dekorasi->foto_dekorasi) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
+                                            @else
+                                                <p>Tidak ada Foto Thumbnail</p>
+                                            @endif
+                                        </div>
+                                        <div class="item-info ml-2">
+                                            <h6 class="mb-0">{{ $dekorasi->nama_dekorasi }}</h6>
+                                            <p>Rp.{{ number_format($dekorasi->harga_dekorasi, 0, ',', '.') }}</p>
+                                        </div>
+                                    </div>
+                                @endif
+                    
+                                @if(session()->has('dokumentasi_terpilih'))
+                                    <?php $dokumentasi = Dokumentasi::find(session('dokumentasi_terpilih')); ?>
+                                    <!-- Item List -->
+                                    <div class="item-container d-flex align-items-center" data-harga="{{ $dokumentasi->harga_dokumentasi }}">
                                         <div class="image-container">
                                             @if($dokumentasi->foto_dokumentasi)
-                                                <a href="#" class="open-second-modal" data-bs-toggle="modal" data-bs-target="#secondModal{{ $dokumentasi->id_dokumentasi }}">
-                                                    <img src="{{ asset('storage/' . $dokumentasi->foto_dokumentasi) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
-                                                </a>
+                                                <img src="{{ asset('storage/' . $dokumentasi->foto_dokumentasi) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
                                             @else
                                                 <p>Tidak ada Foto Thumbnail</p>
                                             @endif
                                         </div>
                                         <div class="item-info ml-2">
                                             <h6 class="mb-0">{{ $dokumentasi->nama_paket_dokumentasi }}</h6>
-                                            <p>Rp.{{ $dokumentasi->harga_dokumentasi }}</p>
+                                            <p>Rp.{{ number_format($dokumentasi->harga_dokumentasi, 0, ',', '.') }}</p>
                                         </div>
                                     </div>
-                                @else
-                                    <!-- Jika dokumentasi tidak ditemukan -->
-                                    <p>Data dokumentasi tidak ditemukan.</p>
                                 @endif
-
-                            @endif --}}
-
-
+                    
+                                @if(session()->has('hiburan_terpilih'))
+                                    <?php $hiburan = Hiburan::find(session('hiburan_terpilih')); ?>
+                                    <!-- Item List -->
+                                    <div class="item-container d-flex align-items-center" data-harga="{{ $hiburan->harga_sewa_hiburan }}">
+                                        <div class="image-container">
+                                            @if($hiburan->foto_hiburan)
+                                                <img src="{{ asset('storage/' . $hiburan->foto_hiburan) }}" alt="Foto Menu" class="img-fluid" style="width: 50px; height: 50px;">
+                                            @else
+                                                <p>Tidak ada Foto Thumbnail</p>
+                                            @endif
+                                        </div>
+                                        <div class="item-info ml-2">
+                                            <h6 class="mb-0">{{ $hiburan->nama_paket_hiburan }}</h6>
+                                            <p>Rp.{{ number_format($hiburan->harga_sewa_hiburan, 0, ',', '.') }}</p>
+                                        </div>
+                                    </div>
+                                @endif
+                    
+                                @if(session()->has('bridalstyle_terpilih'))
+                                    <?php $bridalstyle = Bridalstyle::find(session('bridalstyle_terpilih')); ?>
+                                    <div class="item-container d-flex align-items-center" data-harga="{{ $bridalstyle->harga_paket }}">
+                                        <div class="image-container">
+                                            @if($bridalstyle->foto_bridalstyle)
+                                                <img src="{{ asset('storage/' . $bridalstyle->foto_bridalstyle) }}" alt="Foto Bridalstyle" class="img-fluid" style="width: 50px; height: 50px;">
+                                            @else
+                                                <p>Tidak ada Foto Thumbnail</p>
+                                            @endif
+                                        </div>
+                                        <div class="item-info ml-2">
+                                            <h6 class="mb-0">{{ $bridalstyle->nama_paket_bridalstyle }}</h6>
+                                            <p>Rp.{{ number_format($bridalstyle->harga_paket, 0, ',', '.') }}</p>
+                                        </div>
+                                    </div>
+                                @endif
+                    
+                                @if(session()->has('souvenir_terpilih'))
+                                    <?php $souvenir = Souvenir::find(session('souvenir_terpilih')); ?>
+                                    <div class="item-container d-flex align-items-center" data-harga="{{ $souvenir->harga_paket_souvenir }}">
+                                        <div class="image-container">
+                                            @if($souvenir->foto_souvenir)
+                                                <img src="{{ asset('storage/' . $souvenir->foto_souvenir) }}" alt="Foto Souvenir" class="img-fluid" style="width: 50px; height: 50px;">
+                                            @else
+                                                <p>Tidak ada Foto Thumbnail</p>
+                                            @endif
+                                        </div>
+                                        <div class="item-info ml-2">
+                                            <h6 class="mb-0">{{ $souvenir->nama_paket_souvenir }}</h6>
+                                            <p>Rp.{{ number_format($souvenir->harga_paket_souvenir, 0, ',', '.') }}</p>
+                                        </div>
+                                    </div>
+                                @endif
+                    
+                                @if(session()->has('undangan_terpilih'))
+                                    <?php $undangan = Undangan::find(session('undangan_terpilih')); ?>
+                                    <div class="item-container d-flex align-items-center" data-harga="{{ $undangan->harga_undangan }}">
+                                        <div class="image-container">
+                                            @if($undangan->foto_undangan)
+                                                <img src="{{ asset('storage/' . $undangan->foto_undangan) }}" alt="Foto Undangan" class="img-fluid" style="width: 50px; height: 50px;">
+                                            @else
+                                                <p>Tidak ada Foto Thumbnail</p>
+                                            @endif
+                                        </div>
+                                        <div class="item-info ml-2">
+                                            <h6 class="mb-0">{{ $undangan->bahan_undangan }}</h6>
+                                            <p>Rp.{{ number_format($undangan->harga_undangan, 0, ',', '.') }}</p>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                    
                             <!-- Subtotal -->
                             <div class="total-section">
                                 <div class="d-flex justify-content-between">
                                     <span>Subtotal</span>
-                                    <span>Rp.204.500.000</span>
+                                    <span id="subtotal">Rp.0</span>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <span>Tax (4%)</span>
-                                    <span>Rp.2.045.000</span>
+                                    <span id="tax">Rp.0</span>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <strong>Total</strong>
-                                    <strong>Rp.207.500.000</strong>
+                                    <input type="hidden" name="total_biaya"><strong id="total">Rp.0</strong>
                                 </div>
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        let items = document.querySelectorAll('.item-container');
+                                        let subtotalElement = document.getElementById('subtotal');
+                                        let taxElement = document.getElementById('tax');
+                                        let totalElement = document.getElementById('total');
+                                
+                                        // Fungsi untuk menghitung subtotal
+                                        function calculateSubtotal() {
+                                            let subtotal = 0;
+                                
+                                            // Iterasi setiap item dan tambahkan harganya ke subtotal
+                                            items.forEach(function (item) {
+                                                let harga = parseInt(item.getAttribute('data-harga')) || 0; // Default ke 0 jika NaN
+                                                subtotal += harga;
+                                            });
+                                
+                                            // Hitung pajak 4%
+                                            let tax = subtotal * 0.04;
+                                            let total = subtotal + tax;
+                                
+                                            // Tampilkan hasil dengan format rupiah
+                                            subtotalElement.textContent = 'Rp.' + new Intl.NumberFormat('id-ID').format(subtotal);
+                                            taxElement.textContent = 'Rp.' + new Intl.NumberFormat('id-ID').format(tax);
+                                            totalElement.textContent = 'Rp.' + new Intl.NumberFormat('id-ID').format(total);
+                                        }
+                                
+                                        // Panggil fungsi untuk menghitung subtotal saat halaman dimuat
+                                        calculateSubtotal();
+                                    });
+                                </script>
                             </div>
-        
+                    
                             <!-- Metode Pembayaran -->
                             <div class="payment-method">
                                 <h4>Metode Pembayaran</h4>
@@ -473,11 +756,12 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 <br>
                 <button type="submit" class="btn custom-btn col-12">Submit</button>
             </div>
-        </div>
+        </div> --}}
 
         <!-- CSS untuk button submit -->
         <style>
@@ -604,29 +888,6 @@
         }
     </script>
 
-    {{-- <script>
-        function myFunction() {
-          // Ambil input pencarian
-          var input = document.getElementById('myInput');
-          var filter = input.value.toUpperCase();
-
-          // Ambil kontainer yang berisi item gedung
-          var menuGedung = document.querySelector("#menu-features .row");
-
-          // Ambil semua elemen h5 yang berisi nama gedung
-          var items = menuGedung.querySelectorAll(".menu-item");
-
-          // Loop untuk setiap item gedung dan cek apakah nama gedung cocok dengan input
-          items.forEach(function(item) {
-              var namaGedung = item.querySelector("h5").textContent || item.querySelector("h5").innerText;
-              if (namaGedung.toUpperCase().indexOf(filter) > -1) {
-                  item.style.display = ""; // Tampilkan jika cocok
-              } else {
-                  item.style.display = "none"; // Sembunyikan jika tidak cocok
-              }
-          });
-        }
-    </script> --}}
     <script>
         function myFunction() {
             // Ambil input pencarian
@@ -655,6 +916,30 @@
     </script>
 
 
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        @if (Session::has('success'))
+            Swal.fire({
+                title: 'Pesanan Berhasil!',
+                text: 'Menunggu konfirmasi dari admin!',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonText: 'Lihat Pesanan Saya',
+                cancelButtonText: 'Kembali ke Halaman Utama',
+                reverseButtons: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                // Redirect to "Lihat Pesanan Saya"
+                window.location.href = '/user/order';
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                // Redirect to "Kembali ke Halaman Utama"
+                window.location.href = '/user';
+                }
+            });
+        @endif
+    </script>
 </body>
 
 </html>

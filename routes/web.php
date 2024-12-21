@@ -11,10 +11,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\MaincourseController;
+use App\Http\Controllers\OrderUserController;
 use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\ProfileUserController;
 use App\Http\Controllers\SouvenirController;
 use App\Http\Controllers\UndanganController;
-use App\Models\Maincourse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -48,8 +49,16 @@ require __DIR__.'/auth.php';
 
 // Route untuk Admin
 Route::middleware(['auth', 'can:admin'])->group(function () {
-    Route::get('/admin', [HomeController::class, 'Dadmin']);
+    // Route::get('/admin', [HomeController::class, 'Dadmin']);
     Route::get('/admin', [HomeController::class, 'dashboard']);
+    Route::get('/admin/profile', [HomeController::class, 'Profile']);
+    Route::get('/admin/pembayaran', [HomeController::class, 'Pembayaran']);
+    Route::get('/admin/order', [HomeController::class, 'Order']);
+    Route::get('/admin/pending-order', [HomeController::class, 'PendingOrder'])->name('pending-order');
+    Route::post('/admin/pending-order/confirm/{id}', [HomeController::class, 'confirm'])->name('pendingorder.confirm');
+    Route::get('/admin/confirm-order', [HomeController::class, 'ConfirmOrder']);
+    Route::get('/admin/ongoing-order', [HomeController::class, 'OngoingOrder']);
+    Route::get('/admin/finished-order', [HomeController::class, 'FinishOrder']);
 });
 
 Route::post('/logout', function () {
@@ -60,7 +69,14 @@ Route::post('/logout', function () {
 // Routes untuk user biasa
 Route::middleware(['auth', 'can:user'])->group(function () {
     Route::get('/user', [HomeController::class, 'Duser']);
+    Route::get('/user/profile', [ProfileUserController::class, 'index'])->middleware('auth');
+    Route::post('/save-profile', [ProfileUserController::class, 'saveProfile'])->name('saveProfile');
+    Route::get('/user/order', [OrderUserController::class, 'index']);
 });
+
+// order User
+Route::get('/user/order/invoice/view/{id}', [OrderUserController::class, 'viewInvoice'])->name('view.invoice');
+Route::get('/user/order/invoice/download/{id}', [OrderUserController::class, 'downloadInvoice'])->name('download.invoice');
 
 // maincourse
 Route::get('/admin/maincourse', [MaincourseController::class, 'index'])->name('maincourse.index');
@@ -127,14 +143,27 @@ Route::put('/admin/undangan/{id}', [UndanganController::class ,'update'])->name(
 
 // Booking
 Route::get('/user/booking', [BookingController::class, 'index'])->name('booking.index');
+Route::post('/user/booking/store-session', [BookingController::class, 'storeSession'])->name('pemesanan.storeSession');
+
 // PEMESANAN
 Route::get('/user/pemesanan', [PemesananController::class, 'index'])->name('pemesanan');
+Route::post('/user/pemesanan', [PemesananController::class, 'store'])->name('pemesanan.store');
 // Keranjang
 Route::get('/user/keranjang', [KeranjangController::class, 'index'])->name('keranjang');
 
 // Routing untuk gedung
 Route::get('/gedung', [KeranjangController::class, 'indexgedung'])->name('pemesanangedung.index');
 Route::post('/gedung', [KeranjangController::class, 'storegedung'])->name('pemesanangedung.store');
+Route::post('/skip-dekorasi', [KeranjangController::class, 'skipdekorasi'])->name('skip.pemesanangedung');
+
+// Routing untuk katering
+Route::get('/katering', [KeranjangController::class, 'indexkatering'])->name('pemesanankatering.index');
+Route::post('/katering', [KeranjangController::class, 'storekatering'])->name('pemesanankatering.store');
+Route::post('/skip-dekorasi', [KeranjangController::class, 'skipdekorasi'])->name('skip.pemesanangedung');
+
+// Routing untuk katering
+Route::get('/katering2', [KeranjangController::class, 'indexkatering2'])->name('pemesanankatering2.index');
+Route::post('/katering2', [KeranjangController::class, 'storekatering2'])->name('pemesanankatering2.store');
 Route::post('/skip-dekorasi', [KeranjangController::class, 'skipdekorasi'])->name('skip.pemesanangedung');
 
 // Routing untuk dekorasi
@@ -161,3 +190,9 @@ Route::post('/skip-hiburan', [KeranjangController::class, 'skiphiburan'])->name(
 Route::get('/souvenir', [KeranjangController::class, 'indexsouvenir'])->name('pemesanansouvenir.index');
 Route::post('/souvenir', [KeranjangController::class, 'storesouvenir'])->name('pemesanansouvenir.store');
 Route::post('/skip-hiburan', [KeranjangController::class, 'skiphiburan'])->name('skip.pemesananhiburan');
+
+// Routing untuk souvenir
+Route::get('/undangan', [KeranjangController::class, 'indexundangan'])->name('pemesananundangan.index');
+Route::post('/undangan', [KeranjangController::class, 'storeundangan'])->name('pemesananundangan.store');
+Route::post('/skip-hiburan', [KeranjangController::class, 'skiphiburan'])->name('skip.pemesananhiburan');
+

@@ -100,7 +100,7 @@ class MaincourseController extends Controller
             'foto_menu' => $maincourse->foto_menu,
         ]);
 
-        return redirect()->route('admin.index')->with('success', 'Data berhasil diupdate');
+        return redirect()->route('maincourse.index')->with('success', 'Data berhasil diupdate');
     }
 
     /**
